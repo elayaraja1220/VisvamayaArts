@@ -1,0 +1,45 @@
+.appreciation-container {
+    display: block;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--default-gap);
+    position: relative;
+}
+.appreciation-card {
+    background-color: var(--bg-color-white);
+    padding: 0;
+}
+.appreciation-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.appreciation-img {
+    width: 100%;
+}
+
+
+.appreciation-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .appreciation-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .appreciation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .appreciation-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,38 @@
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* inherits the surrounding text colour, so it works on light and dark backgrounds */
+.breadcrumb-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.breadcrumb-link:hover,
+.breadcrumb-link:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.breadcrumb-current {
+  font-weight: 600;
+}
+

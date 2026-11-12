@@ -1,0 +1,6 @@
+.page-section-policies {
+    margin-top: 50px
+}
+.policy-navigation .btn.active {
+    color: var(--primary-color);
+}

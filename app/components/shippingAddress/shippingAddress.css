@@ -1,0 +1,238 @@
+
+.shipping-checkout-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.35fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 20px;
+
+}
+
+
+.card-shipping {
+  background-color: var(--bg-light-gray-alt);
+}
+.shipping-address-section {
+  min-width: 0;
+}
+
+.shipping-section-header {
+ width: 100%;
+ max-width: 67%;
+ display: flex;
+ justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+
+.shipping-address-list {
+  display: grid;
+  gap: 12px;
+}
+.shipping-address-list:first-child .card {
+  margin-top: 0;
+}
+
+.shipping-address-card {
+  min-width: 0;
+  border: 1px solid var(--border-color-muted-rose);
+  border-radius: 10px;
+  background: var(--bg-color-white);
+  transition: border-color 180ms ease;
+}
+
+.shipping-address-card.is-selected {
+  border-color: var(--form-focus-color);
+}
+
+.shipping-address-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.shipping-address-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-color-primary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.shipping-address-check {
+  display: inline-flex;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color-variant);
+}
+
+
+.shipping-address-check svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.shipping-address-radio {
+  width: 21px;
+  height: 21px;
+  border: 1.5px solid var(--form-placeholder-color);
+  border-radius: 50%;
+  background: var(--bg-color-white);
+}
+.shipping-address-check.selected {
+  background-color: var(--secondary-color-variant);
+  border-radius: 99999px;
+  color: var(--text-color-light);
+  border: 1px solid var(--border-color-black);
+}
+.shipping-address-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shipping-address-actions .btn {
+  color: var(--secondary-color);
+}
+
+.shipping-address-actions svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.shipping-address-card-body {
+  padding-top: 10px;
+}
+
+
+.shipping-address-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 0 0 16px;
+  color: var(--text-color-primary);
+  overflow-wrap: anywhere;
+}
+
+.shipping-contact-divider {
+  color: var(--text-color-primary);
+}
+
+.shipping-address-card-body address {
+  color: var(--text-color-primary);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.shipping-address-empty {
+  text-align: center;
+}
+
+.shipping-order-summary {
+  min-width: 0;
+  border: 1px solid var(--border-color-muted-rose);
+  border-radius: 10px;
+  background: var(--bg-color-white);
+}
+
+.shipping-summary-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  font-size: 17px;
+}
+
+.shipping-summary-row strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.shipping-summary-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 32px;  
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 700;
+  color: var(--text-color-blue);
+}
+
+.shipping-summary-total strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.shipping-summary-footer {
+  padding-top: 28px;
+}
+
+.shipping-summary-footer .btn {
+  width: 100%;
+}
+
+.shipping-address-select:focus-visible,
+.shipping-address-actions .btn:focus-visible {
+  outline: 2px solid var(--form-focus-color);
+  outline-offset: 4px;
+}
+.shipping-modal .modal-header{
+    padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+.shipping-adress-modal-body {
+  background-color: var(--bg-light-gray-alt);
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  padding-bottom: 20px !important;
+}
+.shipping-contact-emailto {
+  color: var(--border-color-black);
+}
+
+@media (max-width: 767.98px) {
+ 
+.shipping-checkout-layout {
+    grid-template-columns: none;
+  }
+.card-shipping {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}
+.shipping-section-header {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.shipping-section-header .typography-h3 {
+  font-size: 20px;
+}
+ .shipping-section-header {
+    max-width: 100%;
+  }
+}
+
+@media (min-width:768px) and (max-width: 999.98px) {
+   .shipping-section-header {
+    max-width: 100%;
+  }
+  
+}

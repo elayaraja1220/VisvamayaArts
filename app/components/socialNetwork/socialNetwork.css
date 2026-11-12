@@ -1,0 +1,36 @@
+
+.social-network {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.social-network-icon-circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    border-radius: 50%;
+     background-color: var(--secondary-color-variant);
+
+
+}
+.footer-icon-circle a {
+    display: flex;
+    
+}
+@media (max-width: 767.98px) { 
+
+     .footer-social-network {
+        justify-content: flex-start;
+    }
+}
+
+@media (min-width:768px) and (max-width: 1199.98px) { 
+ .footer-social-network {
+        justify-content: flex-start;
+    }
+
+}

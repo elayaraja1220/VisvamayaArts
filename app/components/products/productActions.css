@@ -1,0 +1,37 @@
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-small);
+    position: relative;
+}
+.product-actions-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.product-actions .quantity-control {
+    max-width: 110px;
+}
+
+@media (min-width:568px) and (max-width: 999.98px) { 
+    .product-actions {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+}
+@media (max-width: 999.98px)  {
+  .product-actions .quantity-control { 
+      position: absolute;
+      right: 0;
+      top: -50px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+    .hide-mobile-ipad {
+
+        display: none;
+    }
+}

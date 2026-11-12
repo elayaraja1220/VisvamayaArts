@@ -1,0 +1,18 @@
+# Vismayam Arts - static Next.js export on Hostinger (Apache/LiteSpeed)
+
+Options -MultiViews
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Never touch the backend admin / API folder
+  RewriteRule ^admin(/|$) - [L]
+
+  # Fully live product pages: every /products/<slug>/ URL is served by the
+  # single product page, which finds the product from the URL and loads it
+  # from the API. Old per-product folders (from earlier builds) are ignored.
+  RewriteCond %{REQUEST_URI} !^/products/(collections|__fallback)(/|$)
+  RewriteRule ^products/([^/]+)/?$ /products/__fallback/index.html [L]
+</IfModule>

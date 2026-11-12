@@ -1,0 +1,126 @@
+.footer {
+    display: block;
+    color: var(--text-color-white);
+    background-color: var(--secondary-color-shade);
+}
+.footer .footer-top {
+    background-color: var(--footer-top-color);
+    padding: 22px 0;
+    border-bottom: 2px solid #000000;
+}
+.footer-top-row {
+    display: grid;
+    grid-template-columns: 3fr 8fr 2fr;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-top-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-top .typography-h1 {
+    margin-bottom: 0;
+}
+.icon-phone {
+    background-color: var(--secondary-color-variant);
+}
+
+.icon-whatsapp {
+    background-color: var(--bg-color-accent);
+}
+.footer-link-mail {
+    display: flex;
+    align-items: center;
+    color: var(--text-color-white);
+    text-decoration: none;
+}
+
+.footer-bottom {
+    background-color: var(--footer-color);
+}
+.footer-bottom-row {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+}
+.footer-bottom-col-left {
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+    gap: 10px;
+    max-width: 88%;
+}
+.footer-bottom-col-right {
+    display: flex;
+    color: var(--secondary-color-variant);
+    gap: 50px;
+    justify-content: space-between;
+    max-width: 60%;
+}
+.footer-menu-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 0;
+    list-style: none;
+}
+.footer-menu-item-link {
+    color: var(--secondary-color-variant);
+    text-decoration: none;
+}
+.footer-copyright {
+    width: 100%;
+    border-top:1px solid var(--border-color-white);
+    padding: 15px 0;
+    
+    margin-top: 15px;
+}
+.footer-copyright .typography  {
+    margin: 0;
+}
+
+@media (max-width: 999.98px) {
+    .footer-top-row {
+        grid-template-columns: 1fr;
+        gap: var(--gap-small);
+        text-align: center;
+    }
+  .footer-top-row  .customer-care {
+    flex-direction: column;
+   }
+    .footer-top-center {
+        margin: 0;
+        justify-content: center;
+    }
+    .footer .customer-care-details {
+        width: auto;
+        max-width: inherit;
+    }
+    .footer-top-right .footer-social-network{
+        justify-content: center;
+    }
+    .customer-care-details {
+        width: 100%;
+    }
+    
+    .footer-bottom-row {
+          grid-template-columns: 1fr;
+        gap: var(--gap-small);
+    }
+    .footer-bottom-col-left{
+        max-width: 100%;
+       
+    }
+    .footer-bottom-col-right {
+        justify-content: flex-start;
+        max-width: 100%;
+        flex-wrap: wrap;
+        gap: 0;
+    }
+    .footer-menu-left,.footer-menu-right  {
+        width: 50%
+    }
+}

@@ -1,0 +1,121 @@
+.product-details-page {
+    background-color: var(--bg-cream-light);
+    min-height: 100%;
+}
+.products-details-row {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: var(--gap-medium);
+}
+.product-details-image {
+    max-width: 100%;
+    padding: 5px;
+    background-color: var(--bg-color-white);
+    display: block;
+}
+.products-details-content {
+    display: flex;
+    flex-direction: column;
+    gap:var(--gap-medium)
+}
+.prodcut-details-card{
+    background-color: var(--bg-light-gray)
+}
+.typography.product-details-price{
+    margin-bottom: 0;
+}
+.products-details-content .typography.text-gst {
+    margin: 0;
+    font-size: var(--default-font-size);
+}
+.products-detail-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+}
+.products-detali-left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap-small);
+}
+.products-detali-left .typography  {
+    margin: 0;
+}
+.products-details-row p.typography-small {
+    margin-top: 0;
+}
+.section-dimension .typography {
+    margin: 0;
+}
+.product-details-tabs .tabs-panel {
+    min-height: 150px;
+    padding-left: 22px;
+}
+.accordion-content-inner .customer-care {
+    margin: auto;
+    max-width: 100%;
+    gap: 15px;
+}
+.product-details-accordion {
+    margin-top: 10px;
+}
+@media (max-width:567.98px) {
+    .products-details-row {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .product-details-image-box{
+        width: 100%;
+    }
+    .product-details-tabs .tabs-list {
+        overflow: auto;
+        display: block;
+    }
+    .product-details-tabs {
+        display: none;
+    }
+    .product-details-right {
+        margin-right: 0;
+    }
+}
+
+@media (min-width:568px) and (max-width: 999.98px) {
+    .products-details-row {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .product-details-image-box{
+        width: 100%;
+    }
+    .product-details-tabs .tabs-list {
+        overflow: auto;
+        display: block;
+    }
+    .product-details-image {
+        width: 100%;
+    }
+    .product-details-tabs {
+        display: none;
+    }
+     .product-details-right {
+        margin-right: 0;
+    }
+   
+}
+
+
+
+@media (min-width: 1000px) and (max-width: 1199.98px) {
+    .products-details-row {
+        grid-template-columns: 6fr 6fr
+    }
+     .product-details-right {
+        margin-right: 0;
+    }
+}
+@media(min-width: 1200px) {
+     .products-details-row {
+        grid-template-columns: 4fr 8fr
+      }
+}

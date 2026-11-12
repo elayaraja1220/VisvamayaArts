@@ -1,0 +1,239 @@
+
+.tabs {
+  width: 100%;
+  min-width: 0;
+}
+
+.tabs-list {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-width: 0;
+}
+
+.tabs-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.tabs-tab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tabs-tab:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.tabs-panel[hidden] {
+  display: none;
+}
+
+.tabs-panel {
+  width: 100%;
+}
+
+.tabs-radius-none .tabs-tab {
+  border-radius: 0;
+}
+
+.tabs-radius-small .tabs-tab {
+  border-radius: 4px;
+}
+
+.tabs-radius-medium .tabs-tab {
+  border-radius: 8px;
+}
+
+.tabs-radius-large .tabs-tab {
+  border-radius: 12px;
+}
+
+.tabs-radius-full .tabs-tab {
+  border-radius: 9999px;
+}
+
+/* ========================================
+   Sizes
+======================================== */
+
+.tabs-small .tabs-tab {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.tabs-medium .tabs-tab {
+  padding: 10px 18px;
+  font-size: var( --default-font-size);
+  font-weight: 400;
+}
+
+.tabs-large .tabs-tab {
+  padding: 12px 22px;
+  font-size: var( --default-font-size);
+}
+
+/* ========================================
+   Primary theme
+======================================== */
+
+.tabs-primary .tabs-tab {
+  color: var(--primary-color);
+}
+
+.tabs-primary .tabs-tab:hover:not(:disabled) {
+  color: var(--primary-color);
+}
+
+.tabs-primary .tabs-tab-active {
+  color: var(--primary-color);
+}
+
+.tabs-secondary .tabs-tab {
+  color: var(--secondary-color);
+}
+
+.tabs-secondary .tabs-tab:hover:not(:disabled) {
+  color: var(--secondary-color);
+}
+
+.tabs-secondary .tabs-tab-active {
+   color: var(--secondary-color);
+}
+
+/* ========================================
+   Default theme
+======================================== */
+
+.tabs-default .tabs-tab {
+  color: var(--text-color-black);
+}
+
+.tabs-default .tabs-tab:hover:not(:disabled) {
+  color: var(--text-color-black);
+}
+
+.tabs-default .tabs-tab-active {
+  color: var(--text-color-secondary);
+}
+
+.tabs-light .tabs-tab {
+  color: var(--text-color-white);
+}
+
+.tabs-light .tabs-tab:hover:not(:disabled) {
+ color: var(--text-color-white);
+}
+
+.tabs-light .tabs-tab-active {
+  color: var(--text-color-white);
+}
+
+
+.tabs-filled .tabs-tab {
+  background: #f5eee5;
+  border-color: transparent;
+}
+
+.tabs-filled .tabs-tab:hover:not(:disabled) {
+  background: #eee2d3;
+}
+
+.tabs-filled .tabs-tab-active {
+  background: #8a5a36;
+  border-color: #8a5a36;
+  color: var(--text-color-white);
+}
+
+
+.tabs-outline .tabs-tab {
+  background: transparent;
+  border-color: #d1d5db;
+}
+
+.tabs-outline .tabs-tab:hover:not(:disabled) {
+  background: #f5eee5;
+}
+
+.tabs-outline .tabs-tab-active {
+  background: #8a5a36;
+  border-color: #8a5a36;
+  color: var(--text-color-white);
+}
+
+.tabs-outline.tabs-white .tabs-tab {
+  color: var(--text-color-white);
+}
+
+.tabs-outline.tabs-white .tabs-tab.tabs-tab-active {
+  color: var(--bg-cream-light);
+  background-color: var(--active-color-light);
+}
+
+
+.tabs-outline.tabs-white .tabs-tab:hover {
+  color: var(--bg-cream-light);
+  background-color: var(--active-color-light);
+}
+/* ========================================
+   Transparent variant
+======================================== */
+
+.tabs-transparent .tabs-tab {
+  background: transparent;
+  border-color: transparent;
+}
+
+.tabs-transparent .tabs-tab:hover:not(:disabled) {
+  background: #f5eee5;
+}
+
+.tabs-transparent .tabs-tab-active {
+  background: transparent;
+  border-color: transparent;
+  color: #8a5a36;
+}
+
+/* ========================================
+   Bordered variant
+======================================== */
+
+.tabs-bordered .tabs-list {
+  border-bottom: 1px solid #d1d5db;
+  gap: 8px;
+}
+
+.tabs-bordered .tabs-tab {
+  border-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 0;
+  margin-bottom: -1px;
+}
+
+.tabs-bordered .tabs-tab-active {
+  border-bottom-color: var(--secondary-color);
+}
+
+
+.tabs-bordered.tabs-secondary .tabs-tab-active {
+   color: var(--text-color-gray);
+}
+

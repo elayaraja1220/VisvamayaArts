@@ -1,0 +1,41 @@
+{
+  "headerNav": [
+    {
+      "label": "Home",
+      "link": "/"
+    },
+     {
+      "label": "Collections",
+      "link": "/products/collections"
+    },
+    {
+      "label": "Appreciation",
+      "link": "/appreciation"
+    },
+    {
+      "label": "About",
+      "link": "/about"
+    },
+    {
+      "label": "Contact",
+      "link": "/contact"
+    }
+   
+  ],
+  "footerNav1": [
+    
+    {
+      "label": "Return & Shipment Policy",
+      "link": "/policies/?type=shipping"
+    },
+    {
+      "label": "Terms and Conditions",
+      "link": "/policies/?type=terms"
+    },
+    {
+      "label": "Privacy  Policy",
+      "link": "/policies/?type=privacy"
+    }
+   
+  ]
+}

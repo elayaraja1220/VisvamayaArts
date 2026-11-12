@@ -1,0 +1,16 @@
+.product-title-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.product-title-actions li {
+    display: flex;
+}
+
+.product-title-actions img {
+    display: block;
+}

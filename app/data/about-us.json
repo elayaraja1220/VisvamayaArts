@@ -1,0 +1,40 @@
+{
+  "title": "Behind the Ideology",
+  "homeTitle": "About Vismayam",
+  
+  "intro": [
+    "For years, the founders of Vismayam — Lalitharam and Swamimalai Saravanan — have immersed themselves in the world of temple arts, architecture, and sculptures, drawing inspiration from India's rich cultural legacy. While global heritage sites thrive with meaningful keepsakes, India's magnificent temples — even UNESCO treasures like Gangaikondacholapuram — often lack accessible"
+  ],
+
+  "description": "At Vismayam Arts, we bridge this divide by meticulously crafting statues inspired by the masterpiece temple sculptures, bringing their sacred beauty into your home at reasonable costs. Each piece captures the intricate details and textures of ancient artistry, preserving centuries of devotion. Our mission is to celebrate and illuminate India's heritage, offering you a tangible piece of this legacy.",
+  "homeDescription": "For years, the founders of Vismayam — Lalitharam and Swamimalai Saravanan — have immersed themselves in the world of temple arts, architecture, and sculptures, drawing inspiration from India's rich cultural legacy. While global heritage sites thrive with meaningful keepsakes, India's magnificent temples — even UNESCO treasures like Gangaikondacholapuram...",
+  "heroImage": "/images/about/about-left-image.png",
+  "sculptureImage": "/images/about/about-sculptures.png",
+  "founders": [
+    {
+      "name": "Lalitharam",
+      "role": "Co-Founder",
+      "image": "/images/about/Lalitharam.png",
+      "description": "Lalitharam is passionate about temple arts, architecture, and sculpture. His dedication to documenting and preserving India's cultural heritage inspires the vision behind Vismayam Arts.",
+      "socialLinks": {
+        "linkedin": "https://www.linkedin.com/in/ramachandran-mahadevan-279a911b1/?trk=public_post_feed-actor-name",
+        "instagram": "in.linkedin.com/in/ramachandran-mahadevan-279a911b1?trk=public_post_feed-actor-name",
+        "facebook": "https://www.facebook.com/lalitharam.ramachandran/",
+        "youtube":"https://www.youtube.com/@Lalitharamwriter",
+        "x": "https://x.com/lalitha_ram"
+      }
+    },
+    {
+      "name": "Swamimalai Saravanan",
+      "role": "Co-Founder",
+      "image": "/images/about/about-saravana.png",
+      "description": "The founder of Lalitharam and Swamimalai Saravanan is have immersed themselves in the world of temple arts, architecture, and sculptures, drawing inspiration from India's rich cultural legacy.",
+      "socialLinks": {        
+        "instagram": "https://www.instagram.com/swamimalaisaravanan/",
+        "facebook": "https://www.facebook.com/p/Swamimalai-Saravanan-100065164715643/",
+        "youtube": "https://www.youtube.com/c/SwamimalaiSaravanan/featured"
+      }
+    }
+  ],
+  "closingMessage": "We bring authentic sculptures into your home. Our mission is to celebrate and illuminate India's heritage, offering you a tangible piece of this legacy."
+}

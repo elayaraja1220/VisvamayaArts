@@ -1,0 +1,74 @@
+.page-section {
+    padding: 30px 0 80px 0;
+}
+.page-section:first-child {
+  padding-top: 0;
+}
+
+.page-section-newarrivals {
+  background-color: var(--bg-cream-light);
+  padding-top: 0;
+}
+
+
+.page-section-collection {
+  background-color: var(--bg-cream-dark);
+}
+.page-section-our-theme {
+  background-color: var(--bg-cream-light);
+}
+
+.page-section-about-us {
+  background-color: var(--bg-cream-light);
+}
+.page-section-our-customers {
+   background-color: var(--bg-cream-dark);
+   color: var(--text-solor-white);
+}
+.page-section-bg-color-secondary {
+  background-color: var(--bg-cream-light);
+  margin-top: 15px;
+  padding-top: 20px;
+}
+
+.page-section-checkout {
+  padding-top: 30px !important;
+  background-color: var(--bg-cream-light);
+}
+.products-section-similar {
+   background-color: var(--bg-cream-dark);
+   color: var(--text-solor-white);
+}
+
+.page-section-viewed {
+   background-color: var(--bg-cream-light);
+   color: var(--text-solor-white);
+}
+
+.page-section-appreciation {
+  margin-top: 50px;
+  padding-bottom: 0;
+}
+.page-section-appreciation-grid {
+ background-color: var(--bg-cream-light);
+   color: var(--text-solor-white); 
+}
+
+.appreciation-page-section {
+  position: relative;
+  padding-top: 50px !important;
+    padding-bottom: 50px;
+    background-color: var(--bg-cream-light);
+}
+
+.page-section.collections-page {
+  position: relative;
+    padding-bottom: 50px;
+    background-color: var(--bg-cream-light);
+}
+
+@media (max-width: 767.98px) {
+  .page-section-our-theme {
+    padding-bottom: 50px;
+  }
+}

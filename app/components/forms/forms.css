@@ -1,0 +1,393 @@
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-field-gap);
+  width: 100%;
+  min-width: 0;
+}
+
+.form-label {
+  color: var(--text-color-secondary-slat);
+  font-size: var(--font-size-small);
+  font-weight: var(--form-label-weight);
+  line-height: var(--form-line-height);
+}
+
+.form-required {
+  color: var(--form-error-color);
+}
+
+
+.form-control {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--form-border-color);
+  color: var(--form-text-color);
+  font-family: inherit;
+  font-size: var(--font-size-small);
+  font-weight: var(--form-font-weight);
+  line-height: var(--form-line-height);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.form-control--filled {
+  background-color: var(--bg-color-white);
+}
+
+.form-control--outline {
+  background-color: var(--bg-color-white);
+}
+
+.form-control--small {
+  min-height: var(--form-height-small);
+}
+
+.form-control--medium {
+  min-height: var(--form-height-medium);
+}
+
+.form-control--large {
+  min-height: var(--form-height-large);
+}
+
+
+.form-control--curve-small {
+  border-radius: var(--form-radius-small);
+}
+
+.form-control--curve-medium {
+  border-radius: var(--form-radius-medium);
+}
+
+.form-control--curve-large {
+  border-radius: var(--form-radius-large);
+}
+
+.form-input {
+  padding: 0 var(--form-padding-medium);
+}
+
+.form-control::placeholder {
+  color: var(--form-placeholder-color);
+  opacity: 1;
+}
+
+
+.form-textarea {
+  height: auto;
+  min-height: 100px;
+  padding: var(--form-padding-medium);
+  resize: vertical;
+}
+
+/* Select wrapper */
+.form-select-wrapper {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* ========================================
+   FORM SELECT - BASE
+======================================== */
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 100%;
+  min-width: 0;
+  padding: 0 44px 0 var(--form-padding-medium);
+
+  border-radius: var(--form-radius-medium);
+
+  background-color: var(--select-bg);
+  color: var(--select-text);
+
+  font-family: inherit;
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  line-height: var(--form-line-height);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* ========================================
+   FILLED COLORS
+======================================== */
+
+/* Filled White */
+.form-select--white {
+  --select-bg: #ffffff;
+  --select-text: #1f2937;
+  --select-border: #d1d5db;
+  --select-hover-bg: #f9fafb;
+  --select-hover-border: #9ca3af;
+  --select-arrow: #6b7280;
+  --select-placeholder: #9ca3af;
+}
+
+/* Filled Primary */
+.form-select--primary {
+  --select-bg: var(--primary-color, #2563eb);
+  --select-text: #ffffff;
+  --select-border: var(--primary-color, #2563eb);
+  --select-hover-bg: var(--primary-hover-color, #1d4ed8);
+  --select-hover-border: var(--primary-hover-color, #1d4ed8);
+  --select-arrow: #ffffff;
+  --select-placeholder: rgb(255 255 255 / 75%);
+}
+
+/* Filled Secondary */
+.form-select--secondary {
+  --select-bg: #6b7280;
+  --select-text: #ffffff;
+  --select-border: #6b7280;
+  --select-hover-bg: #4b5563;
+  --select-hover-border: #4b5563;
+  --select-arrow: #ffffff;
+  --select-placeholder: rgb(255 255 255 / 75%);
+}
+
+/* Filled Success */
+.form-select--success {
+  --select-bg: #16a34a;
+  --select-text: #ffffff;
+  --select-border: #16a34a;
+  --select-hover-bg: #15803d;
+  --select-hover-border: #15803d;
+  --select-arrow: #ffffff;
+  --select-placeholder: rgb(255 255 255 / 75%);
+}
+
+/* Filled Danger */
+.form-select--danger {
+  --select-bg: #dc2626;
+  --select-text: #ffffff;
+  --select-border: #dc2626;
+  --select-hover-bg: #b91c1c;
+  --select-hover-border: #b91c1c;
+  --select-arrow: #ffffff;
+  --select-placeholder: rgb(255 255 255 / 75%);
+}
+
+/* ========================================
+   OUTLINE COLORS
+======================================== */
+
+.form-select--outline.form-select--white {
+  --select-bg: transparent;
+  --select-text: #1f2937;
+  --select-border: #d1d5db;
+  --select-hover-bg: #f9fafb;
+  --select-hover-border: #9ca3af;
+  --select-arrow: #6b7280;
+}
+
+.form-select--outline.form-select--primary {
+  --select-bg: transparent;
+  --select-text: var(--primary-color, #2563eb);
+  --select-border: var(--primary-color, #2563eb);
+  --select-hover-bg: rgb(37 99 235 / 5%);
+  --select-hover-border: var(--primary-hover-color, #1d4ed8);
+  --select-arrow: var(--primary-color, #2563eb);
+}
+
+.form-select--outline.form-select--secondary {
+  --select-bg: transparent;
+  --select-text: #6b7280;
+  --select-border: #6b7280;
+  --select-hover-bg: rgb(107 114 128 / 5%);
+  --select-hover-border: #4b5563;
+  --select-arrow: #6b7280;
+}
+
+.form-select--outline.form-select--success {
+  --select-bg: transparent;
+  --select-text: #16a34a;
+  --select-border: #16a34a;
+  --select-hover-bg: rgb(22 163 74 / 5%);
+  --select-hover-border: #15803d;
+  --select-arrow: #16a34a;
+}
+
+.form-select--outline.form-select--danger {
+  --select-bg: transparent;
+  --select-text: #dc2626;
+  --select-border: #dc2626;
+  --select-hover-bg: rgb(220 38 38 / 5%);
+  --select-hover-border: #b91c1c;
+  --select-arrow: #dc2626;
+}
+
+/* ========================================
+   PLACEHOLDER
+======================================== */
+
+.form-select:invalid {
+  color: var(--select-placeholder);
+}
+
+/* ========================================
+   DROPDOWN OPTIONS
+======================================== */
+
+.form-select option {
+  background-color: #ffffff;
+  color: #1f2937;
+  padding: 12px;
+}
+
+/* ========================================
+   CUSTOM ARROW
+======================================== */
+
+.form-select-arrow {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  color: #000;
+  pointer-events: none;
+
+  transition: transform 0.2s ease;
+}
+
+.form-select-arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+   HOVER
+======================================== */
+
+.form-select-wrapper:hover .form-select {
+  border-color: var(--select-hover-border);
+  /* background-color: var(--select-hover-bg); */
+}
+
+/* ========================================
+   FOCUS
+======================================== */
+
+.form-select:focus-visible {
+  border-color: var(--select-hover-border);
+  outline: none;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--select-hover-border) 15%, transparent);
+}
+
+/* ========================================
+   INVALID
+======================================== */
+
+.form-select[aria-invalid="true"] {
+  border-color: var(--form-error-color);
+}
+
+/* ========================================
+   DISABLED
+======================================== */
+
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: var(--form-disabled-opacity);
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .form-select,
+  .form-select-arrow {
+    transition: none;
+  }
+}
+
+
+
+.form-control:focus-visible {
+  border-color: var(--form-focus-color);
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 15%);
+}
+
+.form-control[aria-invalid="true"] {
+  border-color: var(--form-error-color);
+}
+
+.form-control[aria-invalid="true"]:focus-visible {
+  box-shadow: 0 0 0 2px rgb(220 38 38 / 15%);
+}
+
+.form-control:disabled {
+  cursor: not-allowed;
+  opacity: var(--form-disabled-opacity);
+}
+
+
+.form-error {
+  color: var(--form-error-color);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.form-suceess {
+  color: #16a34a;
+
+}
+
+.form-choice {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--form-text-color);
+  font-size: var(--font-size-small);
+  line-height: var(--form-line-height);
+  cursor: pointer;
+}
+
+.form-choice input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: var(--form-focus-color);
+}
+
+.form-choice input:disabled {
+  cursor: not-allowed;
+}
+
+.form-choice:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: var(--form-disabled-opacity);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .form-control,
+  .form-button {
+    transition: none;
+  }
+}

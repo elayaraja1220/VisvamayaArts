@@ -1,0 +1,29 @@
+.enquiry-form-body {
+     background-color: var(--bg-light-gray-alt);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--gap-small);
+}
+.enquiry-form-heading {
+    text-align: center;
+}
+.enquiry-form-container {
+    margin-top: 25px;
+}
+.enquiry-form-actions {
+    max-width: 50%;
+    width: 100%;
+    margin: 20px auto 0 auto;
+}
+
+@media (max-width:567.98px) {
+    .enquiry-form-actions {
+        max-width: 100%;
+    }
+    
+}
+
+@media (min-width:568px) and (max-width: 999.98px) { }

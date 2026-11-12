@@ -1,0 +1,419 @@
+
+.policy-construction {
+  --policy-brown: #32190e;
+  --policy-dark: #1c0c06;
+  --policy-gold: #e9b735;
+  --policy-light-gold: #ffd36e;
+  --policy-cream: #f8efdf;
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 650px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--policy-cream);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(31, 13, 6, .98) 0%,
+      rgba(48, 23, 12, .94) 55%,
+      rgba(34, 15, 7, .55) 100%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      #a75e25,
+      transparent 55%
+    ),
+    var(--policy-brown);
+}
+
+.policy-construction__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 75% 35%,
+      rgba(238, 157, 49, .18),
+      transparent 35%
+    );
+}
+
+.policy-construction__container {
+  position: relative;
+  width: 100%;
+  max-width: 1450px;
+  padding: 55px 7%;
+
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  column-gap: 40px;
+}
+
+/* Decorative Divider */
+
+.policy-construction__divider {
+  grid-column: 1 / -1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  margin-bottom: 30px;
+}
+
+.policy-construction__divider span:not(.policy-construction__lotus) {
+  width: 90px;
+  height: 1px;
+  background: var(--policy-gold);
+}
+
+.policy-construction__lotus {
+  font-size: 32px;
+  color: var(--policy-gold);
+}
+
+/* Document Icon */
+
+.policy-construction__document {
+  grid-column: 1;
+  grid-row: 2;
+
+  width: 125px;
+  color: var(--policy-light-gold);
+
+  filter: drop-shadow(0 0 12px #f3bc5550);
+}
+
+.policy-construction__document svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Content */
+
+.policy-construction__content {
+  grid-column: 1;
+  grid-row: 2;
+
+  text-align: center;
+  padding: 0 10px;
+}
+
+.policy-construction__eyebrow {
+  display: block;
+  margin-bottom: 20px;
+
+  color: var(--policy-gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.policy-construction__content h1 {
+  margin: 0 0 22px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(36px, 4vw, 55px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.policy-construction__content h1 span {
+  display: block;
+  color: var(--policy-light-gold);
+  font-style: italic;
+}
+
+.policy-construction__description {
+  max-width: 530px;
+  margin: 0 auto;
+
+  color: #e6d4c0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Policy List */
+
+.policy-construction__pages {
+  margin-top: 30px;
+}
+
+.policy-construction__pages-heading {
+  margin-bottom: 15px;
+
+  color: var(--policy-gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.policy-construction__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.policy-construction__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 15px;
+
+  border: 1px solid #d8a74c80;
+  border-radius: 30px;
+
+  color: var(--policy-cream);
+  background: #ffffff08;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  transition:
+    background .3s ease,
+    color .3s ease,
+    border-color .3s ease;
+}
+
+.policy-construction__item.is-active {
+  color: var(--policy-dark);
+  background: var(--policy-gold);
+  border-color: var(--policy-gold);
+}
+
+/* Bottom Message */
+
+.policy-construction__message {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin-top: 30px;
+  padding: 14px 28px;
+
+  border-radius: 40px;
+
+  color: #32190e;
+  background: linear-gradient(
+    135deg,
+    #fff0d2,
+    #e7c184
+  );
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 600;
+
+  box-shadow: 0 8px 25px #0004;
+}
+
+.policy-construction__clock {
+  font-size: 25px;
+}
+
+/* Product Showcase */
+
+.policy-construction__products {
+  grid-column: 2;
+  grid-row: 2;
+
+  position: relative;
+  min-height: 410px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.policy-construction__product {
+  position: relative;
+  height: 370px;
+}
+
+.policy-construction__product--nataraja {
+  width: 65%;
+}
+
+.policy-construction__product--ganapathi {
+  width: 35%;
+  height: 270px;
+}
+
+.policy-construction__product-image {
+  object-fit: contain;
+  filter: drop-shadow(0 15px 20px #0009);
+
+  animation: policyProductFloat 5s ease-in-out infinite;
+}
+
+.policy-construction__product--ganapathi
+.policy-construction__product-image {
+  animation-delay: 1s;
+}
+
+.policy-construction__product-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  color: var(--policy-gold);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.policy-construction__product-caption span {
+  font-size: 15px;
+}
+
+/* Animation */
+
+@keyframes policyProductFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+  .policy-construction__container {
+    padding: 45px 5%;
+    column-gap: 15px;
+  }
+
+  .policy-construction__document {
+    width: 90px;
+  }
+
+  .policy-construction__content h1 {
+    font-size: 39px;
+  }
+
+  .policy-construction__products {
+    min-height: 340px;
+  }
+
+  .policy-construction__product {
+    height: 310px;
+  }
+
+  .policy-construction__product--ganapathi {
+    height: 230px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .policy-construction {
+    min-height: auto;
+  }
+
+  .policy-construction__container {
+    grid-template-columns: 1fr;
+    padding: 40px 6% 55px;
+    gap: 20px;
+  }
+
+  .policy-construction__divider {
+    grid-column: 1;
+    margin-bottom: 5px;
+  }
+
+  .policy-construction__divider span:not(.policy-construction__lotus) {
+    width: 55px;
+  }
+
+  .policy-construction__document {
+    display: none;
+  }
+
+  .policy-construction__content {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0;
+  }
+
+  .policy-construction__eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .policy-construction__content h1 {
+    font-size: 36px;
+  }
+
+  .policy-construction__description {
+    font-size: 14px;
+  }
+
+  .policy-construction__pages {
+    margin-top: 25px;
+  }
+
+  .policy-construction__item {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .policy-construction__message {
+    margin-top: 25px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .policy-construction__products {
+    grid-column: 1;
+    grid-row: 2;
+
+    min-height: 270px;
+    margin-top: 5px;
+  }
+
+  .policy-construction__product {
+    height: 260px;
+  }
+
+  .policy-construction__product--ganapathi {
+    height: 190px;
+  }
+
+  .policy-construction__product-caption {
+    font-size: 8px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .policy-construction__product-image {
+    animation: none;
+  }
+}

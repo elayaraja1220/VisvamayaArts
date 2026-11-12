@@ -1,0 +1,106 @@
+
+.page-section.fiter-section {
+    padding-bottom: 0px;
+}
+
+.page-title-filter-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.collections-tab-content {
+    margin-top: 20px;
+}
+
+.collections-search {
+    width: 50%;
+    gap: var(--default-gap);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.autocomplete-input::placeholder {
+    color: var(--text-color-white);
+}
+
+.collections-search .autocomplete {
+    width: 46%;
+
+
+}
+
+.collections-search .form-field {
+    width: 35%;
+}
+
+.collections-search .autocomplete-control,
+.collections-search .form-control
+{
+    background-color: color-mix(in srgb,
+            var(--bg-black) 30%,
+            transparent);
+    border-radius: 9999px;
+    color: var(--text-color-white);
+    border: 1px solid var(--active-color-light);
+}
+.collections-search .autocomplete-clear{
+    color: var(--text-color-white);
+}
+
+
+.products-grid-container{
+    gap: var(--default-gap);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.collections-category-tabs.sticky .tabs-list {
+    position: sticky;
+    top: 60px;
+    z-index: 2;
+    background-color: var(--bg-cream-light);
+    padding: 15px 0;
+}
+.collections-category-tabs .tabs-list {
+    overflow: auto;
+}
+
+.collections-search .form-select-wrapper .form-select-arrow {
+    color: var(--text-color-white);
+}
+
+@media (max-width:999.98px) {
+    .collections-search {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 15px;
+        display: none;
+    }
+    .collections-search .autocomplete {
+        flex: 1;
+        max-width: 300px;
+    }
+    .collections-search .form-field {
+        width: 200px;
+    }
+    
+}
+
+@media (max-width: 600px) {
+     .collections-search {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+    .collections-search .autocomplete {
+        max-width: 100%;
+        width: 100%;
+    }
+    .collections-search .form-field {
+        width: 100%;
+    }
+}

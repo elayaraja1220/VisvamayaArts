@@ -1,0 +1,25 @@
+{
+    "socialNetwork": [
+        {
+            "name": "Facebook",
+            "url": "https://www.facebook.com/VismayamArts/",
+            "icon": "/images/icons/svg/svg-facebook.svg",
+            "width": 25,
+            "height": 25
+        },
+        {
+            "name": "Instagram",
+            "url": "https://www.instagram.com/vismayam_arts/?hl=en",
+            "icon": "/images/icons/svg/svg-instagram.svg",
+            "width": 20,
+            "height": 20
+        },
+        {
+            "name": "YouTube",
+            "url": "https://www.youtube.com/@VismayamArts/search",
+            "icon": "/images/icons/svg/svg-youtube.svg",
+            "width": 25,
+            "height": 25
+        }
+    ]
+}

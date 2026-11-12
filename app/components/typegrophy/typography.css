@@ -1,0 +1,107 @@
+.typography {
+    font-size: var(--default-font-size);
+    word-break: break-word;
+    white-space: pre-line;
+
+}
+.typography-h1 {
+    font-size: var(--font-size-h1);
+    margin: 0  0 15px 0 ;
+}
+.typography-h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    margin: 0  0 15px 0 ;
+}
+.typography-h3 {
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+    margin: 0  0 15px 0 ;
+}
+.typography-h4 {
+    font-size: var(--font-size-h4);
+    font-weight: 600;
+    margin: 0  0 15px 0 ;
+}
+.typography-h5 {
+    font-size: var(--font-size-h5);
+    font-weight: 600;
+    margin: 0  0 15px 0 ;
+}
+.typography-h6 {
+    font-size: var(--font-size-h6);
+    font-weight: 600;
+    margin: 0;
+}
+.typography-small {
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+}
+
+@media (max-width: 1199.98px) {
+    .typography-h1 {
+        font-size: 24px;
+
+    }
+
+    .typography-h2 {
+        font-size: 22px;
+        
+    }
+    .typography-h3 {
+        font-size: 20px;
+        
+    }
+    .typography-h4 {
+        font-size: 18px;
+        
+    }
+    .typography-h5 {
+        font-size: 16px;
+       
+        
+    }
+    .typography-h6 {
+        font-size: 14px;
+        
+    }
+
+    p.typography, p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 999.98px) {
+    .typography-h1 {
+        font-size: 22px;
+
+    }
+
+    .typography-h2 {
+        font-size: 20px;
+        
+    }
+    .typography-h3 {
+        font-size: 18px;
+        
+    }
+    .typography-h4 {
+        font-size: 16px;
+        
+    }
+    .typography-h5 {
+        font-size: 14px;
+       
+        
+    }
+    .typography-h6 {
+        font-size: 12px;
+        
+    }
+
+    p.typography, p {
+        font-size: 14px;
+    }
+    
+    
+}

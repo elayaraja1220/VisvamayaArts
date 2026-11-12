@@ -1,0 +1,230 @@
+[
+  {
+    "id": "shipping",
+    "label": "Return & Shipment Policy",
+    "content": {
+      "title": "Shipping Policy",
+      "sections": [
+        {
+          "title": "Introduction",
+          "paragraphs": [
+            "Thank you for shopping with Vismayam Arts. This Shipping Policy explains how orders placed through vismayamarts.in are processed and delivered."
+          ]
+        },
+        {
+          "title": "Order Processing",
+          "paragraphs": [
+            "Orders are processed after payment confirmation. Processing time may vary depending on product availability, order volume, and the nature of the product."
+          ],
+          "bullets": [
+            "Please ensure that your shipping address and contact details are accurate.",
+            "Orders may require additional processing time during holidays or promotional periods.",
+            "We may contact you if additional information is required to process your order."
+          ]
+        },
+        {
+          "title": "Shipping and Delivery",
+          "paragraphs": [
+            "Delivery timelines depend on the destination, courier service, product availability, and other factors outside our control."
+          ],
+          "bullets": [
+            "Delivery estimates, where provided, are indicative and are not guaranteed.",
+            "Courier delays caused by weather, public holidays, or other unforeseen circumstances may affect delivery.",
+            "Please make sure someone is available to receive the shipment at the delivery address."
+          ]
+        },
+        {
+          "title": "Shipping Charges",
+          "paragraphs": [
+            "Applicable shipping charges, if any, will be displayed during checkout before you complete your order."
+          ]
+        },
+        {
+          "title": "Damaged or Missing Packages",
+          "paragraphs": [
+            "If your package arrives damaged or an item appears to be missing, please contact us with your order details and supporting photographs so we can review the issue."
+          ]
+        },
+        {
+          "title": "Contact Us",
+          "paragraphs": [
+            "For shipping-related questions, contact Vismayam Arts using the contact details provided on our website."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "terms",
+    "label": "Terms & Conditions",
+    "content": {
+      "title": "Terms & Conditions",
+      "sections": [
+        {
+          "title": "Introduction",
+          "paragraphs": [
+            "These Website Standard Terms and Conditions govern your use of the Vismayam Arts website, vismayamarts.in. By accessing or using this website, you agree to comply with these terms. If you do not agree with these terms, please do not use this website."
+          ]
+        },
+        {
+          "title": "Eligibility",
+          "bullets": [
+            "You must be legally capable of entering into a binding agreement to use this website.",
+            "If you are under 18 years of age, you may use this website only with the involvement and permission of a parent or legal guardian."
+          ]
+        },
+        {
+          "title": "Intellectual Property Rights",
+          "paragraphs": [
+            "Unless otherwise stated, Vismayam Arts and its licensors own the intellectual property rights in the website and its content. All rights are reserved, subject to the limited permissions described in these terms."
+          ],
+          "bullets": [
+            "You may access website content for personal, non-commercial use.",
+            "You must not reproduce, republish, sell, rent, or redistribute website material without prior written permission.",
+            "You must not use our images, artwork, product descriptions, or branding in a way that infringes our rights."
+          ]
+        },
+        {
+          "title": "Restrictions on Use",
+          "paragraphs": [
+            "You are specifically restricted from:"
+          ],
+          "bullets": [
+            "Publishing website material in other media without permission.",
+            "Selling, sublicensing, or commercially exploiting website material without authorization.",
+            "Publicly displaying or performing website material without permission.",
+            "Using this website in a way that may damage or disrupt the website.",
+            "Attempting to interfere with another user's access to the website.",
+            "Using this website contrary to applicable laws or regulations.",
+            "Engaging in data mining, data harvesting, or data extraction without authorization.",
+            "Using website content for advertising or marketing without permission."
+          ]
+        },
+        {
+          "title": "User Accounts",
+          "paragraphs": [
+            "If you create an account, you are responsible for maintaining the confidentiality of your login credentials and for activities carried out through your account. Please notify us if you believe your account has been accessed without authorization."
+          ]
+        },
+        {
+          "title": "Product Information",
+          "paragraphs": [
+            "We make reasonable efforts to display product descriptions, images, and prices accurately. However, colors and appearance may vary depending on your display, and occasional errors may occur."
+          ]
+        },
+        {
+          "title": "Orders and Payments",
+          "paragraphs": [
+            "Submitting an order constitutes a purchase request. Order acceptance, payment confirmation, availability, and any applicable cancellation or exchange terms are subject to the information communicated during the ordering process."
+          ]
+        },
+        {
+          "title": "Your Content",
+          "paragraphs": [
+            "If you submit reviews, messages, images, or other content to us, you confirm that you have the right to provide that content and that it does not violate another person's rights or applicable law."
+          ]
+        },
+        {
+          "title": "No Warranties",
+          "paragraphs": [
+            "This website and its content are provided on an “as is” and “as available” basis, to the extent permitted by applicable law. We do not guarantee that the website will always be uninterrupted, error-free, or free from harmful components."
+          ]
+        },
+        {
+          "title": "Limitation of Liability",
+          "paragraphs": [
+            "To the extent permitted by applicable law, Vismayam Arts will not be liable for indirect or consequential losses arising from the use of, or inability to use, this website."
+          ]
+        },
+        {
+          "title": "Changes to These Terms",
+          "paragraphs": [
+            "We may update these Terms & Conditions from time to time. Changes will be published on this page, and your continued use of the website after publication constitutes acceptance of the updated terms."
+          ]
+        },
+        {
+          "title": "Contact Information",
+          "paragraphs": [
+            "If you have questions about these Terms & Conditions, please contact Vismayam Arts through the contact information provided on vismayamarts.in."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "privacy",
+    "label": "Privacy Policy",
+    "content": {
+      "title": "Privacy Policy",
+      "sections": [
+        {
+          "title": "Introduction",
+          "paragraphs": [
+            "Vismayam Arts respects your privacy. This Privacy Policy explains what information may be collected when you use vismayamarts.in and how that information may be used."
+          ]
+        },
+        {
+          "title": "Information We May Collect",
+          "paragraphs": [
+            "Depending on how you use our website, information may include:"
+          ],
+          "bullets": [
+            "Name and contact details provided during checkout or account registration.",
+            "Shipping and billing information needed to process an order.",
+            "Order details and customer service communications.",
+            "Technical information such as browser, device, and website usage data."
+          ]
+        },
+        {
+          "title": "How Information May Be Used",
+          "paragraphs": [
+            "Information may be used to:"
+          ],
+          "bullets": [
+            "Process and fulfil orders.",
+            "Communicate order updates and respond to enquiries.",
+            "Provide customer support.",
+            "Maintain website security and improve website functionality.",
+            "Meet applicable legal and regulatory requirements."
+          ]
+        },
+        {
+          "title": "Sharing of Information",
+          "paragraphs": [
+            "Information may be shared with service providers involved in operating the website or fulfilling your order, such as payment, delivery, hosting, or customer support providers, where necessary for those purposes."
+          ]
+        },
+        {
+          "title": "Data Security",
+          "paragraphs": [
+            "We take reasonable measures to protect information. However, no method of electronic transmission or storage can be guaranteed to be completely secure."
+          ]
+        },
+        {
+          "title": "Cookies and Similar Technologies",
+          "paragraphs": [
+            "Our website may use cookies or similar technologies to support website functionality and understand usage. You can manage cookies through your browser settings, although disabling certain cookies may affect website features."
+          ]
+        },
+        {
+          "title": "Your Choices",
+          "paragraphs": [
+            "You may contact us to ask questions about personal information you have provided or to request assistance, subject to applicable law and our ability to verify your request."
+          ]
+        },
+        {
+          "title": "Changes to This Policy",
+          "paragraphs": [
+            "We may update this Privacy Policy from time to time. The latest version will be published on this page."
+          ]
+        },
+        {
+          "title": "Contact Us",
+          "paragraphs": [
+            "For privacy-related questions, please contact Vismayam Arts using the contact details provided on our website."
+          ]
+        }
+      ]
+    }
+  }
+]

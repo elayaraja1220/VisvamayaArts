@@ -1,0 +1,419 @@
+.cart-item {
+    margin-top: 0 !important;
+}
+.cart-item-row {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px dashed var(--bg-black);
+    padding: 10px 0;
+}
+.cart-item-row:last-child {
+   border: none;
+}
+.cart-item-left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--default-gap);
+    max-width: 70%;
+}
+.cart-item-left .quantity-control {
+    max-width: 100px;
+}
+.cart-item-image {
+    max-width: 130px;
+    max-height: 160px;
+}
+.cart-item-image img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+.cart-item-right {
+    margin-left: auto;
+    max-width: 30%;
+}
+.cart-item-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+.cart-item-remove-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+     gap: var(--default-gap);
+}
+.cart-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.cart-summary {
+    margin-top: auto;
+}
+.cart-summery-grand-total .typography {
+    margin-bottom: 0;
+}
+.cart-summary-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1.5;
+}
+.cart-summary-total {
+    margin: 16px 0;
+    padding: 0 15px;
+}
+.view-cart-drawer .drawer-header-title{
+    padding: 0 30px;
+    margin: 0;
+
+}
+.typography.cart-item-name {
+    margin-bottom: 0;
+}
+.cart-item-details {
+    max-width: calc(100% - 130px - var(--default-gap));
+}
+.cart-item-dimension {
+    margin: 0;
+}
+.checkout-button {
+    margin-top: 15px;
+    padding-left: 75px;
+    padding-right: 75px;
+}
+.checkout-button .btn {
+    font-size: 18px;
+}
+
+
+/* =========================================
+   EMPTY CART - VISMAYAM ARTS
+========================================= */
+
+.cart-empty-container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      #fffdf8 0%,
+      #fff9ed 65%,
+      #fdf3e3 100%
+    );
+}
+
+/* Main Layout */
+
+.cart-empty {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Ganesha Illustration */
+
+.cart-empty-icon {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.cart-empty-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  filter: drop-shadow(
+    0 12px 18px rgba(153, 101, 18, 0.12)
+  );
+
+  animation: cartGaneshaFloat 4s ease-in-out infinite;
+}
+
+/* Content */
+
+.cart-empty-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading */
+
+.cart-empty-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #252052;
+  margin: 12px 0;
+  letter-spacing: -0.5px;
+}
+
+/* Description */
+
+.cart-empty-description {
+  max-width: 340px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #55515b;
+  margin: 0;
+}
+
+/* Golden Divider */
+
+.cart-empty-divider {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px 0;
+  color: #d6a12a;
+}
+
+.cart-empty-divider::before,
+.cart-empty-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d6a12a
+  );
+}
+
+.cart-empty-divider::after {
+  background: linear-gradient(
+    90deg,
+    #d6a12a,
+    transparent
+  );
+}
+
+.cart-empty-divider span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Continue Shopping Button */
+
+.cart-empty-button {
+  width: 100%;
+  max-width: 340px;
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  padding: 14px 24px;
+  border: none;
+  border-radius: 50px;
+
+  background: linear-gradient(
+    135deg,
+    #a61920,
+    #850e16
+  );
+
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.cart-empty-button:hover {
+  background: linear-gradient(
+    135deg,
+    #bd2028,
+    #970f18
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(145, 18, 25, 0.22);
+}
+
+.cart-empty-arrow {
+  font-size: 22px;
+  transition: transform 0.25s ease;
+}
+
+.cart-empty-button:hover .cart-empty-arrow {
+  transform: translateX(5px);
+}
+
+/* Divine Blessing */
+
+.cart-empty-blessing {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  padding: 18px 20px;
+  margin-top: 28px;
+
+  border: 1px solid rgba(214, 161, 42, 0.15);
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #fff0d2,
+    #fff9ed
+  );
+
+  box-sizing: border-box;
+}
+
+.cart-empty-diya {
+  font-size: 34px;
+  flex-shrink: 0;
+}
+
+.cart-empty-blessing p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #51412b;
+  margin: 0;
+}
+
+/* Illustration Animation */
+
+@keyframes cartGaneshaFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1024px) {
+  .cart-empty-container {
+    padding: 20px;
+  }
+
+  .cart-empty-icon {
+    max-width: 300px;
+    height: 260px;
+  }
+
+  .cart-empty-title {
+    font-size: 30px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 576px) {
+  .cart-empty-container {
+    padding: 20px 16px;
+  }
+
+  .cart-empty-icon {
+    max-width: 250px;
+    height: 220px;
+    margin-bottom: 8px;
+  }
+
+  .cart-empty-title {
+    font-size: 26px;
+  }
+
+  .cart-empty-description {
+    font-size: 14px;
+    max-width: 280px;
+  }
+
+  .cart-empty-divider {
+    margin: 20px 0;
+  }
+
+  .cart-empty-button {
+    min-height: 52px;
+    font-size: 14px;
+  }
+
+  .cart-empty-blessing {
+    padding: 14px;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .cart-empty-diya {
+    font-size: 28px;
+  }
+
+  .cart-empty-blessing p {
+    font-size: 13px;
+  }
+}
+
+/* Reduced Motion Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-empty-icon img {
+    animation: none;
+  }
+
+  .cart-empty-button,
+  .cart-empty-arrow {
+    transition: none;
+  }
+}
+
+@media (max-width: 499.98px) {
+    .cart-item-right, .cart-item-left {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+@media (min-width:500px) and (max-width: 767.98px) {
+   .cart-item-left {
+        max-width: 60%;
+        width: 100%;
+    }
+    .cart-item-right{
+        max-width: 40%;
+        width: 100%;
+        text-align: right;
+    }
+}
