@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -64,7 +63,6 @@ export default function EnquiryForm({
     mode: "onBlur",
   });
 
-  // Update form values when initialValues change
   useEffect(() => {
     reset({
       ...EMPTY_VALUES,
@@ -72,7 +70,6 @@ export default function EnquiryForm({
     });
   }, [initialValues, reset]);
 
-  // Reusable confirmation dialog
   const showDialog = (
     status: ConfirmationStatus,
     title: string,
@@ -84,7 +81,6 @@ export default function EnquiryForm({
     setDialogOpen(true);
   };
 
-  // Submit Enquiry
   const submitHandler: SubmitHandler<EnquiryFormValues> = async (
     values
   ) => {
@@ -139,7 +135,6 @@ export default function EnquiryForm({
 
   const busy = submitting || isSubmitting;
 
-  // Close dialog
   const handleCloseDialog = () => {
     if (dialogStatus === "inprogress") return;
 
@@ -162,7 +157,6 @@ export default function EnquiryForm({
 
         <div className="enquiry-form-body">
 
-          {/* Name */}
           <FormInput
             label="Name"
             placeholder="Enter your name"
@@ -182,7 +176,6 @@ export default function EnquiryForm({
             })}
           />
 
-          {/* Phone Number */}
           <FormInput
             label="Phone Number"
             type="tel"
@@ -200,7 +193,6 @@ export default function EnquiryForm({
             })}
           />
 
-          {/* Email */}
           <FormInput
             label="Mail ID"
             type="email"
@@ -217,7 +209,6 @@ export default function EnquiryForm({
             })}
           />
 
-          {/* Description */}
           <FormTextarea
             label="Description"
             placeholder="Tell us about your bulk order enquiry..."
@@ -240,7 +231,6 @@ export default function EnquiryForm({
             })}
           />
 
-          {/* Submit */}
           <div className="enquiry-form-actions">
             <Button
               type="submit"
@@ -257,7 +247,6 @@ export default function EnquiryForm({
         </div>
       </form>
 
-      {/* CONFIRMATION DIALOG */}
       <ConfirmationDialog
         open={dialogOpen}
         status={dialogStatus}

@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -99,19 +98,16 @@ export default function Drawer({
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(false);
 
-  // Client-side mounting.
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Render the drawer when opened.
   useEffect(() => {
     if (mounted && open) {
       setVisible(true);
     }
   }, [mounted, open]);
 
-  // Opening animation.
   useEffect(() => {
     if (!open || !visible) return;
 
@@ -129,7 +125,6 @@ export default function Drawer({
     };
   }, [open, visible]);
 
-  // Closing animation.
   useEffect(() => {
     if (!mounted || open) return;
 
@@ -142,7 +137,6 @@ export default function Drawer({
     return () => window.clearTimeout(timer);
   }, [mounted, open]);
 
-  // Escape key and body scroll handling.
   useEffect(() => {
     if (!mounted || !open) return;
 
@@ -166,7 +160,6 @@ export default function Drawer({
     };
   }, [mounted, open, backdrop, closeOnEscape, onClose]);
 
-  // Focus management.
   useEffect(() => {
     if (!active) return;
 
@@ -179,7 +172,6 @@ export default function Drawer({
     };
   }, [active]);
 
-  // Apply only the supplied size and color/content props.
   const styles: DrawerStyle = {
     ...(size !== undefined && {
       "--drawer-size": sizeValues[size],

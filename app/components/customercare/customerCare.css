@@ -1,4 +1,3 @@
-
 .customer-care {
   display: flex;
   align-items: center;
@@ -90,7 +89,6 @@
   width: 25px;
   height: 25px;
 }
-
 
 .customer-care--horizontal {
   flex-direction: row;
@@ -188,7 +186,6 @@
   font-size: 16px;
 }
 
-
 .customer-care--large {
   gap: 20px;
   font-size: 18px;
@@ -239,11 +236,9 @@
 .customer-care-divider:last-child {
   border-right: none;
   padding-right: 0;
- 
 
 }
 @media (max-width: 767.98px) {
- 
 
   .customer-care-contact {
     gap: 12px;

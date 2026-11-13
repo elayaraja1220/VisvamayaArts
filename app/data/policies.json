@@ -1,54 +1,74 @@
 [
   {
-    "id": "shipping",
-    "label": "Return & Shipment Policy",
+    "id": "return",
+    "label": "Refund - Cancellation Policy",
     "content": {
-      "title": "Shipping Policy",
+      "title": "Refund - Cancellation Policy",
       "sections": [
         {
-          "title": "Introduction",
-          "paragraphs": [
-            "Thank you for shopping with Vismayam Arts. This Shipping Policy explains how orders placed through vismayamarts.in are processed and delivered."
+          "title": "Return Policy",
+          "bullets": [
+            "**Eligibility for Returns:** Returns are accepted within 7 days of delivery. Customized or made-to-order items are non-returnable.",
+            "**Not Eligible for Return or Refund:** Items damaged after delivery or bought during clearance sales or special discounts.",
+            "**Damaged or Incorrect Products:** Contact us within 48 hours of delivery with photos and order details. We will offer a replacement or full refund at no extra cost.",
+            "**Return Process:** Email us at vismayamarts@gmail.com or contact our number +91 99809 92830 within 7 days of receiving your order. Include your order number, reason for return, and clear images (if product is damaged/defective). Our team will review and approve your request within 2–3 working days."
           ]
         },
         {
-          "title": "Order Processing",
-          "paragraphs": [
-            "Orders are processed after payment confirmation. Processing time may vary depending on product availability, order volume, and the nature of the product."
-          ],
+          "title": "Cancellations Policy",
           "bullets": [
-            "Please ensure that your shipping address and contact details are accurate.",
-            "Orders may require additional processing time during holidays or promotional periods.",
-            "We may contact you if additional information is required to process your order."
+            "**Cancellations:** Orders can be cancelled within 24 hours of placing them. After this window, production or packing may begin, and cancellation might not be possible."
           ]
         },
         {
-          "title": "Shipping and Delivery",
-          "paragraphs": [
-            "Delivery timelines depend on the destination, courier service, product availability, and other factors outside our control."
-          ],
+          "title": "Refund Policy",
           "bullets": [
-            "Delivery estimates, where provided, are indicative and are not guaranteed.",
-            "Courier delays caused by weather, public holidays, or other unforeseen circumstances may affect delivery.",
-            "Please make sure someone is available to receive the shipment at the delivery address."
+            "**Refund Process:** Depending on the mode of payment and bank policies, we will take 7 to 14 working days to credit the refund money to your account."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shipping",
+    "label": "Shipment Policy",
+    "content": {
+      "title": "Shipment Policy",
+      "sections": [
+        {
+          "title": "Order Processing Time",
+          "paragraphs": [
+            "All orders are processed within 1–3 business days after payment confirmation. Orders are not processed on Sundays or public holidays."
           ]
         },
         {
           "title": "Shipping Charges",
           "paragraphs": [
-            "Applicable shipping charges, if any, will be displayed during checkout before you complete your order."
+            "Free shipping may be available on select products or for orders above a certain value (as mentioned on the product page or during promotions)."
           ]
         },
         {
-          "title": "Damaged or Missing Packages",
+          "title": "Delivery Time",
           "paragraphs": [
-            "If your package arrives damaged or an item appears to be missing, please contact us with your order details and supporting photographs so we can review the issue."
+            "3–7 business days after dispatch. Delivery times may vary depending on your location and courier service availability."
           ]
         },
         {
-          "title": "Contact Us",
+          "title": "Order Tracking",
           "paragraphs": [
-            "For shipping-related questions, contact Vismayam Arts using the contact details provided on our website."
+            "Once your order is shipped, you will receive a tracking number."
+          ]
+        },
+        {
+          "title": "Delays or Issues",
+          "paragraphs": [
+            "If your order is significantly delayed, contact our support team for assistance. Unforeseen delays due to weather, public holidays, or courier issues may occur."
+          ]
+        },
+        {
+          "title": "Damaged in Transit",
+          "paragraphs": [
+            "If the product arrives damaged, contact us within 36 hours of delivery with photos of the item and packaging. We will resolve the issue with a replacement or refund as per our return policy."
           ]
         }
       ]
@@ -58,94 +78,113 @@
     "id": "terms",
     "label": "Terms & Conditions",
     "content": {
-      "title": "Terms & Conditions",
+      "title": "Terms and Conditions",
       "sections": [
         {
-          "title": "Introduction",
+          "title": "Overview",
           "paragraphs": [
-            "These Website Standard Terms and Conditions govern your use of the Vismayam Arts website, vismayamarts.in. By accessing or using this website, you agree to comply with these terms. If you do not agree with these terms, please do not use this website."
+            "Last Updated: October 2026",
+            "This website is owned and operated by Vismayam Arts Private Limited. Throughout the site, the terms \"we,\" \"us,\" and \"our\" refer to Vismayam Arts Private Limited. This website, including all information, tools, and services available via it, is provided to you, the user, on the condition that you accept all of the terms, conditions, policies, and notices included here.",
+            "By accessing our site and/or purchasing something from us, you agree to be bound by the following terms and conditions (\"Terms of Service\", \"Terms\"), as well as any additional terms and conditions and policies referenced herein and/or available via a hyperlink."
           ]
         },
         {
-          "title": "Eligibility",
-          "bullets": [
-            "You must be legally capable of entering into a binding agreement to use this website.",
-            "If you are under 18 years of age, you may use this website only with the involvement and permission of a parent or legal guardian."
+          "title": "Section 1 - Online Store & Service Eligibility",
+          "paragraphs": [
+            "By agreeing to these Terms, you represent that you are at least the age of majority in your state or province of residence. You may not use our products or services for any illegal or unauthorized purpose, nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to the Copyright Act, 1957 and the Information Technology Act, 2000)."
           ]
         },
         {
-          "title": "Intellectual Property Rights",
+          "title": "Section 2 - Intellectual Property Rights (IPR)",
           "paragraphs": [
-            "Unless otherwise stated, Vismayam Arts and its licensors own the intellectual property rights in the website and its content. All rights are reserved, subject to the limited permissions described in these terms."
+            "All content included on this site, such as text, graphics, logos, images, digital twins, 3D models, and software, is the property of Vismayam Arts Private Limited or its content suppliers and is protected by Indian and international copyright and trademark laws.",
+            "Restrictions: You agree not to reproduce, duplicate, copy, sell, or exploit any portion of the Service or the digital assets displayed on this site without express written permission from us."
+          ]
+        },
+        {
+          "title": "Section 3 - Accuracy of Heritage Data",
+          "paragraphs": [
+            "Disclaimer: Digital twins and 3D models are \"representations\" and should not be used as the sole basis for physical authentication or structural engineering decisions without independent professional validation.",
+            "Historical Info: Historical material is provided for your convenience and may not reflect the most recent archaeological discoveries."
+          ]
+        },
+        {
+          "title": "Section 4 - Modifications to Service and Prices",
+          "paragraphs": [
+            "Prices for our products and consultancy services are subject to change without notice. We reserve the right to modify or discontinue the Service (or any part thereof) at any time. We shall not be liable to you or to any third party for any modification, price change, or suspension of the Service."
+          ]
+        },
+        {
+          "title": "Section 5 - Billing and Account Information",
+          "paragraphs": [
+            "We reserve the right to refuse any order you place with us. In the event that we make a change to or cancel an order, we may attempt to notify you by contacting the e-mail or billing address provided at the time the order was made."
+          ]
+        },
+        {
+          "title": "Section 6 - Third-Party Links",
+          "paragraphs": [
+            "Certain content, products, and services available via our Service may include materials from third parties (e.g., specific hardware manufacturers or cloud providers). We are not responsible for examining or evaluating the content or accuracy of third-party materials."
+          ]
+        },
+        {
+          "title": "Section 7 - User Comments and Feedback",
+          "paragraphs": [
+            "If you send us creative ideas, suggestions, or proposals, you agree that we may, at any time, without restriction, edit, copy, publish, and distribute those comments. We are under no obligation to maintain any comments in confidence or to pay compensation for them."
+          ]
+        },
+        {
+          "title": "Section 8 - Personal Information & Data Protection",
+          "paragraphs": [
+            "Your submission of personal information through the store is governed by our Privacy Policy. Our practices are aligned with the Digital Personal Data Protection Act (DPDPA), 2023."
+          ]
+        },
+        {
+          "title": "Section 9 - Disclaimer of Warranties; Limitation of Liability",
+          "paragraphs": [
+            "\"As Is\" Basis: The service and all products are provided 'as is' and 'as available' for your use, without any representation, warranties, or conditions of any kind.",
+            "Liability Cap: In no case shall Vismayam Arts Private Limited, our directors, or employees be liable for any injury, loss, claim, or any direct, indirect, or consequential damages. In jurisdictions where the exclusion of liability for incidental damages is limited, our liability shall be limited to the maximum extent permitted by law."
+          ]
+        },
+        {
+          "title": "Section 10 - Force Majeure",
+          "paragraphs": [
+            "Vismayam Arts Private Limited shall not be liable for any failure to perform its obligations where such failure results from any cause beyond our reasonable control, including, but not limited to, mechanical, electronic, or communications failure, \"Acts of God,\" labor unrest, or sudden changes in government regulations regarding the handling of archaeology and heritage artifacts."
+          ]
+        },
+        {
+          "title": "Section 11 - Indemnification",
+          "paragraphs": [
+            "You agree to indemnify and hold Vismayam Arts Private Limited and our affiliates harmless from any claim or demand, including reasonable attorneys’ fees, made by any third party due to or arising out of your breach of these Terms of Service."
+          ]
+        },
+        {
+          "title": "Section 12 - Severability & Termination",
+          "paragraphs": [
+            "If any provision of these Terms is determined to be unlawful or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law. The obligations of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes."
+          ]
+        },
+        {
+          "title": "Section 13 - Governing Law & Jurisdiction",
+          "paragraphs": [
+            "These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of India. Any disputes arising here from shall be subject to the exclusive jurisdiction of the courts in New Delhi, India."
+          ]
+        },
+        {
+          "title": "Section 14 - Grievance Redressal",
+          "paragraphs": [
+            "In accordance with the Information Technology Act 2000 and the Consumer Protection (E-Commerce) Rules, 2020, the name and contact details of the Grievance Officer are provided below:"
           ],
           "bullets": [
-            "You may access website content for personal, non-commercial use.",
-            "You must not reproduce, republish, sell, rent, or redistribute website material without prior written permission.",
-            "You must not use our images, artwork, product descriptions, or branding in a way that infringes our rights."
+            "Attn: Grievance Officer",
+            "Email: vismayamarts@gmail.com",
+            "Address: P.37, Bharath Rainbow const, Balaji Nagar Kattur, Pappakurichi Kattur, Tiruchirapalli. Tamilnadu, India"
           ]
         },
         {
-          "title": "Restrictions on Use",
+          "title": "Section 15 - Contact Information",
           "paragraphs": [
-            "You are specifically restricted from:"
-          ],
-          "bullets": [
-            "Publishing website material in other media without permission.",
-            "Selling, sublicensing, or commercially exploiting website material without authorization.",
-            "Publicly displaying or performing website material without permission.",
-            "Using this website in a way that may damage or disrupt the website.",
-            "Attempting to interfere with another user's access to the website.",
-            "Using this website contrary to applicable laws or regulations.",
-            "Engaging in data mining, data harvesting, or data extraction without authorization.",
-            "Using website content for advertising or marketing without permission."
-          ]
-        },
-        {
-          "title": "User Accounts",
-          "paragraphs": [
-            "If you create an account, you are responsible for maintaining the confidentiality of your login credentials and for activities carried out through your account. Please notify us if you believe your account has been accessed without authorization."
-          ]
-        },
-        {
-          "title": "Product Information",
-          "paragraphs": [
-            "We make reasonable efforts to display product descriptions, images, and prices accurately. However, colors and appearance may vary depending on your display, and occasional errors may occur."
-          ]
-        },
-        {
-          "title": "Orders and Payments",
-          "paragraphs": [
-            "Submitting an order constitutes a purchase request. Order acceptance, payment confirmation, availability, and any applicable cancellation or exchange terms are subject to the information communicated during the ordering process."
-          ]
-        },
-        {
-          "title": "Your Content",
-          "paragraphs": [
-            "If you submit reviews, messages, images, or other content to us, you confirm that you have the right to provide that content and that it does not violate another person's rights or applicable law."
-          ]
-        },
-        {
-          "title": "No Warranties",
-          "paragraphs": [
-            "This website and its content are provided on an “as is” and “as available” basis, to the extent permitted by applicable law. We do not guarantee that the website will always be uninterrupted, error-free, or free from harmful components."
-          ]
-        },
-        {
-          "title": "Limitation of Liability",
-          "paragraphs": [
-            "To the extent permitted by applicable law, Vismayam Arts will not be liable for indirect or consequential losses arising from the use of, or inability to use, this website."
-          ]
-        },
-        {
-          "title": "Changes to These Terms",
-          "paragraphs": [
-            "We may update these Terms & Conditions from time to time. Changes will be published on this page, and your continued use of the website after publication constitutes acceptance of the updated terms."
-          ]
-        },
-        {
-          "title": "Contact Information",
-          "paragraphs": [
-            "If you have questions about these Terms & Conditions, please contact Vismayam Arts through the contact information provided on vismayamarts.in."
+            "Questions about the Terms of Service should be sent to us at vismayamarts@gmail.com",
+            "Note: Unauthorized use of our website link or incorporating it into external documents without prior consent from Vismayam Arts Private Limited is strictly prohibited."
           ]
         }
       ]
@@ -160,68 +199,128 @@
         {
           "title": "Introduction",
           "paragraphs": [
-            "Vismayam Arts respects your privacy. This Privacy Policy explains what information may be collected when you use vismayamarts.in and how that information may be used."
+            "This Privacy Policy describes Our policies and procedures of Vismayam Arts Private Limited (“Vismayam Arts”, “We”, “Us”, or “Our”) on the collection, use and disclosure of Your information when You respond to our advertisements and tells You about Your privacy rights and how the law protects You. We use Your Personal Data to contact and support you, as well as to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy."
           ]
         },
         {
-          "title": "Information We May Collect",
+          "title": "Interpretation",
           "paragraphs": [
-            "Depending on how you use our website, information may include:"
+            "The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural."
+          ]
+        },
+        {
+          "title": "Definitions",
+          "paragraphs": [
+            "For the purposes of this Privacy Policy:"
           ],
           "bullets": [
-            "Name and contact details provided during checkout or account registration.",
-            "Shipping and billing information needed to process an order.",
-            "Order details and customer service communications.",
-            "Technical information such as browser, device, and website usage data."
+            "**Company** (referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement) refers to Vismayam Arts Private Limited, operating under the brand name \"Vismayam Arts\".",
+            "**Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.",
+            "**Personal Data** is any information that relates to an identified or identifiable individual.",
+            "**Service** refers to the advertisement, website, or application.",
+            "**Service Provider** means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.",
+            "**Usage Data** refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).",
+            "**You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable."
           ]
         },
         {
-          "title": "How Information May Be Used",
+          "title": "Collecting Your Personal Data",
           "paragraphs": [
-            "Information may be used to:"
+            "While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:"
           ],
           "bullets": [
-            "Process and fulfil orders.",
-            "Communicate order updates and respond to enquiries.",
-            "Provide customer support.",
-            "Maintain website security and improve website functionality.",
-            "Meet applicable legal and regulatory requirements."
+            "First name and last name",
+            "Email address",
+            "Phone number",
+            "Location details such as your address, city, or country",
+            "Any other data such as personal preferences, requirements, or comments"
           ]
         },
         {
-          "title": "Sharing of Information",
+          "title": "Use of Your Personal Data",
           "paragraphs": [
-            "Information may be shared with service providers involved in operating the website or fulfilling your order, such as payment, delivery, hosting, or customer support providers, where necessary for those purposes."
+            "The Company may use Personal Data for the following purposes:"
+          ],
+          "bullets": [
+            "**To provide and maintain our Service**, including to monitor the usage of our Service.",
+            "**To manage Your Account:** to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.",
+            "**For the performance of a contract:** the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.",
+            "**To contact You:** To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.",
+            "**To provide You** with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.",
+            "**To manage Your requests:** To attend and manage Your requests to Us.",
+            "**For business transfers:** We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred.",
+            "**For other purposes:** We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience."
           ]
         },
         {
-          "title": "Data Security",
+          "title": "Sharing Your Personal Information",
           "paragraphs": [
-            "We take reasonable measures to protect information. However, no method of electronic transmission or storage can be guaranteed to be completely secure."
+            "We may share Your personal information in the following situations:"
+          ],
+          "bullets": [
+            "**With Service Providers:** We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.",
+            "**For business transfers:** We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company.",
+            "**With Affiliates:** We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us.",
+            "**With business partners:** We may share Your information with Our business partners to offer You certain products, services or promotions.",
+            "**With other users:** when You share personal information or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.",
+            "**With Your consent:** We may disclose Your personal information for any other purpose with Your consent."
           ]
         },
         {
-          "title": "Cookies and Similar Technologies",
+          "title": "Loyalty Rewards and Promotional Offers",
           "paragraphs": [
-            "Our website may use cookies or similar technologies to support website functionality and understand usage. You can manage cookies through your browser settings, although disabling certain cookies may affect website features."
+            "During promotional or sale periods, users may continue to earn reward points as per applicable offers. However, redemption of reward points may be temporarily restricted during such periods. The Company reserves the right to modify or limit redemption policies at its discretion."
           ]
         },
         {
-          "title": "Your Choices",
+          "title": "Retention of Your Personal Data",
           "paragraphs": [
-            "You may contact us to ask questions about personal information you have provided or to request assistance, subject to applicable law and our ability to verify your request."
+            "The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.",
+            "The Company will also retain Usage Data for internal analysis purposes."
           ]
         },
         {
-          "title": "Changes to This Policy",
+          "title": "Transfer of Your Personal Data",
           "paragraphs": [
-            "We may update this Privacy Policy from time to time. The latest version will be published on this page."
+            "Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction. Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information."
+          ]
+        },
+        {
+          "title": "Disclosure of Your Personal Data",
+          "paragraphs": [
+            "Law enforcement: Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).",
+            "Other legal requirements: The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:"
+          ],
+          "bullets": [
+            "Comply with a legal obligation",
+            "Protect and defend the rights or property of the Company",
+            "Prevent or investigate possible wrongdoing in connection with the Service",
+            "Protect the personal safety of Users of the Service or the public",
+            "Protect against legal liability"
+          ]
+        },
+        {
+          "title": "Security of Your Personal Data",
+          "paragraphs": [
+            "The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security."
+          ]
+        },
+        {
+          "title": "Links to Other Websites",
+          "paragraphs": [
+            "Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services."
+          ]
+        },
+        {
+          "title": "Changes to this Privacy Policy",
+          "paragraphs": [
+            "We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page. This Privacy Policy was last updated on 2026/11/06 10:25:00 IST"
           ]
         },
         {
           "title": "Contact Us",
           "paragraphs": [
-            "For privacy-related questions, please contact Vismayam Arts using the contact details provided on our website."
+            "If you have any questions about this Privacy Policy, You can contact us via email at vismayamarts@gmail.com"
           ]
         }
       ]

@@ -1,7 +1,6 @@
-
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import "./policy.css";
@@ -12,11 +11,6 @@ import { Container } from "@/app/components/container/Container";
 import { Card } from "@/app/components/card/card";
 import Button from "@/app/components/button/button";
 import Typography from "@/app/components/typegrophy/typography";
-import PolicyUnderConstruction from "@/app/components/under-construction/under-construction";
-
-// ---------------------------------------------
-// Types
-// ---------------------------------------------
 
 interface PolicySection {
   title: string;
@@ -33,20 +27,44 @@ interface Policy {
   };
 }
 
-// Type-safe policies data
 const policyList = policies as Policy[];
 
-// ---------------------------------------------
-// Policy Content Component
-// ---------------------------------------------
+const EMAIL_PATTERN = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g;
+
+// Turns email addresses into mailto links.
+function renderEmailLinks(text: string, keyPrefix: string) {
+  return text.split(EMAIL_PATTERN).map((part, index) =>
+    index % 2 === 1 ? (
+      <a
+        key={`${keyPrefix}-${index}`}
+        href={`mailto:${part}`}
+        className="policy-link"
+      >
+        {part}
+      </a>
+    ) : (
+      part
+    )
+  );
+}
+
+// Renders "**text**" segments from policies.json as semibold (600)
+// and email addresses as mailto links.
+function renderRichText(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <span key={index} className="font-weight-semibold">
+        {renderEmailLinks(part.slice(2, -2), `${index}`)}
+      </span>
+    ) : (
+      renderEmailLinks(part, `${index}`)
+    )
+  );
+}
 
 function PolicyContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // -----------------------------------------
-  // Get Policy from URL
-  // -----------------------------------------
 
   const requestedPolicy = searchParams.get("type");
 
@@ -56,10 +74,6 @@ function PolicyContent() {
     ? requestedPolicy!
     : "terms";
 
-  // -----------------------------------------
-  // Body Class
-  // -----------------------------------------
-
   useEffect(() => {
     document.body.classList.add("product-details-body");
 
@@ -67,10 +81,6 @@ function PolicyContent() {
       document.body.classList.remove("product-details-body");
     };
   }, []);
-
-  // -----------------------------------------
-  // Change Policy
-  // -----------------------------------------
 
   const handlePolicyChange = (policyId: string) => {
     router.replace(
@@ -81,25 +91,13 @@ function PolicyContent() {
     );
   };
 
-  // -----------------------------------------
-  // Selected Policy
-  // -----------------------------------------
-
   const selectedPolicy = policyList.find(
     (policy) => policy.id === activePolicy
   );
 
-  // -----------------------------------------
-  // Render
-  // -----------------------------------------
-
-
-  const [hideNow, setHideNow] = useState(false)
   return (
     <PageSection className="page-section-policies">
       <Container>
-
-        {/* Policy Navigation */}
 
         <nav
           className="policy-navigation"
@@ -125,27 +123,15 @@ function PolicyContent() {
           })}
         </nav>
 
-        {/* Policy Content */}
-
         <Card className="m-0">
-        <PolicyUnderConstruction 
-        natarajaImage="/images/png/nataraja.png"
-         ganapathiImage="/images/png/ganapathi.png"
- />
-          {
-            hideNow &&
-          
-          <div className="policy-content hide-now">
+          <div className="policy-content">
 
             {selectedPolicy && (
               <>
-                {/* Policy Title */}
 
                 <Typography variant="h5">
                   {selectedPolicy.content.title}
                 </Typography>
-
-                {/* Policy Sections */}
 
                 {selectedPolicy.content.sections.map(
                   (section, index) => (
@@ -154,23 +140,17 @@ function PolicyContent() {
                       key={`${selectedPolicy.id}-${index}`}
                     >
 
-                      {/* Section Title */}
-
-                      <Typography variant="h6">
+                      <Typography variant="small" className="font-weight-semibold ">
                         {section.title}
                       </Typography>
-
-                      {/* Paragraphs */}
 
                       {section.paragraphs?.map(
                         (paragraph, paragraphIndex) => (
                           <Typography key={paragraphIndex}>
-                            {paragraph}
+                            {renderRichText(paragraph)}
                           </Typography>
                         )
                       )}
-
-                      {/* Bullet Points */}
 
                       {section.bullets &&
                         section.bullets.length > 0 && (
@@ -178,7 +158,7 @@ function PolicyContent() {
                             {section.bullets.map(
                               (bullet, bulletIndex) => (
                                 <li key={bulletIndex}>
-                                  {bullet}
+                                  {renderRichText(bullet)}
                                 </li>
                               )
                             )}
@@ -192,17 +172,12 @@ function PolicyContent() {
             )}
 
           </div>
-          }
         </Card>
 
       </Container>
     </PageSection>
   );
 }
-
-// ---------------------------------------------
-// Policy Page
-// ---------------------------------------------
 
 export default function PolicyPage() {
   return (

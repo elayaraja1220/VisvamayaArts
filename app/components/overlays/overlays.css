@@ -10,7 +10,6 @@
 
 }
 
-
 .modal-header {
   background-color: var(--secondary-color-variant);
   display: flex;
@@ -25,8 +24,7 @@
   flex-direction: column;
   padding-bottom: 0;
   max-height: calc(100vh - 160px);
- 
-  
+
 }
 .modal-header .typography {
   color: var(--text-color-black);
@@ -64,7 +62,6 @@
   width: 100%;
 
 }
-
 
 .modal.modal-large .modal-header {
   padding: var(--padding-medium) var(--padding-large);

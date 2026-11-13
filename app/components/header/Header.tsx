@@ -15,8 +15,6 @@ import { breakpoints } from "@/app/utils/breakpoints";
 
 import { usePathname } from "next/navigation";
 
-
-
 import {
   ShoppingCart,
   Menu as MenuIcon,
@@ -25,9 +23,6 @@ import {
 import "./header.css";
 
 export function Header() {
-  // --------------------------------------------------
-  // Responsive Breakpoints
-  // --------------------------------------------------
 
   const isMobile = useMediaQuery(breakpoints.mobile);
   const isIpadSmall = useMediaQuery(breakpoints.ipadSmall);
@@ -50,7 +45,6 @@ export function Header() {
 
   const { count, hydrated } = useCart();
 
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
@@ -67,13 +61,11 @@ export function Header() {
     };
   }, []);
 
-
   useEffect(() => {
     if (showHeaderNav) {
       setMenuOpen(false);
     }
   }, [showHeaderNav]);
-
 
   const pathname = usePathname();
 
@@ -138,7 +130,6 @@ export function Header() {
                         {isActiveLink(item.link) && (
                           <span className="highlight"></span>
                         )}
-
 
                       </Link>
                     </li>

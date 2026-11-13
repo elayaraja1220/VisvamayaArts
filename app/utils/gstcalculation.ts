@@ -14,7 +14,6 @@ export function calculateOrderTotals(
 ): OrderCalculations {
   const gstPercentage = 9;
 
-  // GST amounts based on your requested calculation
   const cgst_amount = Number(
     ((totalInclusive * gstPercentage) / 100).toFixed(2),
   );
@@ -27,12 +26,10 @@ export function calculateOrderTotals(
     (cgst_amount + sgst_amount).toFixed(2),
   );
 
-  // Remove GST from the original inclusive product price
   const subtotal = Number(
     (totalInclusive - totalGST).toFixed(2),
   );
 
-  // Grand total remains the original GST-inclusive price
   const grandTotal = Number(
     (subtotal + cgst_amount + sgst_amount).toFixed(2),
   );

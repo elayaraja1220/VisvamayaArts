@@ -23,10 +23,6 @@ type ViewCartProps = {
   
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                  HELPERS                                   */
-/* -------------------------------------------------------------------------- */
-
 const formatPrice = (amount: number) =>
   new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -41,10 +37,6 @@ const parsePrice = (price: string | number | undefined) => {
   return Number.isFinite(parsed) ? parsed : 0;
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                VIEW CART                                   */
-/* -------------------------------------------------------------------------- */
-
 export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
   const router = useRouter();
   const slugs = useProductSlugs();
@@ -55,21 +47,12 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
     removeFromCart,
   } = useCart();
 
-  /* ------------------------------------------------------------------------ */
-  /*                     GST-INCLUSIVE CART TOTAL                             */
-  /* ------------------------------------------------------------------------ */
-
-  // Product prices already include GST.
   const totalInclusive = items.reduce(
     (total, item) =>
       total +
       parsePrice(item.product.product_price) * item.quantity,
     0,
   );
-
-  /* ------------------------------------------------------------------------ */
-  /*                    SHARED GST CALCULATION UTILITY                       */
-  /* ------------------------------------------------------------------------ */
 
   const {
     subtotal,
@@ -81,10 +64,6 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
     totalItems,
   } = calculateOrderTotals(totalInclusive, items);
 
-  /* ------------------------------------------------------------------------ */
-  /*                              LOADING STATE                               */
-  /* ------------------------------------------------------------------------ */
-
   if (!hydrated) {
     return (
       <div className="cart-loading" aria-live="polite">
@@ -93,16 +72,11 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
     );
   }
 
-  /* ------------------------------------------------------------------------ */
-  /*                              EMPTY CART                                  */
-  /* ------------------------------------------------------------------------ */
-
   if (items.length === 0) {
   return (
     <div className="cart-empty-container">
       <div className="cart-empty">
 
-        {/* Ganesha Illustration */}
         <div className="cart-empty-icon">
           <img
             src="/images/cart/empty-cart.png"
@@ -110,7 +84,6 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
           />
         </div>
 
-        {/* Empty Cart Content */}
         <div className="cart-empty-content">
 
           <Typography
@@ -125,12 +98,10 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
             to your cart yet.
           </Typography>
 
-          {/* Decorative Divider */}
           <div className="cart-empty-divider">
             <span>❖</span>
           </div>
 
-          {/* Continue Shopping */}
           <Button
             href="/products/collections/"
             size="large"
@@ -147,7 +118,6 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
             <span className="cart-empty-arrow">→</span>
           </Button>
 
-          {/* Divine Blessing */}
           <div className="cart-empty-blessing">
             <span className="cart-empty-diya">🪔</span>
 
@@ -163,15 +133,8 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
   );
 }
 
-  /* ------------------------------------------------------------------------ */
-  /*                                CART UI                                   */
-  /* ------------------------------------------------------------------------ */
-
   return (
     <div className="cart-layout">
-      {/* -------------------------------------------------------------------- */}
-      {/*                              CART ITEMS                               */}
-      {/* -------------------------------------------------------------------- */}
 
       <section className="cart-items" aria-label="Cart items">
         <Card className="cart-item">
@@ -261,10 +224,6 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
         </Card>
       </section>
 
-      {/* -------------------------------------------------------------------- */}
-      {/*                            CART SUMMARY                              */}
-      {/* -------------------------------------------------------------------- */}
-
       <section className="cart-summary">
         <div className="cart-summary-total">
           <div className="cart-summary-flex">
@@ -307,10 +266,6 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
             {formatPrice(grandTotal)}
           </Typography>
         </div>
-
-        {/* ------------------------------------------------------------------ */}
-        {/*                              CHECKOUT                              */}
-        {/* ------------------------------------------------------------------ */}
 
         <div className="checkout-button">
           <Button

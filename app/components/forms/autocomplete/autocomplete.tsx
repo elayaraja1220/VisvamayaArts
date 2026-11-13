@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -47,6 +46,8 @@ export default function Autocomplete<T>({
   minQueryLength = 1,
   maxResults = 100,
   multiple = false,
+  showArrow = false,
+  matchMode = "contains",
   className = "",
   style,
 }: AutocompleteProps<T>) {
@@ -70,6 +71,8 @@ export default function Autocomplete<T>({
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  // True when opened from the arrow: list every option, ignore the query.
+  const [showAll, setShowAll] = useState(false);
 
   const query = isInputControlled ? inputValue : internalInputValue;
   const selectedValue = isSelectionControlled ? value : internalValue;
@@ -96,17 +99,42 @@ export default function Autocomplete<T>({
 
       if (!normalizedQuery) return items;
 
+      if (matchMode === "startsWith") {
+        const starts: T[] = [];
+        const wordStarts: T[] = [];
+
+        for (const option of items) {
+          const optionLabel = getOptionLabel(option).toLocaleLowerCase();
+
+          if (optionLabel.startsWith(normalizedQuery)) {
+            starts.push(option);
+          } else if (
+            optionLabel
+              .split(/[\s\-(),.]+/)
+              .some((word) => word.startsWith(normalizedQuery))
+          ) {
+            wordStarts.push(option);
+          }
+        }
+
+        return [...starts, ...wordStarts];
+      }
+
       return items.filter((option) =>
         getOptionLabel(option)
           .toLocaleLowerCase()
           .includes(normalizedQuery)
       );
     },
-    [getOptionLabel]
+    [getOptionLabel, matchMode]
   );
 
   const filteredOptions = useMemo(() => {
   const searchQuery = query.trim();
+
+  if (showAll) {
+    return options.slice(0, Math.max(0, maxResults));
+  }
 
   if (searchQuery.length < minQueryLength) {
     return [];
@@ -120,6 +148,7 @@ export default function Autocomplete<T>({
 }, [
   options,
   query,
+  showAll,
   filterOptions,
   defaultFilter,
   maxResults,
@@ -143,7 +172,7 @@ export default function Autocomplete<T>({
       : undefined;
 
   const shouldShowOptions =
-    isOpen && query.trim().length >= minQueryLength;
+    isOpen && (showAll || query.trim().length >= minQueryLength);
 
   const setQuery = useCallback(
     (nextValue: string) => {
@@ -209,6 +238,7 @@ export default function Autocomplete<T>({
 
       emitSelection([optionValue], [option]);
       setQuery(getOptionLabel(option));
+      setShowAll(false);
       setIsOpen(false);
       setActiveIndex(-1);
     },
@@ -282,7 +312,23 @@ export default function Autocomplete<T>({
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setQuery(event.target.value);
+    setShowAll(false);
     setIsOpen(true);
+  }
+
+  function toggleFromArrow() {
+    if (disabled) return;
+
+    if (isOpen) {
+      setIsOpen(false);
+      setShowAll(false);
+      setActiveIndex(-1);
+      return;
+    }
+
+    setShowAll(true);
+    setIsOpen(true);
+    inputRef.current?.focus();
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -343,6 +389,7 @@ export default function Autocomplete<T>({
         !rootRef.current.contains(event.target)
       ) {
         setIsOpen(false);
+        setShowAll(false);
         setActiveIndex(-1);
       }
     }
@@ -493,6 +540,33 @@ export default function Autocomplete<T>({
               </svg>
             </button>
           )}
+
+        {showArrow && (
+          <button
+            type="button"
+            className={[
+              "autocomplete-arrow",
+              isOpen ? "autocomplete-arrow-open" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            aria-label={isOpen ? "Close options" : "Show all options"}
+            tabIndex={-1}
+            disabled={disabled}
+            onPointerDown={(event) => event.preventDefault()}
+            onClick={toggleFromArrow}
+          >
+            <svg viewBox="0 0 20 20" width="18" height="18" fill="none">
+              <path
+                d="M5 7.5L10 12.5L15 7.5"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
       </div>
 
       <div id={statusId} className="autocomplete-sr-only" role="status">

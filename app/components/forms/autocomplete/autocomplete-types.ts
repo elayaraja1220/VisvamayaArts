@@ -1,7 +1,8 @@
-
 import type { CSSProperties, ReactNode } from "react";
 
 export type AutocompleteOptionValue = string | number;
+
+export type AutocompleteMatchMode = "contains" | "startsWith";
 
 export type AutocompleteProps<T> = {
   options: T[];
@@ -47,6 +48,15 @@ export type AutocompleteProps<T> = {
   minQueryLength?: number;
   maxResults?: number;
   multiple?: boolean;
+  /**
+   * How typed text matches options (ignored when `filterOptions` is given).
+   * - "contains" (default): label contains the text anywhere.
+   * - "startsWith": label starts with the text first, then any later word
+   *   starting with it ("b" -> Bahamas, Bahrain, ..., Antigua and Barbuda).
+   */
+  matchMode?: AutocompleteMatchMode;
+  /** Shows a dropdown arrow that opens the full (unfiltered) option list. */
+  showArrow?: boolean;
   className?: string;
   style?: CSSProperties;
 };

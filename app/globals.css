@@ -4,8 +4,6 @@
   box-sizing: border-box;
 }
 
-
-
 :root {
   --primary-color: #F2C30F;
   --secondary-color-variant: #EF8D03;
@@ -50,12 +48,10 @@
   --form-height-medium: 40px;
   --form-height-large: 48px;
 
-  /* Curves */
   --form-radius-small: 4px;
   --form-radius-medium: 8px;
   --form-radius-large: 12px;
 
-  /* Spacing */
   --form-padding-small: 8px;
   --form-padding-medium: 12px;
   --form-padding-large: 16px;
@@ -76,7 +72,6 @@
 
   --footer-top-color: #69574a;
   --footer-color: #4d3a2e;
-
 
   --font-main: "Inter", sans-serif;
   --header-height: 80px;
@@ -99,7 +94,6 @@
   --font-size-small: 14px;
   --font-size-x-small: 10px;
   --font-size-18: 18px;
-
 
   --default-gap: 16px;
   --gap-small: 10px;

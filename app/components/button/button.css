@@ -154,7 +154,6 @@
   border-color: var(--border-color-muted);
 }
 
-
 .btn-small {
   padding: 6px 14px;
   font-size: var(--font-size-small);
@@ -199,7 +198,6 @@
   width: 100%;
   min-height: 44px;
 }
-
 
 .btn-circle.btn-small {
   width: 30px;
@@ -271,7 +269,6 @@
   border-radius: 9999px;
 }
 
-
 .btn-circle.btn-curve-none,
 .btn-circle.btn-curve-small,
 .btn-circle.btn-curve-medium,
@@ -279,7 +276,6 @@
 .btn-circle.btn-curve-full {
   border-radius: 50%;
 }
-
 
 .btn-transparent:hover:not(:disabled),
 .btn-transparent-primary:hover:not(:disabled),
@@ -290,7 +286,6 @@
   background-color: rgba(128, 128, 128, 0.12);
   opacity: 1;
 }
-
 
 .btn-filled-white {
   background-color: var(--bg-color-white);

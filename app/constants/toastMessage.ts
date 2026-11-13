@@ -1,4 +1,3 @@
-
 export const toastMessages = {
   cart: {
     added: (productName: string) => ({

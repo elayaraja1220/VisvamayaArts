@@ -1,4 +1,3 @@
-
 import type { FormSelectProps } from "../form-types";
 import { getFormClasses } from "../form-utils";
 
@@ -64,7 +63,6 @@ export default function FormSelect({
         {
           placeholder && <option value="">{placeholder}</option>
         }
-        
 
         {options.map((option) => (
           <option key={option.value} value={option.value}>
@@ -73,7 +71,6 @@ export default function FormSelect({
         ))}
       </select>
 
-     
     </div>
   );
 }

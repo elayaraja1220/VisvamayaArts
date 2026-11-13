@@ -5,9 +5,6 @@ import { Container } from "@/app/components/container/Container";
 import Loading from "@/app/components/loading/loading";
 import CollectionsContent from "@/app/components/productCollection/productCollection";
 
-// Products and categories load live in the browser (see productCollection),
-// so new products appear here without rebuilding the site.
-
 function CollectionsLoading() {
   return (
     <PageSection className="text-white">

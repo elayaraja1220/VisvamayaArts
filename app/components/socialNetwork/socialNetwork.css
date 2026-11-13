@@ -1,4 +1,3 @@
-
 .social-network {
     display: flex;
     justify-content: flex-end;
@@ -14,7 +13,6 @@
     margin-right: 5px;
     border-radius: 50%;
      background-color: var(--secondary-color-variant);
-
 
 }
 .footer-icon-circle a {

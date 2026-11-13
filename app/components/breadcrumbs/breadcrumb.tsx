@@ -3,9 +3,7 @@ import "./breadcrumb.css";
 
 export type BreadcrumbItem = {
   label: string;
-  /** Renders a link */
   href?: string;
-  /** Renders a button (use when the crumb changes state instead of the route) */
   onClick?: () => void;
 };
 
@@ -14,7 +12,6 @@ type BreadcrumbProps = {
   className?: string;
 };
 
-/** The last item is treated as the current page. */
 export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   return (
     <nav

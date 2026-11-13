@@ -6,6 +6,7 @@ import Typography from "../typegrophy/typography";
 import "./footer.css";
 import Image from "next/image";
 import Menu from "../../data/header-nav.json"
+import policies from "@/app/data/policies.json";
 import { useEffect, useState } from "react";
 import CustomerCare from "../customercare/customerCare";
 import SocialNetwork from "../socialNetwork/socialNetwork";
@@ -16,7 +17,6 @@ export default function Footer() {
     useEffect(() => {
         setYear(new Date().getFullYear());
     }, []);
-
 
     return (
         <footer className="footer">
@@ -65,10 +65,13 @@ export default function Footer() {
                             <div className="footer-menu-right">
                                 <ul className="footer-menu-list">
 
-                                    {Menu.footerNav1.map((item) => (
-                                        <li key={item.link} className="footer-menu-list-item">
-                                            <Link href={item.link} className="footer-menu-item-link">
-                                                {item.label}
+                                    {policies.map((policy) => (
+                                        <li key={policy.id} className="footer-menu-list-item">
+                                            <Link
+                                                href={`/policies?type=${encodeURIComponent(policy.id)}`}
+                                                className="footer-menu-item-link"
+                                            >
+                                                {policy.label}
                                             </Link>
                                         </li>
                                     ))}
@@ -83,7 +86,6 @@ export default function Footer() {
                     </Container>
                 </div>
             </div>
-
 
         </footer>
     )

@@ -137,7 +137,6 @@
   padding: 24px;
 }
 
-
 .accordion-header:not(:disabled):hover {
   filter: brightness(0.97);
 }

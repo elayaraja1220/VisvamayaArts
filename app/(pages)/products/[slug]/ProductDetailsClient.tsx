@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -18,6 +17,7 @@ import { getProductImageUrl } from "@/app/service/imageSerive";
 import { Card } from "@/app/components/card/card";
 
 import "./products-details.css";
+import ProductImageGallery from "./ProductImageGallery";
 
 import CustomerCare from "@/app/components/customercare/customerCare";
 import { Tabs } from "@/app/components/tabs";
@@ -50,20 +50,17 @@ type Props = {
 };
 
 export default function ProductDetailsClient({ id }: Props) {
-  // Responsive breakpoints
   const isMobile = useMediaQuery(breakpoints.mobile);
   const isIpadSmall = useMediaQuery(breakpoints.ipadSmall);
   const isIpad = useMediaQuery(breakpoints.ipad);
   const isDesktop = useMediaQuery(breakpoints.desktop);
 
-  // Component state
   const [product, setProduct] = useState<Product | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const ishideNow = useState(true);
 
-  // Load product details
   useEffect(() => {
     let active = true;
 
@@ -107,14 +104,12 @@ export default function ProductDetailsClient({ id }: Props) {
     };
   }, [id]);
 
-  // Loading state
   if (loading) {
     return (
       <Loading message="Loading product details..." type="section" />
     );
   }
 
-  // Error state
   if (error || !product) {
     return (
        <ProductNotFound primaryHref="/products/collections"
@@ -123,7 +118,6 @@ export default function ProductDetailsClient({ id }: Props) {
     );
   }
 
-  // Product category
   const categoryName =
     categories.find(
       (category) =>
@@ -131,7 +125,18 @@ export default function ProductDetailsClient({ id }: Props) {
         String(product.product_category_id)
     )?.product_category_name ?? "";
 
-  // Product specifications
+  const extraImages = Array.isArray(product.product_images)
+    ? product.product_images
+    : (product.product_images ?? "").split(",");
+
+  const galleryImages = Array.from(
+    new Set(
+      [product.product_image, ...extraImages]
+        .map((image) => getProductImageUrl(image))
+        .filter(Boolean)
+    )
+  );
+
   const specifications = (
     product.product_dimension_detailed ?? ""
   )
@@ -142,7 +147,6 @@ export default function ProductDetailsClient({ id }: Props) {
     .map((item) => item.trim())
     .filter(Boolean);
 
-  // Product detail tabs
   const tabs: TabItem[] = [
     {
       id: "description",
@@ -182,18 +186,14 @@ export default function ProductDetailsClient({ id }: Props) {
     },
   ];
 
-  // Show product detail accordion on mobile and small iPad only
-  const showProductAccordion = !isDesktop; 
-  
+  const showProductAccordion = !isDesktop;
 
   return (
     <>
-      {/* Recently Viewed Tracking */}
       <TrackRecentlyViewed
         productId={String(product.product_id)}
       />
 
-      {/* Product Header */}
       <Container>
         <div className="products-detail-row">
           <div className="products-detali-left">
@@ -215,21 +215,19 @@ export default function ProductDetailsClient({ id }: Props) {
         </div>
       </Container>
 
-      {/* Product Details */}
       <PageSection className="page-section-product-details page-section-bg-color-secondary">
         <Container>
           <Card className="prodcut-details-card">
             <div className="products-details-row">
 
-              {/* Product Image */}
               <div className="product-details-image-box">
-                <img
-                  src={getProductImageUrl(product.product_image)}
+                <ProductImageGallery
+                  key={product.product_id}
+                  images={galleryImages}
                   alt={product.product_name}
-                  className="product-details-image"
+                  variant="vertical"
                 />
 
-                {/* Desktop Product Tabs */}
                 {isDesktop && (
                   <div className="product-details-tabs">
                     <Tabs
@@ -243,10 +241,8 @@ export default function ProductDetailsClient({ id }: Props) {
                 )}
               </div>
 
-              {/* Product Information */}
               <div className="products-details-content">
 
-                {/* Product Description */}
                 {!isMobile && !isIpadSmall && (
                   <>
                     {product.product_description_heading && (
@@ -264,7 +260,6 @@ export default function ProductDetailsClient({ id }: Props) {
                   </>
                 )}
 
-                {/* Product Price */}
                 <div>
                   <Typography
                     variant="h1"
@@ -279,13 +274,8 @@ export default function ProductDetailsClient({ id }: Props) {
                   </Typography>
                 </div>
 
-                {/* Product Actions */}
                 <ProductActions product={product} />
 
-                {/* Gift Options */}
-                {/* {ishideNow && <GiftOptions />} */}
-
-                {/* Product Dimensions */}
                 <div className="section-dimension">
 
                   <Accordion
@@ -297,7 +287,6 @@ export default function ProductDetailsClient({ id }: Props) {
                       "needHelp",
                     ]}
                   >
-                    {/* Dimensions */}
                     <AccordionItem id="dimensions">
                       <AccordionHeader>
                         Dimensions
@@ -322,7 +311,6 @@ export default function ProductDetailsClient({ id }: Props) {
                       </AccordionContent>
                     </AccordionItem>
 
-                    {/* Need Help */}
                     <AccordionItem id="needHelp">
                       <AccordionHeader>
                         Need Help?
@@ -338,7 +326,6 @@ export default function ProductDetailsClient({ id }: Props) {
                     </AccordionItem>
                   </Accordion>
 
-                  {/* Mobile and Small iPad Product Accordion */}
                   {showProductAccordion && (
                     <div className="product-details-accordion">
                       <Accordion
@@ -372,13 +359,11 @@ export default function ProductDetailsClient({ id }: Props) {
         </Container>
       </PageSection>
 
-      {/* Similar Products */}
       <SimilarProducts
         categoryId={String(product.product_category_id)}
         currentProductId={String(product.product_id)}
       />
 
-      {/* Recently Viewed Products */}
       <PageSection className="page-section-viewed">
         <Container>
           <RecentlyViewedProducts

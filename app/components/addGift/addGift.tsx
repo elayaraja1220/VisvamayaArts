@@ -18,7 +18,6 @@ export default function GiftOptions() {
         onChange={(e) => setAddGift(e.target.checked)}
       />
 
-      {/* Only show the gift fields when the box is ticked */}
       {addGift && (
         <div>
           <FormTextarea

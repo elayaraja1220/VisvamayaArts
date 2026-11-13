@@ -1,4 +1,3 @@
-
 import type { FormChoiceProps } from "../form-types";
 
 export default function FormCheckbox({

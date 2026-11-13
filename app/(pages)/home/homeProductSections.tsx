@@ -120,7 +120,6 @@ export default function HomeProductSections() {
 
   return (
     <>
-      {/* New Arrivals */}
       <PageSection className="page-section-newarrivals">
         <Container>
           <PageTitle
@@ -133,7 +132,6 @@ export default function HomeProductSections() {
         </Container>
       </PageSection>
 
-      {/* Collections */}
       <PageSection className="page-section-collection">
         <Container>
           <PageTitle
@@ -149,7 +147,6 @@ export default function HomeProductSections() {
         </Container>
       </PageSection>
 
-      {/* Shop By Theme */}
       <PageSection className="page-section-our-theme">
         <Container>
           <PageTitle

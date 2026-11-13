@@ -32,10 +32,6 @@ const SELECTED_ADDRESS_STORAGE_KEY =
 
 const ORDER_EMAIL = "no-reply@vismayamarts.in";
 
-/* =========================================
-   Helpers
-========================================= */
-
 const parsePrice = (
   price: string | number | undefined,
 ): number => {
@@ -46,14 +42,9 @@ const parsePrice = (
   return Number.isFinite(parsed) ? parsed : 0;
 };
 
-/* =========================================
-   Checkout
-========================================= */
-
 export default function Checkout() {
   const { items, hydrated, removeFromCart } = useCart();
 
-  /* ADDRESS STATE */
   const [addresses, setAddresses] =
     useState<ShippingAddressData[]>([]);
 
@@ -62,7 +53,6 @@ export default function Checkout() {
 
   const [addressLoaded, setAddressLoaded] = useState(false);
 
-  /* ORDER STATE */
   const [isSubmittingOrder, setIsSubmittingOrder] =
     useState(false);
 
@@ -73,7 +63,6 @@ export default function Checkout() {
   const [pendingAddress, setPendingAddress] =
     useState<ShippingAddressData | null>(null);
 
-  /* CONFIRMATION DIALOG STATE */
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const [dialogStatus, setDialogStatus] =
@@ -83,10 +72,6 @@ export default function Checkout() {
 
   const [dialogDescription, setDialogDescription] =
     useState("");
-
-  /* =========================================
-     Load Saved Addresses
-  ========================================= */
 
   useEffect(() => {
     try {
@@ -137,10 +122,6 @@ export default function Checkout() {
     }
   }, []);
 
-  /* =========================================
-     Save Address List
-  ========================================= */
-
   useEffect(() => {
     if (!addressLoaded) return;
 
@@ -156,10 +137,6 @@ export default function Checkout() {
       );
     }
   }, [addresses, addressLoaded]);
-
-  /* =========================================
-     Save Selected Address
-  ========================================= */
 
   useEffect(() => {
     if (!addressLoaded) return;
@@ -183,10 +160,6 @@ export default function Checkout() {
     }
   }, [selectedAddressId, addressLoaded]);
 
-  /* =========================================
-     Calculate Order Totals
-  ========================================= */
-
   const totalInclusive = items.reduce(
     (total, item) =>
       total +
@@ -204,10 +177,6 @@ export default function Checkout() {
     totalItems,
   } = calculateOrderTotals(totalInclusive, items);
 
-  /* =========================================
-     Add / Edit Address
-  ========================================= */
-
   const handleSaveAddress = async (
     address: ShippingAddressData,
     mode: "add" | "edit",
@@ -224,10 +193,6 @@ export default function Checkout() {
 
     setSelectedAddressId(address.id);
   };
-
-  /* =========================================
-     Delete Address
-  ========================================= */
 
   const handleDeleteAddress = (
     address: ShippingAddressData,
@@ -251,19 +216,11 @@ export default function Checkout() {
     }
   };
 
-  /* =========================================
-     Select Address
-  ========================================= */
-
   const handleSelectAddress = (
     address: ShippingAddressData,
   ) => {
     setSelectedAddressId(address.id);
   };
-
-  /* =========================================
-     Show Confirmation Dialog
-  ========================================= */
 
   const showDialog = (
     status: ConfirmationStatus,
@@ -275,10 +232,6 @@ export default function Checkout() {
     setDialogDescription(description);
     setDialogOpen(true);
   };
-
-  /* =========================================
-     Submit Order
-  ========================================= */
 
   const handleProceedToPay = useCallback(
     async (address: ShippingAddressData) => {
@@ -315,7 +268,6 @@ export default function Checkout() {
         const firstName = names[0] ?? "";
         const lastName = names.slice(1).join(" ");
 
-        /* ORDER PRODUCTS */
         const orderProducts: SubmitOrderProduct[] =
           items.map((item) => {
             const productPrice = parsePrice(
@@ -337,7 +289,6 @@ export default function Checkout() {
 
               phone_number: address.phone,
 
-              // Customer email address
               email_id: address.email,
 
               address_line_1: address.addressLine,
@@ -350,7 +301,6 @@ export default function Checkout() {
             };
           });
 
-        /* ORDER PAYLOAD */
         const payload: SubmitOrderPayload = {
           sub_total: subtotal.toFixed(2),
           cgst_amount: cgst_amount.toFixed(2),
@@ -372,11 +322,9 @@ export default function Checkout() {
           totalItems,
         });
 
-        /* EXISTING BACKEND API */
         const success = await submitOrder(payload);
 
         if (success) {
-
 
           setOrderPlaced(true);
 
@@ -386,7 +334,6 @@ export default function Checkout() {
             `Thank you for shopping with Vismayam Arts. Your order has been successfully placed. A confirmation email will be sent to ${address.email} from ${ORDER_EMAIL}.`,
           );
 
-          /* CLEAR CART AFTER SUCCESS */
           const productIds = items.map(
             (item) => item.product.product_id,
           );
@@ -439,10 +386,6 @@ export default function Checkout() {
     ],
   );
 
-  /* =========================================
-     Retry Order
-  ========================================= */
-
   const handleRetryOrder = () => {
     if (!pendingAddress || isSubmittingOrder) return;
 
@@ -451,19 +394,11 @@ export default function Checkout() {
     handleProceedToPay(pendingAddress);
   };
 
-  /* =========================================
-     Close Dialog
-  ========================================= */
-
   const handleCloseDialog = () => {
     if (dialogStatus === "inprogress") return;
 
     setDialogOpen(false);
   };
-
-  /* =========================================
-     Loading State
-  ========================================= */
 
   if (!hydrated || !addressLoaded) {
     return (
@@ -475,21 +410,15 @@ export default function Checkout() {
     );
   }
 
-  /* =========================================
-     Checkout Page
-  ========================================= */
-
   return (
     <PageSection className="page-section-checkout">
 
-      {/* ORDER MESSAGE */}
       {orderMessage && !dialogOpen && (
         <p role="status" aria-live="polite">
           {orderMessage}
         </p>
       )}
 
-      {/* EMPTY CART / ORDER SUCCESS */}
       {items.length === 0 ? (
 
         <section
@@ -549,7 +478,6 @@ export default function Checkout() {
                       Continue Shopping
                       <span aria-hidden="true">→</span>
                     </Link>
-
 
                   </div>
                 </>
@@ -619,7 +547,6 @@ export default function Checkout() {
         </section>
 
       ) : (
-        /* SHIPPING ADDRESS / CHECKOUT */
 
         <ShippingAddress
           addresses={addresses}
@@ -643,7 +570,6 @@ export default function Checkout() {
         />
       )}
 
-      {/* SUBMITTING STATUS */}
       {isSubmittingOrder && (
         <p
           className="checkout-submitting"
@@ -653,8 +579,6 @@ export default function Checkout() {
         </p>
       )}
 
-
-      {/* REUSABLE CONFIRMATION DIALOG */}
       <ConfirmationDialog
         open={dialogOpen}
         status={dialogStatus}

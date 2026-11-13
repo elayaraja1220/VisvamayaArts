@@ -8,12 +8,9 @@ import { ArrowLeft } from "react-feather";
 
 type BackTitleProps = {
   title: string;
-  /** Name of the currently selected tab, shown after the title as "Title | Tab" */
   tabName?: string;
   subtitle?: string;
-  /** Custom back action. Defaults to router.back() */
   onBack?: () => void;
-  /** The arrow icon points right by default; set false if your icon already points left */
   flipIcon?: boolean;
   titleVariant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;

@@ -58,8 +58,7 @@
     }
     .typography-h5 {
         font-size: 16px;
-       
-        
+
     }
     .typography-h6 {
         font-size: 14px;
@@ -91,8 +90,7 @@
     }
     .typography-h5 {
         font-size: 14px;
-       
-        
+
     }
     .typography-h6 {
         font-size: 12px;
@@ -102,6 +100,5 @@
     p.typography, p {
         font-size: 14px;
     }
-    
-    
+
 }

@@ -9,11 +9,6 @@ export function getProductCategoryIds(
     return categoryIds.map(String);
   }
 
-  // Supports API values such as:
-  // "1,2,3"
-  // "1"
-  // "[1,2,3]"
-
   const value = String(categoryIds).trim();
 
   if (value.startsWith("[") && value.endsWith("]")) {
@@ -24,7 +19,6 @@ export function getProductCategoryIds(
         return parsed.map(String);
       }
     } catch {
-      // Continue with comma-separated handling
     }
   }
 

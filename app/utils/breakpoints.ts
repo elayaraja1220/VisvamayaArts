@@ -1,5 +1,3 @@
-// app/utils/breakpoints.ts
-
 export const breakpoints = {
   mobileSmall: "(max-width: 567.98px)",
 
@@ -9,7 +7,6 @@ export const breakpoints = {
   ipadSmall: "(min-width: 768px) and (max-width: 999.98px)",
   ipad: "(min-width: 1000px) and (max-width: 1199.98px)",
   
-  // Header navigation breakpoint
   headerNav: "(min-width: 1000px)",
 
   desktop: "(min-width: 1200px)",

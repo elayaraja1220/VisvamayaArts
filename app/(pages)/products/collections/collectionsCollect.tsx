@@ -44,14 +44,12 @@ export default function CollectionsCollect({
   const [sortOrder, setSortOrder] = useState<SortOrder>("default");
   const [scroll, setScroll] = useState(false);
 
-  // Reset when initial category changes
   useEffect(() => {
     setActiveId(initialCategoryId || ALL);
     setSelectedProductId(null);
     setQuery("");
   }, [initialCategoryId]);
 
-  // Visible categories
   const visibleCategories = useMemo(
     () =>
       categories
@@ -64,7 +62,6 @@ export default function CollectionsCollect({
     [categories],
   );
 
-  // Visible products
   const visibleProducts = useMemo(
     () =>
       products
@@ -73,7 +70,6 @@ export default function CollectionsCollect({
     [products],
   );
 
-  // Sorting options
   const categoryOptions = useMemo(
     () => [
       { value: "default", label: "All" },
@@ -85,13 +81,11 @@ export default function CollectionsCollect({
     [],
   );
 
-  // Price parser
   const getProductPrice = (price: Product["product_price"]) => {
     const parsedPrice = Number(String(price ?? "0").replace(/[^0-9.-]/g, ""));
     return Number.isFinite(parsedPrice) ? parsedPrice : 0;
   };
 
-  // Sort products
   const sortProducts = (productsToSort: Product[]): Product[] => {
     const sortedProducts = [...productsToSort];
 
@@ -123,13 +117,11 @@ export default function CollectionsCollect({
     }
   };
 
-  // Search input
   const handleSearchChange = (value: string) => {
     setQuery(value);
     setSelectedProductId(null);
   };
 
-  // Autocomplete product selection
   const handleProductSelect = (
     value: string | number | null | (string | number)[],
   ) => {
@@ -157,13 +149,11 @@ export default function CollectionsCollect({
     }
   };
 
-  // Category selection
   const selectCategory = (categoryId: string) => {
     setActiveId(categoryId);
     setSelectedProductId(null);
   };
 
-  // Get products by category, search and sorting
   const getProductsForCategory = (categoryId: string) => {
     const searchQuery = query.trim().toLowerCase();
     const shouldSearch = searchQuery.length >= 3;
@@ -190,7 +180,6 @@ export default function CollectionsCollect({
       return matchesCategory && matchesSearch && matchesSelectedProduct;
     });
 
-    // Default sorting: New Arrivals first in All tab
     if (categoryId === ALL && sortOrder === "default") {
       return filteredProducts.sort((a, b) => {
         const aIsNew = String(a.new_arrivals) === "1";
@@ -203,11 +192,9 @@ export default function CollectionsCollect({
       });
     }
 
-    // Apply selected sorting
     return sortProducts(filteredProducts);
   };
 
-  // Build tabs
   const tabItems = useMemo(() => {
     const tabCategories = [
       { id: ALL, label: "All" },
@@ -246,7 +233,6 @@ export default function CollectionsCollect({
     sortOrder,
   ]);
 
-  // Sticky tabs on scroll
   useEffect(() => {
     const handleScroll = () => {
       setScroll(window.scrollY > 116);

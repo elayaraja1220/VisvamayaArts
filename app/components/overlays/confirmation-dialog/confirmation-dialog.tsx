@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect } from "react";
@@ -29,7 +28,6 @@ export type ConfirmationDialogProps = {
   showCloseButton?: boolean;
   closeOnBackdrop?: boolean;
 
-  // Auto close settings
   autoClose?: boolean;
   autoCloseDuration?: number;
 };
@@ -87,10 +85,6 @@ export default function ConfirmationDialog({
 }: ConfirmationDialogProps) {
   const config = STATUS_CONFIG[status];
 
-  // -----------------------------------------
-  // Automatic Close
-  // -----------------------------------------
-
   useEffect(() => {
     if (!open || !autoClose || status === "inprogress") {
       return;
@@ -104,10 +98,6 @@ export default function ConfirmationDialog({
       window.clearTimeout(timer);
     };
   }, [open, autoClose, autoCloseDuration, status, onClose]);
-
-  // -----------------------------------------
-  // Escape Key
-  // -----------------------------------------
 
   useEffect(() => {
     if (!open) return;
@@ -127,19 +117,11 @@ export default function ConfirmationDialog({
 
   if (!open) return null;
 
-  // -----------------------------------------
-  // Backdrop Click
-  // -----------------------------------------
-
   const handleBackdropClick = () => {
     if (closeOnBackdrop) {
       onClose?.();
     }
   };
-
-  // -----------------------------------------
-  // Render
-  // -----------------------------------------
 
   return (
     <div

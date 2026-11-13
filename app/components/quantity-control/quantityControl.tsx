@@ -29,7 +29,6 @@ export default function QuantityControl({
 
   const { toast } = useToast();
 
-  // Increase quantity
   const handleIncrease = () => {
     if (!product) return;
 
@@ -40,7 +39,6 @@ export default function QuantityControl({
     );
   };
 
-  // Decrease quantity
   const handleDecrease = () => {
     if (quantity <= 0) return;
 

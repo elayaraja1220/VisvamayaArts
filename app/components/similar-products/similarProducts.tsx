@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -71,7 +70,6 @@ export default function SimilarProducts({
     };
   }, [categoryId, currentProductId, limit]);
 
-  // Hide the section while loading or when no products exist
   if (loading || products.length === 0) {
     return null;
   }

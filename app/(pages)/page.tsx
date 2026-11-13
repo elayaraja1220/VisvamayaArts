@@ -13,10 +13,8 @@ export default function Home() {
         <HeroCarousel />
       </PageSection>
 
-      {/* API data loads in the browser */}
       <HomeProductSections />
 
-      {/* Appreciation */}
       <PageSection className="page-section-our-customers">
         <Container>
           <PageTitle
@@ -30,7 +28,6 @@ export default function Home() {
         </Container>
       </PageSection>
 
-      {/* About */}
       <PageSection className="page-section-about-us">
         <Container>
           <AboutUs variant="home" />

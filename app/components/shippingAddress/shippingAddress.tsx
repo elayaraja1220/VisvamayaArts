@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -21,10 +20,6 @@ import { Edit2, Trash2, Check } from "react-feather";
 import "./shippingAddress.css";
 import Link from "next/link";
 import { Container } from "../container/Container";
-
-/* -------------------------------------------------------------------------- */
-/*                                    TYPES                                   */
-/* -------------------------------------------------------------------------- */
 
 export type ShippingAddressData = {
   id: string;
@@ -76,10 +71,6 @@ type ShippingAddressProps = {
   onProceedToPay?: (address: ShippingAddressData) => void | Promise<void>;
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                   HELPERS                                  */
-/* -------------------------------------------------------------------------- */
-
 const formatCurrency = (amount: number) =>
   new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -107,10 +98,6 @@ function toFormValues(address: ShippingAddressData): AddressFormData {
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*                             SHIPPING ADDRESS                               */
-/* -------------------------------------------------------------------------- */
-
 export default function ShippingAddress({
   addresses,
   cartItems = [],
@@ -137,10 +124,6 @@ export default function ShippingAddress({
   const [formError, setFormError] = useState("");
   const [orderError, setOrderError] = useState("");
 
-  /* ------------------------------------------------------------------------ */
-  /*                         CONFIRMATION DIALOG                              */
-  /* ------------------------------------------------------------------------ */
-
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const [dialogStatus, setDialogStatus] = useState<
@@ -166,10 +149,6 @@ export default function ShippingAddress({
     setDialogOpen(false);
   };
 
-  /* ------------------------------------------------------------------------ */
-  /*                         SELECTED ADDRESS                                 */
-  /* ------------------------------------------------------------------------ */
-
   useEffect(() => {
     if (selectedAddressId !== undefined) {
       setInternalSelectedId(selectedAddressId);
@@ -181,10 +160,6 @@ export default function ShippingAddress({
   const activeId = selectedAddressId ?? internalSelectedId;
 
   const selectedAddress = addresses.find((item) => item.id === activeId);
-
-  /* ------------------------------------------------------------------------ */
-  /*                         ADDRESS MODAL                                    */
-  /* ------------------------------------------------------------------------ */
 
   const openAdd = () => {
     setEditingAddress(null);
@@ -205,10 +180,6 @@ export default function ShippingAddress({
     setEditingAddress(null);
     setFormError("");
   };
-
-  /* ------------------------------------------------------------------------ */
-  /*                            SAVE ADDRESS                                  */
-  /* ------------------------------------------------------------------------ */
 
   const handleSave = async (values: AddressFormValues) => {
     const isEditing = Boolean(editingAddress);
@@ -279,14 +250,6 @@ export default function ShippingAddress({
     }
   };
 
-  /* ------------------------------------------------------------------------ */
-  /*                            PROCEED TO PAY                                */
-  /* ------------------------------------------------------------------------ */
-
-  // The parent checkout page handles order submission and its own
-  // confirmation dialog. This component only validates and passes
-  // the selected address to the parent.
-
   const handleProceedToPay = async () => {
     setOrderError("");
 
@@ -319,10 +282,6 @@ export default function ShippingAddress({
     }
   };
 
-  /* ------------------------------------------------------------------------ */
-  /*                                    UI                                    */
-  /* ------------------------------------------------------------------------ */
-
   return (
     <section className="shipping-checkout" aria-label="Shipping and payment">
       <Container>
@@ -343,8 +302,6 @@ export default function ShippingAddress({
 
         <Card className="card-shipping" padding="large">
           <CardBody className="shipping-checkout-layout">
-
-            {/* ADDRESS LIST */}
 
             <div className="shipping-address-section">
               <div className="shipping-address-list">
@@ -464,8 +421,6 @@ export default function ShippingAddress({
               </div>
             </div>
 
-            {/* ORDER SUMMARY */}
-
             <Card padding="large" className="shipping-order-summary">
               <CardBody>
                 <div className="shipping-summary-row">
@@ -536,8 +491,6 @@ export default function ShippingAddress({
         </Card>
       </Container>
 
-      {/* ADDRESS MODAL */}
-
       <Modal
         open={open}
         onClose={closeModal}
@@ -565,8 +518,6 @@ export default function ShippingAddress({
           />
         </Card>
       </Modal>
-
-      {/* ADDRESS CONFIRMATION DIALOG */}
 
       <ConfirmationDialog
         open={dialogOpen}

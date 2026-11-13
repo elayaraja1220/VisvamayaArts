@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import "./under-construction.css";
 
@@ -30,7 +29,6 @@ export default function PolicyUnderConstruction({
 
       <div className="policy-construction__container">
 
-        {/* Decorative Divider */}
         <div className="policy-construction__divider">
           <span />
           <span className="policy-construction__lotus">
@@ -39,9 +37,6 @@ export default function PolicyUnderConstruction({
           <span />
         </div>
 
-      
-
-        {/* Main Content */}
         <div className="policy-construction__content">
 
           <span className="policy-construction__eyebrow">
@@ -57,19 +52,14 @@ export default function PolicyUnderConstruction({
             {description}
           </p>
 
-          {/* Policy Pages */}
           <div className="policy-construction__pages">
 
             <p className="policy-construction__pages-heading">
               INFORMATION PAGES BEING UPDATED
             </p>
 
-            
-          
-
           </div>
 
-          {/* Bottom Message */}
           <div className="policy-construction__message">
             <span className="policy-construction__clock">
               ◷
@@ -80,7 +70,6 @@ export default function PolicyUnderConstruction({
 
         </div>
 
-        {/* Product Showcase */}
         <div className="policy-construction__products">
 
           <div className="policy-construction__product policy-construction__product--nataraja">
@@ -104,8 +93,6 @@ export default function PolicyUnderConstruction({
               className="policy-construction__product-image"
             />
           </div>
-
-          
 
         </div>
 

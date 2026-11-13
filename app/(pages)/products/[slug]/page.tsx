@@ -1,14 +1,26 @@
 import ProductBySlug from "./ProductBySlug";
+import { getProductCollections } from "@/app/service/dataService";
+import { buildSlugMap } from "@/app/utils/slugify";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-// Fully live: the build creates ONE product page, products/__fallback/.
-// public/.htaccess serves it for every /products/<slug>/ URL, and the page
-// finds the product from the URL and loads its details from the API.
-// So products added in the admin never need a rebuild.
-export function generateStaticParams() {
-  return [{ slug: "__fallback" }];
+export async function generateStaticParams() {
+  const params = [{ slug: "__fallback" }];
+
+  if (process.env.NODE_ENV === "development") {
+    try {
+      const products = await getProductCollections();
+      const oldestFirst = [...products].sort(
+        (a, b) => Number(a.product_id) - Number(b.product_id),
+      );
+      const { slugToId } = buildSlugMap(oldestFirst);
+      for (const slug of slugToId.keys()) params.push({ slug });
+    } catch {
+    }
+  }
+
+  return params;
 }
 
 export default function ProductDetailsPage() {

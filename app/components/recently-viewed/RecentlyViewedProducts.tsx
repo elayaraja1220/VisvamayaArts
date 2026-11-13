@@ -18,7 +18,6 @@ type Props = {
 
 async function fetchProduct(id: string): Promise<Product | null> {
   try {
-    // Calls your PHP API through dataService.ts
     return await getProductById(id);
   } catch (error) {
     console.error(`Failed to fetch product ${id}:`, error);

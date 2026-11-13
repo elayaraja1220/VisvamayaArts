@@ -1,4 +1,3 @@
-
 import type {
   CSSProperties,
   InputHTMLAttributes,
@@ -11,7 +10,6 @@ export type FormVariant = "filled" | "outline";
 export type FormSize = "small" | "medium" | "large";
 export type FormCurve = "small" | "medium" | "large";
 
-// FormSelect only
 export type FormColor =
   | "white"
   | "primary"

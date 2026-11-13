@@ -1,4 +1,3 @@
-
 .card {
   display: flex;
   flex-direction: column;
@@ -24,7 +23,6 @@
 .card-padding-large {
   padding: 24px;
 }
-
 
 .card-header {
   display: flex;

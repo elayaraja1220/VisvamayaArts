@@ -42,8 +42,6 @@ const { toast } = useToast();
 
   const quantity = cartItem?.quantity ?? 0;
 
-
-
   const handleBuyNow = () => {
     if (quantity === 0) {
       
@@ -56,7 +54,6 @@ const { toast } = useToast();
   };
 
   const handleWishlist = () => {
-    // Add wishlist functionality here.
     console.log("Wishlist product:", product.product_id);
   };
  const isHideNow = useState(true);

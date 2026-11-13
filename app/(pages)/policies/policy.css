@@ -1,6 +1,21 @@
 .page-section-policies {
-    margin-top: 50px
+    margin-top: 50px;
+    line-height: 1.6;
 }
 .policy-navigation .btn.active {
     color: var(--primary-color);
+}
+.policy-section {
+    border-bottom: 1px solid var(--border-color-gray);
+}
+.policy-section:last-child {
+    border-bottom: none;
+}
+.policy-link {
+    color: var(--secondary-color);
+    text-decoration: underline;
+    word-break: break-word;
+}
+.policy-link:hover {
+    text-decoration: none;
 }

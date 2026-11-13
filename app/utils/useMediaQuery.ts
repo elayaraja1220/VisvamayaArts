@@ -1,11 +1,10 @@
-// app/hooks/useMediaQuery.ts
 "use client";
 
 import { useSyncExternalStore } from "react";
 
 export default function useMediaQuery(
   query: string,
-  serverDefault = false, // what to assume during server render
+  serverDefault = false,
 ): boolean {
   const subscribe = (callback: () => void) => {
     const mediaQuery = window.matchMedia(query);

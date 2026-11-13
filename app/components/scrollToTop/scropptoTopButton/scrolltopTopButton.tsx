@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -13,7 +12,6 @@ export default function ScrollToTopButton() {
       setIsVisible(window.scrollY > 140);
     };
 
-    // Check initial scroll position
     handleScroll();
 
     window.addEventListener("scroll", handleScroll, {

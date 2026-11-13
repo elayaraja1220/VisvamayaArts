@@ -1,4 +1,3 @@
-
 .page-section.fiter-section {
     padding-bottom: 0px;
 }
@@ -30,7 +29,6 @@
 .collections-search .autocomplete {
     width: 46%;
 
-
 }
 
 .collections-search .form-field {
@@ -50,7 +48,6 @@
 .collections-search .autocomplete-clear{
     color: var(--text-color-white);
 }
-
 
 .products-grid-container{
     gap: var(--default-gap);

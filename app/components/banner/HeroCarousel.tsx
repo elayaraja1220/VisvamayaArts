@@ -14,7 +14,6 @@ import Button from "../button/button";
 import useMediaQuery from "@/app/utils/useMediaQuery";
 import { breakpoints } from "@/app/utils/breakpoints";
 
-
 const slides = [
   {
     id: 1,
@@ -80,15 +79,13 @@ const isMobile = useMediaQuery(breakpoints.mobile);
     setIsMounted(true);
   }, []);
 
-  // Undgå at rendere Swiper på serveren under SSR for at forhindre hydration- og tidsfejl
   if (!isMounted) {
     return <section className="hero-carousel" style={{ minHeight: "400px" }} />;
   }
 
   return (
     <section className="hero-carousel">
-      
-             
+
       <Swiper
         modules={[Autoplay, EffectFade, Pagination]}
         effect="fade"
@@ -127,9 +124,7 @@ const isMobile = useMediaQuery(breakpoints.mobile);
                 }
                  
               </div>
-           
 
-              
               <div className="hero-banner-button">
                 <Button href="/products/collections" size="large" curve="full" variant="filled" color="primary">Explore Collecion</Button>
                 <Button href="/about" size="large" curve="full" variant="outline" color="primary">Our Story</Button>

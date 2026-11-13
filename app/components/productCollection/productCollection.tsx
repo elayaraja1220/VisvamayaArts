@@ -12,7 +12,6 @@ import { loadAllProducts } from "@/app/service/productLinks";
 import CollectionsCollect from "@/app/(pages)/products/collections/collectionsCollect";
 
 type Props = {
-  // Shown while products and categories load
   fallback: ReactNode;
 };
 
@@ -24,7 +23,6 @@ export default function ProductCollection({ fallback }: Props) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Load the latest products and categories from the API
   useEffect(() => {
     let active = true;
 

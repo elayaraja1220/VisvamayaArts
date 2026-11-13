@@ -54,7 +54,6 @@ export default function CustomerCare({
                     </span>
                     {
                         isShowWhatsApp &&
-                    
 
                     <span className="customer-care-icon customer-care-icon--whatsapp">
                        <Link href="https://wa.me/9980992830?text=Checking I am interested in buying your product. Please contact me. Thank you" target="_blank">
@@ -81,7 +80,6 @@ export default function CustomerCare({
                         <div>Chat us</div>
                     }
                     <div className="customer-care-icons">
-
 
                         <span className="customer-care-icon customer-care-icon--whatsapp">
                             <Link href="https://wa.me/9980992830?text=Checking I am interested in buying your product. Please contact me. Thank you" target="_blank">

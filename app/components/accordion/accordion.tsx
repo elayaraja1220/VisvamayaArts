@@ -60,7 +60,6 @@ export default function Accordion({
 
   const [openIds, setOpenIds] = useState<string[]>(() => {
     const initial = defaultOpenIds ?? (defaultOpen ? ["default"] : []);
-    // single mode can only have one item open
     return mode === "single" ? initial.slice(0, 1) : initial;
   });
 
@@ -143,7 +142,6 @@ export function AccordionHeader({
   const { baseId, openIds, toggleItem } = useAccordion();
   const item = useContext(AccordionItemContext);
 
-  // "default" supports the single-item JSX shorthand.
   const id = item?.id ?? "default";
   const isDisabled = disabled ?? item?.disabled ?? false;
   const isOpen = openIds.includes(id);
@@ -165,7 +163,6 @@ export function AccordionHeader({
     >
       <span className="accordion-title">{children}</span>
 
-     
       <svg
         className="accordion-icon"
         width="16"
@@ -201,9 +198,7 @@ export function AccordionContent({
       aria-hidden={!isOpen}
       inert={!isOpen}
     >
-      {/* animated wrapper: no padding here */}
       <div className="accordion-content">
-        {/* padding lives here */}
         <div className={`accordion-content-inner ${className}`}>
           {children}
         </div>

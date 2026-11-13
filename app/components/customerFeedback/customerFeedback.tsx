@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -97,7 +96,6 @@ export default function CustomerFeedback({
 
       {variant === "slide" ? (
         <>
-          {/* Slide Variant */}
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -141,7 +139,6 @@ export default function CustomerFeedback({
             ))}
           </Swiper>
 
-          {/* Slider Navigation */}
           <div className="products-arrrow-container">
             <Button
               type="button"
@@ -168,7 +165,6 @@ export default function CustomerFeedback({
         </>
       ) : (
         <>
-          {/* Grid Variant - Without Swiper */}
           <div className="appreciation-grid">
             {displayedData.map((item, i) => (
               <div className="appreciation-card" key={i}>

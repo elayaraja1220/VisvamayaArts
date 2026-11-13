@@ -27,7 +27,6 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // No API calls at build time: all product data loads live in the browser.
   return (
     <html
       lang="en"

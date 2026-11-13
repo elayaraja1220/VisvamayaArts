@@ -22,7 +22,6 @@ export default function AboutUs({
   return (
     <>
      <Container>
-            {/* Full page heading */}
         {!isHome && (
           <Typography
             variant="h3"
@@ -40,10 +39,7 @@ export default function AboutUs({
     >
       <Container>
       <div className="about-us-container">
-        {/* Home section heading */}
 
-
-        {/* Main introduction */}
         <div className="about-us-intro">
           
           <div className="about-us-image">
@@ -87,16 +83,12 @@ export default function AboutUs({
           >
             Legacy Behind
           </Typography>
- 
-       
+
           <Typography className="about-legacy-description">
             {founder.description}
           </Typography>
         </div>
 
-        {/* Founder Image */}
-        
-        
         <div className="about-legacy-col Scupture-image-div">
           <Image
             src="/images/about/Scupture-text-poster.png"
@@ -145,7 +137,6 @@ export default function AboutUs({
           </div>
         </div>
 
-        {/* Founders: full page only */}
         {!isHome && (
           <div className="about-us-founders">
             {aboutData.founders.map((founder) => (
@@ -170,7 +161,6 @@ export default function AboutUs({
                     >
                       {founder.name}
                     </Typography>
-
 
                     <div className="about-founder-socials">
                       {
@@ -205,7 +195,6 @@ export default function AboutUs({
                       </Link>
                       }
 
-
                        {
                         founder.socialLinks.youtube &&
                          <Link
@@ -225,8 +214,7 @@ export default function AboutUs({
                         <img src={"/images/social-icons/icon-X.png"} />
                       </Link>
                       }
-                     
-                     
+
                     </div>
                   </div>
                 </div>
@@ -238,7 +226,6 @@ export default function AboutUs({
             ))}
           </div>
         )}
-
 
       </div>
       </Container>

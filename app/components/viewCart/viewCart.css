@@ -87,11 +87,6 @@
     font-size: 18px;
 }
 
-
-/* =========================================
-   EMPTY CART - VISMAYAM ARTS
-========================================= */
-
 .cart-empty-container {
   width: 100%;
   min-height: 100%;
@@ -109,8 +104,6 @@
     );
 }
 
-/* Main Layout */
-
 .cart-empty {
   width: 100%;
   max-width: 460px;
@@ -119,8 +112,6 @@
   align-items: center;
   text-align: center;
 }
-
-/* Ganesha Illustration */
 
 .cart-empty-icon {
   width: 100%;
@@ -143,16 +134,12 @@
   animation: cartGaneshaFloat 4s ease-in-out infinite;
 }
 
-/* Content */
-
 .cart-empty-content {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-/* Heading */
 
 .cart-empty-title {
   font-family: Georgia, "Times New Roman", serif;
@@ -164,8 +151,6 @@
   letter-spacing: -0.5px;
 }
 
-/* Description */
-
 .cart-empty-description {
   max-width: 340px;
   font-size: 16px;
@@ -173,8 +158,6 @@
   color: #55515b;
   margin: 0;
 }
-
-/* Golden Divider */
 
 .cart-empty-divider {
   width: 85%;
@@ -210,8 +193,6 @@
   font-size: 22px;
   line-height: 1;
 }
-
-/* Continue Shopping Button */
 
 .cart-empty-button {
   width: 100%;
@@ -267,8 +248,6 @@
   transform: translateX(5px);
 }
 
-/* Divine Blessing */
-
 .cart-empty-blessing {
   width: 100%;
 
@@ -306,8 +285,6 @@
   margin: 0;
 }
 
-/* Illustration Animation */
-
 @keyframes cartGaneshaFloat {
   0%,
   100% {
@@ -318,10 +295,6 @@
     transform: translateY(-7px);
   }
 }
-
-/* =========================================
-   TABLET
-========================================= */
 
 @media (max-width: 1024px) {
   .cart-empty-container {
@@ -337,10 +310,6 @@
     font-size: 30px;
   }
 }
-
-/* =========================================
-   MOBILE
-========================================= */
 
 @media (max-width: 576px) {
   .cart-empty-container {
@@ -385,8 +354,6 @@
     font-size: 13px;
   }
 }
-
-/* Reduced Motion Accessibility */
 
 @media (prefers-reduced-motion: reduce) {
   .cart-empty-icon img {

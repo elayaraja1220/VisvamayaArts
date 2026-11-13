@@ -8,7 +8,7 @@ type TypographyProps = {
   as?: ElementType;
   className?: string;
   children?: ReactNode;
-  dangerouslySetInnerHTML?: { __html: string }; // Added this
+  dangerouslySetInnerHTML?: { __html: string };
 };
 
 const defaultTag: Record<Variant, ElementType> = {
@@ -28,14 +28,14 @@ export default function Typography({
   as,
   className = "",
   children,
-  dangerouslySetInnerHTML, // Destructure it here
+  dangerouslySetInnerHTML,
 }: TypographyProps) {
   const Tag = as || defaultTag[variant];
 
   return (
     <Tag 
       className={`typography typography-${variant} ${className}`.trim()}
-      dangerouslySetInnerHTML={dangerouslySetInnerHTML} // Pass it to the HTML tag
+      dangerouslySetInnerHTML={dangerouslySetInnerHTML}
     >
       {children}
     </Tag>

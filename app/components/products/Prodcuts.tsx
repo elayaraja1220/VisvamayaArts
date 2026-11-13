@@ -29,7 +29,6 @@ export default function Products({
   data,
   variant = "slide",
 }: ProductsProps) {
-  // product_id -> unique slug, worked out live from the current product list
   const slugs = useProductSlugs();
   const { items, addToCart } = useCart();
   const { toast } = useToast();
@@ -58,7 +57,6 @@ export default function Products({
     );
   }
 
-  // Shared card markup used by both slide and grid variants
   const renderCard = (item: Product) => {
     const cartItem = isMounted
       ? items.find((c) => c.product.product_id === item.product_id)
@@ -68,9 +66,6 @@ export default function Products({
 
     return (
       <div className="product-card">
-        {/* Product Image and Details.
-            Plain <a>: product pages are served by .htaccess, so a full page
-            load is required (no Next.js prefetch of non-existent files). */}
         <a href={productHref(item, slugs)} className="product-top">
           <div className="product-image-box">
             {item.new_arrivals === "1" && (
@@ -102,7 +97,6 @@ export default function Products({
           <div className="prodcut-overlay-box" />
         </a>
 
-        {/* Product Price and Cart */}
         <div className="product-details">
           <div className="product-details-left">
             <Typography as="h6" className="product-price">
@@ -139,7 +133,6 @@ export default function Products({
     );
   };
 
-  /* ---------- GRID VARIANT (no Swiper) ---------- */
   if (variant === "grid") {
     return (
       <div className="products-grid">
@@ -152,7 +145,6 @@ export default function Products({
     );
   }
 
-  /* ---------- SLIDE VARIANT (default) ---------- */
   return (
     <div className="products-slider">
       <Swiper

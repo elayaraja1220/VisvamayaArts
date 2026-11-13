@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,13 +10,10 @@ import {
 
 import "./addressForm.css";
 
-import { FormInput, FormSelect } from "../forms";
+import { FormInput } from "../forms";
+import Autocomplete from "../forms/autocomplete";
 import Button from "../button/button";
 import Typography from "../typegrophy/typography";
-
-/* -------------------------------------------------------------------------- */
-/*                                    TYPES                                   */
-/* -------------------------------------------------------------------------- */
 
 export type AddressFormValues = {
     receiverFirstName: string;
@@ -55,15 +51,6 @@ type AddressFormProps = {
     onCancel?: () => void;
 };
 
-type SelectOption = {
-    label: string;
-    value: string;
-};
-
-/* -------------------------------------------------------------------------- */
-/*                              DEFAULT VALUES                                */
-/* -------------------------------------------------------------------------- */
-
 const EMPTY_VALUES: AddressFormValues = {
     receiverFirstName: "",
     receiverLastName: "",
@@ -78,74 +65,227 @@ const EMPTY_VALUES: AddressFormValues = {
     city: "",
 };
 
-/* -------------------------------------------------------------------------- */
-/*                              COUNTRY OPTIONS                               */
-/* -------------------------------------------------------------------------- */
+// Free, key-less APIs:
+// - CountriesNow: country / state / city lists for every country
+// - India Post (postalpincode.in): India pincode -> state, district, block
+// - Nominatim (OpenStreetMap): any country's postal code -> country, state, city
+//   Usage policy: max 1 request/second, so lookups are debounced.
+const COUNTRIES_API = "https://countriesnow.space/api/v0.1/countries";
+const INDIA_PINCODE_API = "https://api.postalpincode.in/pincode";
+const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 
-const countryOptions: SelectOption[] = [
-    { label: "India", value: "India" },
-];
-
-/* -------------------------------------------------------------------------- */
-/*                               STATE OPTIONS                                */
-/* -------------------------------------------------------------------------- */
-
-const stateOptions: SelectOption[] = [
-    { label: "Tamil Nadu", value: "Tamil Nadu" },
-    { label: "Karnataka", value: "Karnataka" },
-    { label: "Kerala", value: "Kerala" },
-    { label: "Andhra Pradesh", value: "Andhra Pradesh" },
-    { label: "Telangana", value: "Telangana" },
-    { label: "Maharashtra", value: "Maharashtra" },
-];
-
-/* -------------------------------------------------------------------------- */
-/*                           CITY OPTIONS BY STATE                            */
-/* -------------------------------------------------------------------------- */
-
-const cityOptionsByState: Record<string, SelectOption[]> = {
-    "Tamil Nadu": [
-        { label: "Chennai", value: "Chennai" },
-        { label: "Coimbatore", value: "Coimbatore" },
-        { label: "Madurai", value: "Madurai" },
-        { label: "Salem", value: "Salem" },
-        { label: "Tiruchirappalli", value: "Tiruchirappalli" },
-        { label: "Tirunelveli", value: "Tirunelveli" },
-    ],
-
-    Karnataka: [
-        { label: "Bengaluru", value: "Bengaluru" },
-        { label: "Mysuru", value: "Mysuru" },
-        { label: "Mangaluru", value: "Mangaluru" },
-    ],
-
-    Kerala: [
-        { label: "Thiruvananthapuram", value: "Thiruvananthapuram" },
-        { label: "Kochi", value: "Kochi" },
-        { label: "Kozhikode", value: "Kozhikode" },
-    ],
-
-    "Andhra Pradesh": [
-        { label: "Vijayawada", value: "Vijayawada" },
-        { label: "Visakhapatnam", value: "Visakhapatnam" },
-        { label: "Tirupati", value: "Tirupati" },
-    ],
-
-    Telangana: [
-        { label: "Hyderabad", value: "Hyderabad" },
-        { label: "Warangal", value: "Warangal" },
-    ],
-
-    Maharashtra: [
-        { label: "Mumbai", value: "Mumbai" },
-        { label: "Pune", value: "Pune" },
-        { label: "Nagpur", value: "Nagpur" },
-    ],
+type CountryItem = {
+    name: string;
+    code: string;
 };
 
-/* -------------------------------------------------------------------------- */
-/*                            PINCODE API TYPES                               */
-/* -------------------------------------------------------------------------- */
+type CountriesNowResponse<T> = {
+    error: boolean;
+    msg: string;
+    data: T;
+};
+
+type NominatimResult = {
+    address?: {
+        country?: string;
+        state?: string;
+        region?: string;
+        state_district?: string;
+        county?: string;
+        city?: string;
+        town?: string;
+        village?: string;
+        municipality?: string;
+        city_district?: string;
+        suburb?: string;
+    };
+};
+
+type PostalLookupResult = {
+    country: string;
+    state: string;
+    city: string;
+    blocks: string[];
+} | null;
+
+const INDIA_PINCODE = /^[1-9]\d{5}$/;
+
+const unique = (items: (string | null | undefined)[]) =>
+    Array.from(
+        new Set(
+            items
+                .map((item) => (item ?? "").trim())
+                .filter((item) => item && item.toUpperCase() !== "NA")
+        )
+    );
+
+type TextAutocompleteProps = {
+    name: string;
+    label: string;
+    placeholder: string;
+    options: string[];
+    value: string;
+    onChange: (value: string) => void;
+    disabled?: boolean;
+    required?: boolean;
+    error?: string;
+    emptyMessage?: string;
+    noOptionsMessage?: string;
+};
+
+// Free-text dropdown: pick from the list (arrow opens all options)
+// or type any value — the typed text is stored as the field value.
+function TextAutocomplete({
+    value,
+    onChange,
+    error,
+    ...props
+}: TextAutocompleteProps) {
+    return (
+        <div>
+            <Autocomplete<string>
+                {...props}
+                getOptionLabel={(option) => option}
+                getOptionValue={(option) => option}
+                matchMode="startsWith"
+                value={value || null}
+                inputValue={value ?? ""}
+                onInputChange={onChange}
+                onChange={(next) => onChange(next == null ? "" : String(next))}
+                minQueryLength={1}
+                maxResults={500}
+                showArrow
+            />
+
+            {error && (
+                <Typography className="form-error m-0">
+                    {error}
+                </Typography>
+            )}
+        </div>
+    );
+}
+
+async function fetchJson<T>(
+    url: string,
+    signal: AbortSignal
+): Promise<T | null> {
+    const response = await fetch(url, { signal });
+
+    if (response.status === 404) return null;
+
+    if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+    }
+
+    return response.json() as Promise<T>;
+}
+
+async function lookupIndiaPincode(
+    code: string,
+    signal: AbortSignal
+): Promise<PostalLookupResult> {
+    const result = await fetchJson<PostalResponse[]>(
+        `${INDIA_PINCODE_API}/${code}`,
+        signal
+    );
+
+    const offices = result?.[0]?.PostOffice ?? [];
+
+    if (result?.[0]?.Status !== "Success" || !offices.length) {
+        return null;
+    }
+
+    return {
+        country: "India",
+        state: offices[0].State || "",
+        city: offices[0].District || "",
+        blocks: unique(offices.map((office) => office.Block)),
+    };
+}
+
+async function lookupWorldPostalCode(
+    code: string,
+    preferredCountry: string,
+    signal: AbortSignal
+): Promise<PostalLookupResult> {
+    const params = new URLSearchParams({
+        postalcode: code,
+        format: "jsonv2",
+        addressdetails: "1",
+        "accept-language": "en",
+        limit: "20",
+    });
+
+    const results =
+        (await fetchJson<NominatimResult[]>(
+            `${NOMINATIM_API}?${params}`,
+            signal
+        )) ?? [];
+
+    // Same postal code can exist in several countries:
+    // prefer the selected country, otherwise take the best match.
+    const match =
+        results.find(
+            (item) => item.address?.country === preferredCountry
+        ) ?? results[0];
+
+    const address = match?.address;
+
+    if (!address?.country) return null;
+
+    const sameCountry = results
+        .map((item) => item.address)
+        .filter((item) => item?.country === address.country);
+
+    return {
+        country: address.country,
+        state: address.state || address.region || "",
+        city:
+            address.city ||
+            address.town ||
+            address.village ||
+            address.municipality ||
+            address.county ||
+            "",
+        blocks: unique(
+            sameCountry.flatMap((item) => [
+                item?.county,
+                item?.state_district,
+                item?.city_district,
+                item?.suburb,
+            ])
+        ),
+    };
+}
+
+async function lookupPostalCode(
+    code: string,
+    preferredCountry: string,
+    signal: AbortSignal
+): Promise<PostalLookupResult> {
+    const looksIndian = INDIA_PINCODE.test(code);
+
+    if (looksIndian && (!preferredCountry || preferredCountry === "India")) {
+        const india = await lookupIndiaPincode(code, signal);
+
+        if (india) return india;
+    }
+
+    const world = await lookupWorldPostalCode(
+        code,
+        preferredCountry,
+        signal
+    );
+
+    if (world) return world;
+
+    if (looksIndian && preferredCountry && preferredCountry !== "India") {
+        return lookupIndiaPincode(code, signal);
+    }
+
+    return null;
+}
 
 type PostalResponse = {
     Status: string;
@@ -165,10 +305,6 @@ type PostalResponse = {
     }[] | null;
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                COMPONENT                                   */
-/* -------------------------------------------------------------------------- */
-
 export default function AddressForm({
     initialValues,
     userDetails,
@@ -177,16 +313,13 @@ export default function AddressForm({
     onCancel,
 }: AddressFormProps) {
 
-    /* ---------------------------------------------------------------------- */
-    /*                              FORM STATE                                */
-    /* ---------------------------------------------------------------------- */
-
     const {
         register,
         control,
         handleSubmit,
         reset,
         setValue,
+        getValues,
         watch,
         formState: { errors, isSubmitting },
     } = useForm<AddressFormValues>({
@@ -197,19 +330,11 @@ export default function AddressForm({
         mode: "onBlur",
     });
 
-    /* ---------------------------------------------------------------------- */
-    /*                            PINCODE STATE                               */
-    /* ---------------------------------------------------------------------- */
-
     const [pincodeLoading, setPincodeLoading] = useState(false);
 
     const [pincodeMessage, setPincodeMessage] = useState("");
 
     const [pincodeError, setPincodeError] = useState(false);
-
-    /* ---------------------------------------------------------------------- */
-    /*                              WATCH VALUES                              */
-    /* ---------------------------------------------------------------------- */
 
     const firstName = watch("receiverFirstName");
     const lastName = watch("receiverLastName");
@@ -218,12 +343,107 @@ export default function AddressForm({
 
     const pincode = watch("pincode");
 
+    const selectedCountry = watch("country");
     const selectedState = watch("state");
-    const selectedCity = watch("city");
 
-    /* ---------------------------------------------------------------------- */
-    /*                         USE MY DETAILS CHECKBOX                        */
-    /* ---------------------------------------------------------------------- */
+    const [countries, setCountries] = useState<CountryItem[]>([]);
+    const [states, setStates] = useState<string[]>([]);
+    const [cities, setCities] = useState<string[]>([]);
+    const [blocks, setBlocks] = useState<string[]>([]);
+
+    // Country / state / city / block stay locked until a pincode lookup
+    // has finished (success or failure), then they become editable.
+    const [addressUnlocked, setAddressUnlocked] = useState(false);
+
+    // Load all countries once
+    useEffect(() => {
+        const controller = new AbortController();
+
+        fetchJson<CountriesNowResponse<{ name: string; Iso2: string }[]>>(
+            `${COUNTRIES_API}/iso`,
+            controller.signal
+        )
+            .then((result) => {
+                if (!result || result.error) return;
+
+                setCountries(
+                    result.data
+                        .map((item) => ({ name: item.name, code: item.Iso2 }))
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                );
+            })
+            .catch((error) => {
+                if (error?.name !== "AbortError") {
+                    console.error("Country list error:", error);
+                }
+            });
+
+        return () => controller.abort();
+    }, []);
+
+    // Load states whenever the country changes (debounced: country can be typed)
+    useEffect(() => {
+        setStates([]);
+
+        if (!selectedCountry) return;
+
+        const controller = new AbortController();
+
+        const timer = setTimeout(() => {
+            fetchJson<CountriesNowResponse<{ states: { name: string }[] }>>(
+                `${COUNTRIES_API}/states/q?country=${encodeURIComponent(selectedCountry)}`,
+                controller.signal
+            )
+                .then((result) => {
+                    if (!result || result.error) return;
+
+                    setStates(result.data.states.map((item) => item.name));
+                })
+                .catch((error) => {
+                    if (error?.name !== "AbortError") {
+                        console.error("State list error:", error);
+                    }
+                });
+        }, 500);
+
+        return () => {
+            clearTimeout(timer);
+            controller.abort();
+        };
+    }, [selectedCountry]);
+
+    // Load cities whenever the state changes (debounced: state can be typed)
+    useEffect(() => {
+        setCities([]);
+
+        if (!selectedCountry || !selectedState) return;
+
+        const controller = new AbortController();
+
+        const timer = setTimeout(() => {
+            fetchJson<CountriesNowResponse<string[]>>(
+                `${COUNTRIES_API}/state/cities/q?country=${encodeURIComponent(
+                    selectedCountry
+                )}&state=${encodeURIComponent(selectedState)}`,
+                controller.signal
+            )
+                .then((result) => {
+                    if (!result || result.error) return;
+
+                    setCities(result.data);
+                })
+                .catch((error) => {
+                    if (error?.name !== "AbortError") {
+                        console.error("City list error:", error);
+                    }
+                });
+        }, 500);
+
+        return () => {
+            clearTimeout(timer);
+            controller.abort();
+        };
+    }, [selectedCountry, selectedState]);
 
     const userNameParts = (userDetails?.fullName ?? "")
         .trim()
@@ -237,10 +457,6 @@ export default function AddressForm({
         phone === (userDetails?.phone ?? "") &&
         email === (userDetails?.email ?? "");
 
-    /* ---------------------------------------------------------------------- */
-    /*                            RESET FORM                                  */
-    /* ---------------------------------------------------------------------- */
-
     useEffect(() => {
         reset({
             ...EMPTY_VALUES,
@@ -251,31 +467,17 @@ export default function AddressForm({
         setPincodeError(false);
     }, [initialValues, reset]);
 
-    /* ---------------------------------------------------------------------- */
-    /*                         AUTOMATIC PINCODE LOOKUP                       */
-    /* ---------------------------------------------------------------------- */
-
+    // Postal code -> country, state, city, block (any country)
     useEffect(() => {
-        const pin = (pincode ?? "").replace(/\D/g, "");
+        const code = (pincode ?? "").trim().toUpperCase();
 
-        // Empty pincode: preserve initial address values.
-        if (pin.length === 0) {
+        setPincodeMessage("");
+        setPincodeError(false);
+        setAddressUnlocked(false);
+
+        if (code.length < 3) {
             setPincodeLoading(false);
-            setPincodeMessage("");
-            setPincodeError(false);
-            return;
-        }
-
-        // Wait until the user enters all 6 digits.
-        if (pin.length < 6) {
-            setValue("state", "");
-            setValue("city", "");
-            setValue("block", "");
-
-            setPincodeLoading(false);
-            setPincodeMessage("");
-            setPincodeError(false);
-
+            setBlocks([]);
             return;
         }
 
@@ -283,87 +485,45 @@ export default function AddressForm({
 
         const controller = new AbortController();
 
-        // Clear previous location when a new PIN is entered.
-        setValue("state", "");
-        setValue("city", "");
-        setValue("block", "");
-
-        setPincodeMessage("");
-        setPincodeError(false);
-
-        // Debounce API request.
         const timer = setTimeout(async () => {
             setPincodeLoading(true);
 
             try {
-                const response = await fetch(
-                    `https://api.postalpincode.in/pincode/${pin}`,
-                    {
-                        method: "GET",
-                        cache: "no-store",
-                        signal: controller.signal,
-                    }
+                const result = await lookupPostalCode(
+                    code,
+                    getValues("country"),
+                    controller.signal
                 );
 
-                if (!response.ok) {
-                    throw new Error(
-                        "Unable to fetch pincode details."
+                if (cancelled) return;
+
+                if (!result) {
+                    setBlocks([]);
+                    setPincodeError(true);
+
+                    setPincodeMessage(
+                        "No details found for this pincode. Please select country, state and city manually."
                     );
-                }
-
-                const result: PostalResponse[] =
-                    await response.json();
-
-                // Invalid pincode.
-                if (
-                    result?.[0]?.Status !== "Success" ||
-                    !result?.[0]?.PostOffice?.length
-                ) {
-                    if (!cancelled) {
-                        setValue("state", "");
-                        setValue("city", "");
-                        setValue("block", "");
-
-                        setPincodeError(true);
-
-                        setPincodeMessage(
-                            "Invalid pincode. Please check and try again."
-                        );
-                    }
 
                     return;
                 }
 
-                // Get first post office details.
-                const office = result[0].PostOffice[0];
+                const options = { shouldValidate: true, shouldDirty: true };
 
-                if (cancelled) return;
+                const currentBlock = getValues("block");
 
-                // Automatically populate country.
-                setValue("country", office.Country || "India", {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                });
+                setBlocks(result.blocks);
 
-                // Automatically populate state.
-                setValue("state", office.State || "", {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                });
-
-                // Automatically populate city / district.
-                setValue("city", office.District || "", {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                });
-
-                // Automatically populate block.
-                setValue("block", office.Block || "", {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                });
-
-                setPincodeError(false);
+                setValue("country", result.country, options);
+                setValue("state", result.state, options);
+                setValue("city", result.city, options);
+                setValue(
+                    "block",
+                    result.blocks.includes(currentBlock)
+                        ? currentBlock
+                        : result.blocks[0] ?? "",
+                    options
+                );
 
                 setPincodeMessage(
                     "Address details fetched successfully."
@@ -387,28 +547,24 @@ export default function AddressForm({
                 setPincodeError(true);
 
                 setPincodeMessage(
-                    "Unable to fetch address details. Please enter manually."
+                    "Unable to fetch address details. Please select country, state and city manually."
                 );
 
             } finally {
                 if (!cancelled) {
                     setPincodeLoading(false);
+                    setAddressUnlocked(true);
                 }
             }
-        }, 400);
+        }, 800);
 
-        // Cancel old request when pincode changes.
         return () => {
             cancelled = true;
             clearTimeout(timer);
             controller.abort();
         };
 
-    }, [pincode, setValue]);
-
-    /* ---------------------------------------------------------------------- */
-    /*                         USE MY DETAILS HANDLER                         */
-    /* ---------------------------------------------------------------------- */
+    }, [pincode, getValues, setValue]);
 
     const handleUseMyDetails = (checked: boolean) => {
         const names = (userDetails?.fullName ?? "")
@@ -453,10 +609,6 @@ export default function AddressForm({
         );
     };
 
-    /* ---------------------------------------------------------------------- */
-    /*                             SUBMIT HANDLER                             */
-    /* ---------------------------------------------------------------------- */
-
     const submitHandler: SubmitHandler<AddressFormValues> = async (
         values
     ) => {
@@ -487,55 +639,9 @@ export default function AddressForm({
         });
     };
 
-    /* ---------------------------------------------------------------------- */
-    /*                         DYNAMIC STATE OPTIONS                          */
-    /* ---------------------------------------------------------------------- */
-
-    const availableStateOptions = [...stateOptions];
-
-    // Include API-returned states not present in original list.
-    if (
-        selectedState &&
-        !availableStateOptions.some(
-            (option) => option.value === selectedState
-        )
-    ) {
-        availableStateOptions.push({
-            label: selectedState,
-            value: selectedState,
-        });
-    }
-
-    /* ---------------------------------------------------------------------- */
-    /*                          DYNAMIC CITY OPTIONS                          */
-    /* ---------------------------------------------------------------------- */
-
-    const cityOptions = [
-        ...(cityOptionsByState[selectedState] ?? []),
-    ];
-
-    // Include API-returned district in dropdown.
-    if (
-        selectedCity &&
-        !cityOptions.some(
-            (option) => option.value === selectedCity
-        )
-    ) {
-        cityOptions.push({
-            label: selectedCity,
-            value: selectedCity,
-        });
-    }
-
-    /* ---------------------------------------------------------------------- */
-    /*                              FORM STATUS                               */
-    /* ---------------------------------------------------------------------- */
+    const countryNames = countries.map((item) => item.name);
 
     const busy = submitting || isSubmitting;
-
-    /* ---------------------------------------------------------------------- */
-    /*                                    UI                                  */
-    /* ---------------------------------------------------------------------- */
 
     return (
         <form
@@ -544,8 +650,6 @@ export default function AddressForm({
             noValidate
         >
             <div className="scroll-address-body">
-
-                {/* USE MY DETAILS */}
 
                 <label className="address-form__checkbox">
                     <input
@@ -561,8 +665,6 @@ export default function AddressForm({
                         Use My Name &amp; Phone Number
                     </span>
                 </label>
-
-                {/* USER DETAILS */}
 
                 <div className="address-form">
 
@@ -640,8 +742,6 @@ export default function AddressForm({
 
                 </div>
 
-                {/* ADDRESS DETAILS */}
-
                 <div className="address-form">
 
                     <fieldset className="fieldset">
@@ -652,8 +752,6 @@ export default function AddressForm({
                         >
                             Address
                         </Typography>
-
-                        {/* ADDRESS LINE 1 */}
 
                         <FormInput
                             label="Address Line 1"
@@ -674,8 +772,6 @@ export default function AddressForm({
                             })}
                         />
 
-                        {/* ADDRESS LINE 2 */}
-
                         <FormInput
                             label="Address Line 2"
                             autoComplete="address-line2"
@@ -689,36 +785,33 @@ export default function AddressForm({
                             })}
                         />
 
-                        {/* PINCODE / COUNTRY / STATE / CITY / BLOCK */}
-
                         <div className="address-form-3__grid">
-
-                            {/* PINCODE */}
 
                             <div>
 
                                 <FormInput
-                                    label="Pincode"
-                                    inputMode="numeric"
+                                    label="Pincode / Postal Code"
                                     autoComplete="postal-code"
-                                    placeholder="6-digit pincode"
-                                    maxLength={6}
+                                    placeholder="e.g. 600001, 90210, SW1A 1AA"
+                                    maxLength={10}
                                     required
                                     error={errors.pincode?.message}
                                     {...register("pincode", {
                                         required: "Pincode is required",
-                                        pattern: {
-                                            value: /^[1-9]\d{5}$/,
-                                            message:
-                                                "Enter a valid 6-digit Indian pincode",
-                                        },
-                                        onChange: (event) => {
-                                            const value =
-                                                event.target.value
-                                                    .replace(/\D/g, "")
-                                                    .slice(0, 6);
+                                        validate: (value, values) => {
+                                            const code = value.trim();
 
-                                            event.target.value = value;
+                                            if (values.country === "India") {
+                                                return (
+                                                    INDIA_PINCODE.test(code) ||
+                                                    "Enter a valid 6-digit Indian pincode"
+                                                );
+                                            }
+
+                                            return (
+                                                /^[A-Za-z0-9][A-Za-z0-9 -]{1,9}$/.test(code) ||
+                                                "Enter a valid postal code"
+                                            );
                                         },
                                     })}
                                 />
@@ -746,9 +839,6 @@ export default function AddressForm({
 
                             </div>
 
-                            {/* COUNTRY */}
-                            
-
                             <Controller
                                 name="country"
                                 control={control}
@@ -756,87 +846,92 @@ export default function AddressForm({
                                     required: "Please select a country",
                                 }}
                                 render={({ field, fieldState }) => (
-                                    <FormSelect
-                                        variant="outline"
+                                    <TextAutocomplete
                                         name={field.name}
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        onBlur={field.onBlur}
                                         label="Country"
-                                        options={countryOptions}
-                                        placeholder="Select country"
+                                        placeholder="Select or type country"
+                                        options={countryNames}
+                                        value={field.value}
+                                        onChange={(value) => {
+                                            if (value === field.value) return;
+
+                                            field.onChange(value);
+
+                                            setValue("state", "");
+                                            setValue("city", "");
+                                            setValue("block", "");
+                                            setBlocks([]);
+                                        }}
                                         required
                                         error={fieldState.error?.message}
+                                        emptyMessage="No match — your typed country will be used."
+                                        noOptionsMessage="No countries loaded — type your country."
+                                        disabled={!addressUnlocked}
                                     />
                                 )}
                             />
 
-                            {/* STATE */}
-
                             <Controller
                                 name="state"
                                 control={control}
-                                rules={{
-                                    required: "Please select a state",
-                                }}
-                                render={({ field, fieldState }) => (
-                                    <FormSelect
+                                render={({ field }) => (
+                                    <TextAutocomplete
                                         name={field.name}
-                                        value={field.value}
-                                        onBlur={field.onBlur}
-                                        onChange={(event) => {
-                                            field.onChange(event);
-
-                                            setValue("city", "", {
-                                                shouldValidate: true,
-                                                shouldDirty: true,
-                                            });
-                                        }}
                                         label="State"
-                                        options={availableStateOptions}
-                                        placeholder="Select state"
-                                        required
-                                        error={fieldState.error?.message}
+                                        placeholder="Select or type state"
+                                        options={states}
+                                        value={field.value}
+                                        onChange={(value) => {
+                                            if (value === field.value) return;
+
+                                            field.onChange(value);
+
+                                            setValue("city", "");
+                                        }}
+                                        emptyMessage="No match — your typed state will be used."
+                                        noOptionsMessage="No states loaded — type your state."
+                                        disabled={!addressUnlocked}
                                     />
                                 )}
                             />
                             </div>
                             <div className="address-form__grid">
 
-                            {/* CITY / DISTRICT */}
-
+                            {/* All four fields: pick from the list (arrow) or type any value */}
                             <Controller
                                 name="city"
                                 control={control}
-                                rules={{
-                                    required: "Please select a city",
-                                }}
-                                render={({ field, fieldState }) => (
-                                    <FormSelect
+                                render={({ field }) => (
+                                    <TextAutocomplete
                                         name={field.name}
+                                        label="City / District"
+                                        placeholder="Select or type city"
+                                        options={cities}
                                         value={field.value}
                                         onChange={field.onChange}
-                                        onBlur={field.onBlur}
-                                        label="City / District"
-                                        options={cityOptions}
-                                        placeholder={
-                                            selectedState
-                                                ? "Select city"
-                                                : "Select state first"
-                                        }
-                                        disabled={!selectedState}
-                                        required
-                                        error={fieldState.error?.message}
+                                        emptyMessage="No match — your typed city will be used."
+                                        noOptionsMessage="No cities loaded — type your city."
+                                        disabled={!addressUnlocked}
                                     />
                                 )}
                             />
 
-                            {/* BLOCK */}
-
-                            <FormInput
-                                
-                                placeholder="Enter block / taluk"
-                                {...register("block")}
+                            <Controller
+                                name="block"
+                                control={control}
+                                render={({ field }) => (
+                                    <TextAutocomplete
+                                        name={field.name}
+                                        label="Block / Taluk"
+                                        placeholder="Select or type block / taluk"
+                                        options={blocks}
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        emptyMessage="No match — your typed block will be used."
+                                        noOptionsMessage="No blocks found — type your block / taluk."
+                                        disabled={!addressUnlocked}
+                                    />
+                                )}
                             />
 
                         </div>
@@ -846,8 +941,6 @@ export default function AddressForm({
                 </div>
 
             </div>
-
-            {/* FORM ACTIONS */}
 
             <div className="address-form__actions">
 

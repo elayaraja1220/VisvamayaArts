@@ -19,14 +19,12 @@ export default function ProductBySlug() {
     let active = true;
 
     async function resolve() {
-      // The real product URL, e.g. /products/murugan/
       const parts = window.location.pathname.split("/").filter(Boolean);
 
       let slug = "";
       try {
         slug = decodeURIComponent(parts[parts.length - 1] ?? "");
       } catch {
-        // malformed URL -> not found
       }
 
       let id: string | undefined;
@@ -34,7 +32,6 @@ export default function ProductBySlug() {
         const { slugToId } = await loadProductSlugMaps();
         id = slugToId.get(slug);
       } catch {
-        // API unavailable -> not found
       }
 
       if (!active) return;

@@ -1,6 +1,3 @@
-// app/service/dataService.ts
-
-// NEXT_PUBLIC_ variables are embedded by Next.js during `npm run build`.
 const baseURL = (
   process.env.NEXT_PUBLIC_API_URL ?? ""
 ).replace(/\/+$/, "");
@@ -8,10 +5,6 @@ const baseURL = (
 const appreciationImageBaseURL = (
   process.env.NEXT_PUBLIC_API_APPRECTION_IMAGE_BASE_URL ?? ""
 ).replace(/\/+$/, "");
-
-// --------------------------------------------------
-// Product Types
-// --------------------------------------------------
 
 export type Product = {
   product_id: string;
@@ -27,6 +20,7 @@ export type Product = {
   product_dimension_detailed?: string;
   product_price: string;
   product_image: string;
+  product_images?: string[] | string | null;
   product_360_image?: string;
   new_arrivals?: string | number;
   display_order?: string;
@@ -38,10 +32,6 @@ export type Product = {
   product_instagram_url?: string | null;
 };
 
-// --------------------------------------------------
-// Category Types
-// --------------------------------------------------
-
 export type Category = {
   image: string;
   product_category_id: string;
@@ -52,10 +42,6 @@ export type Category = {
   product_image: string;
   product_category_image: string;
 };
-
-// --------------------------------------------------
-// Order Types
-// --------------------------------------------------
 
 export type OrderAddress = {
   first_name: string;
@@ -91,10 +77,6 @@ export type Appreciation = {
   appreciation_image: string;
 };
 
-// --------------------------------------------------
-// API URL Helper
-// --------------------------------------------------
-
 function getApiURL(endpoint: string): string {
   if (!baseURL) {
     throw new Error(
@@ -106,10 +88,6 @@ function getApiURL(endpoint: string): string {
 
   return `${baseURL}/${cleanEndpoint}`;
 }
-
-// --------------------------------------------------
-// Response Parser
-// --------------------------------------------------
 
 function parseArrayResponse<T>(result: unknown): T[] {
   if (Array.isArray(result)) {
@@ -123,19 +101,11 @@ function parseArrayResponse<T>(result: unknown): T[] {
   return [];
 }
 
-// --------------------------------------------------
-// Sort helper: newest first (highest product_id on top)
-// --------------------------------------------------
-
 function sortNewestFirst(products: Product[]): Product[] {
   return [...products].sort(
     (a, b) => Number(b.product_id) - Number(a.product_id),
   );
 }
-
-// --------------------------------------------------
-// Common API Request (returns [] on any failure)
-// --------------------------------------------------
 
 async function request<T>(
   endpoint: string,
@@ -155,13 +125,11 @@ async function request<T>(
 
     const options: RequestInit & { next?: { revalidate: number } } = {
       method: params ? "POST" : "GET",
-      // GET: cache for 5 minutes. POST: never cache.
       ...(params ? { cache: "no-store" } : { next: { revalidate: 300 } }),
     };
 
     const headers: Record<string, string> = { Accept: "application/json" };
 
-    // Browsers forbid this header, so only set it on the server.
     if (isServer) {
       headers["User-Agent"] = "Mozilla/5.0 (compatible; VismayamSite/1.0)";
     }
@@ -215,11 +183,6 @@ async function request<T>(
   }
 }
 
-// --------------------------------------------------
-// Product APIs
-// --------------------------------------------------
-
-// New arrivals, newest first
 export async function getNewArrivals(): Promise<Product[]> {
   const products = await request<Product>("getNewArrivals");
   return sortNewestFirst(products);
@@ -237,23 +200,13 @@ export function getProductsByCategory(
   });
 }
 
-// --------------------------------------------------
-// All Products
-// --------------------------------------------------
-
 export function getAllProducts(): Promise<Product[]> {
   return request<Product>("getAllProducts");
 }
 
-// Compatibility with the previous misspelled function.
 export function gellAllProducts(): Promise<Product[]> {
   return getAllProducts();
 }
-
-// --------------------------------------------------
-// Product Collections
-// All products + new arrivals, newest first.
-// --------------------------------------------------
 
 export async function getProductCollections(): Promise<Product[]> {
   const [allProducts, newArrivals] = await Promise.all([
@@ -261,7 +214,6 @@ export async function getProductCollections(): Promise<Product[]> {
     request<Product>("getNewArrivals"),
   ]);
 
-  // Later entries win, so new arrivals keep their new_arrivals flag.
   const unique = Array.from(
     new Map(
       [...allProducts, ...newArrivals]
@@ -272,10 +224,6 @@ export async function getProductCollections(): Promise<Product[]> {
 
   return sortNewestFirst(unique);
 }
-
-// --------------------------------------------------
-// Product Details
-// --------------------------------------------------
 
 export async function getProductById(
   productId: string | number,
@@ -295,10 +243,6 @@ export async function getProductById(
     products.find((product) => String(product.product_id) === id) ?? null
   );
 }
-
-// --------------------------------------------------
-// Submit Order
-// --------------------------------------------------
 
 export async function submitOrder(
   payload: SubmitOrderPayload,
@@ -348,10 +292,6 @@ export async function submitOrder(
   throw new Error(`Unexpected submitOrder response: ${result}`);
 }
 
-// --------------------------------------------------
-// Appreciations
-// --------------------------------------------------
-
 export function getAppreciationImageUrl(
   image: string | null | undefined,
 ): string {
@@ -371,10 +311,6 @@ export function getAppreciationImageUrl(
 export function getApprecitions(): Promise<Appreciation[]> {
   return request<Appreciation>("getAppreciations");
 }
-
-// --------------------------------------------------
-// Bulk Order Enquiry
-// --------------------------------------------------
 
 export type BulkOrderEnquiryPayload = {
   name: string;
@@ -420,9 +356,6 @@ export async function sendBulkOrderEnquiry(
 
   throw new Error(`Unexpected enquiry response: ${result}`);
 }
-
-
-
 
 export interface PincodeDetails {
   country: string;

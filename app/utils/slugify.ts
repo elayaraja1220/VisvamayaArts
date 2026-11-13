@@ -10,8 +10,6 @@ type SlugProduct = {
   product_name: string;
 };
 
-// Builds slug <-> id maps. If two products share a name,
-// the later one gets "-<id>" added so slugs stay unique.
 export function buildSlugMap<T extends SlugProduct>(products: T[]) {
   const seen = new Map<string, number>();
   const idToSlug = new Map<string, string>();

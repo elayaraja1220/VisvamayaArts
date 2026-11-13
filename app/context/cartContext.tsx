@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -44,7 +43,6 @@ export function CartProvider({
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
-  // Restore cart from localStorage.
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -78,7 +76,6 @@ export function CartProvider({
     }
   }, []);
 
-  // Save cart after hydration.
   useEffect(() => {
     if (!hydrated) return;
 

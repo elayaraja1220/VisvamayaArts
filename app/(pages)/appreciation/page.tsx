@@ -21,13 +21,11 @@ export default function Appreciation() {
         <Container>
           <PageTitle
 
-
             title="Appreciation"
             subtitle="Words of gratitude from art lovers and patrons"
           />
 
         </Container>
-
 
       </PageSection>
     <PageSection className="page-section-appreciation-grid">

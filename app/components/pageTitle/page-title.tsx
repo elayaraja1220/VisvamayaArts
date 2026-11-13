@@ -1,4 +1,3 @@
-
 import Button from "../button/button";
 import Typography from "../typegrophy/typography";
 import "./page-title.css";

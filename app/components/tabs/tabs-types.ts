@@ -21,13 +21,11 @@ export type TabItem = {
   disabled?: boolean;
 };
 
-
 export type TabSize =
   | "small"
   | "medium"
   | "large"
   | "fullwidth";
-
 
 export type TabsProps = {
   tabs: TabItem[];

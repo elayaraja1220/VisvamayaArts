@@ -44,17 +44,12 @@
 
 }
 
-
-
 .about-us {
   width: 100%;
   box-sizing: border-box;
   background: #321b10;
   color: #ffffff;
 }
-
-
-/* ------------------------------ Home variant ------------------------------ */
 
 .about-us--home {
   padding: 64px 0;
@@ -127,8 +122,6 @@
   line-height: 1.7;
 }
 
-/* ------------------------------ Page variant ------------------------------ */
-
 .about-us-page-title {
   margin: 0 0 32px;
   color: #ffffff;
@@ -157,8 +150,6 @@
 .about-us-description {
   margin-top: 12px !important;
 }
-
-/* -------------------------------- Founders -------------------------------- */
 
 .about-us-founders {
   display: grid;
@@ -246,7 +237,6 @@
   align-items: center;
   padding: 10px;
 }
-/* -------------------------------- Responsive ----------------------------- */
 
 @media (max-width: 767.98px) {
   .img-Scupture-text-poster {

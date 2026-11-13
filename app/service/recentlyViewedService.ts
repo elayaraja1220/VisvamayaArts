@@ -37,9 +37,7 @@ export function saveRecentlyViewedId(productId: string): void {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
 
-    // Notify components in the same browser tab.
     window.dispatchEvent(new Event("recently-viewed-updated"));
   } catch {
-    // localStorage may be unavailable.
   }
 }
