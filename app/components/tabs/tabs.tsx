@@ -44,7 +44,6 @@ export default function Tabs({
 
     if (tab.href) {
       window.open(tab.href, "_blank", "noopener,noreferrer");
-      return;
     }
 
     if (activeTab === undefined) {
