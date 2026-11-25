@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import PageSection from "@/app/components/page-section/page-section";
 import { Container } from "@/app/components/container/Container";
 import Typography from "@/app/components/typegrophy/typography";
+import Button from "@/app/components/button/button";
 
 import {
   getProductById,
@@ -160,11 +161,21 @@ export default function ProductDetailsClient({ id }: Props) {
     {
       id: "reviews",
       label: "Customer Reviews",
-      href: "https://g.page/r/CRWyZ_fw3SfSEBM/review",
       content: (
-        <p>
-          Kindly share your valuable feedback on Google. Thanks
-        </p>
+        <div style={{textAlign: "center"}}>
+          <p>
+            Kindly share your valuable feedback on Google. Thanks
+          </p>
+          <Button
+            href="https://g.page/r/CRWyZ_fw3SfSEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            curve="full"
+
+          >
+            Write a review on Google
+          </Button>
+        </div>
       ),
     },
     {
@@ -226,7 +237,7 @@ export default function ProductDetailsClient({ id }: Props) {
                   key={product.product_id}
                   images={galleryImages}
                   alt={product.product_name}
-                  variant="vertical"
+                  variant={isDesktop ? "vertical" : isIpad ? "horizontal" : "horizontal"}
                 />
 
                 {isDesktop && (
