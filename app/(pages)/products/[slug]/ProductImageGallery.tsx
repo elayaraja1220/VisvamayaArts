@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-const VISIBLE_THUMBS = 5;
-
 export type GalleryVariant = "horizontal" | "vertical";
 
 type Props = {
@@ -18,13 +16,8 @@ export default function ProductImageGallery({
   variant = "vertical",
 }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [startIndex, setStartIndex] = useState(0);
 
   if (images.length === 0) return null;
-
-  const showArrows = images.length > VISIBLE_THUMBS;
-  const maxStart = Math.max(0, images.length - VISIBLE_THUMBS);
-  const visibleThumbs = images.slice(startIndex, startIndex + VISIBLE_THUMBS);
 
   const handleThumbHover = (index: number) => {
     setActiveIndex(index);
@@ -32,14 +25,6 @@ export default function ProductImageGallery({
 
   const handleThumbClick = (index: number) => {
     setActiveIndex(index);
-  };
-
-  const handlePrev = () => {
-    setStartIndex((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
-    setStartIndex((prev) => Math.min(maxStart, prev + 1));
   };
 
   const largeImage = (
@@ -54,21 +39,8 @@ export default function ProductImageGallery({
 
   const thumbnails = images.length > 1 && (
         <div className="product-gallery-thumbs">
-          {showArrows && (
-            <button
-              type="button"
-              className="product-gallery-arrow"
-              onClick={handlePrev}
-              disabled={startIndex === 0}
-              aria-label="Previous images"
-            >
-              &#8249;
-            </button>
-          )}
-
           <ul className="product-gallery-thumb-list">
-            {visibleThumbs.map((src, i) => {
-              const index = startIndex + i;
+            {images.map((src, index) => {
               return (
                 <li key={`${src}-${index}`}>
                   <button
@@ -88,17 +60,6 @@ export default function ProductImageGallery({
             })}
           </ul>
 
-          {showArrows && (
-            <button
-              type="button"
-              className="product-gallery-arrow"
-              onClick={handleNext}
-              disabled={startIndex >= maxStart}
-              aria-label="Next images"
-            >
-              &#8250;
-            </button>
-          )}
         </div>
   );
 
