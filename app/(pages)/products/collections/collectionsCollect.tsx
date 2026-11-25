@@ -64,9 +64,7 @@ export default function CollectionsCollect({
 
   const visibleProducts = useMemo(
     () =>
-      products
-        .filter((product) => product.product_id != null)
-        .sort((a, b) => Number(b.product_id) - Number(a.product_id)),
+      products.filter((product) => product.product_id != null),
     [products],
   );
 
@@ -180,7 +178,9 @@ export default function CollectionsCollect({
       return matchesCategory && matchesSearch && matchesSelectedProduct;
     });
 
-    if (categoryId === ALL && sortOrder === "default") {
+    // Default sort, in every tab: all new arrivals first, then the rest.
+    // Inside each group the original API order is kept (stable sort).
+    if (sortOrder === "default") {
       return filteredProducts.sort((a, b) => {
         const aIsNew = String(a.new_arrivals) === "1";
         const bIsNew = String(b.new_arrivals) === "1";
@@ -188,7 +188,7 @@ export default function CollectionsCollect({
         if (aIsNew && !bIsNew) return -1;
         if (!aIsNew && bIsNew) return 1;
 
-        return Number(b.product_id) - Number(a.product_id);
+        return 0;
       });
     }
 

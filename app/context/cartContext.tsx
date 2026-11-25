@@ -132,6 +132,12 @@ export function CartProvider({
 
   const clearCart = useCallback(() => {
     setItems([]);
+
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      console.error("Unable to clear the saved cart.", error);
+    }
   }, []);
 
   const count = items.reduce(

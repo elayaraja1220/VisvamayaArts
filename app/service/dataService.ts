@@ -1,7 +1,8 @@
+import { withBasePath } from "@/app/utils/basePath";
+
 const baseURL = (
   process.env.NEXT_PUBLIC_API_URL ?? ""
 ).replace(/\/+$/, "");
-
 const appreciationImageBaseURL = (
   process.env.NEXT_PUBLIC_API_APPRECTION_IMAGE_BASE_URL ?? ""
 ).replace(/\/+$/, "");
@@ -235,7 +236,7 @@ export async function getProductById(
     return null;
   }
 
-  const products = await request<Product>("getProductById", {
+  const products = await request<Product>("getProductWithImagesById", {
     product_id: id,
   });
 
@@ -296,7 +297,7 @@ export function getAppreciationImageUrl(
   image: string | null | undefined,
 ): string {
   if (!image) {
-    return "/images/placeholder.png";
+    return withBasePath("/images/placeholder.png");
   }
 
   if (/^https?:\/\//i.test(image)) {

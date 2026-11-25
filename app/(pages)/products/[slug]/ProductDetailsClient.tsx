@@ -160,9 +160,10 @@ export default function ProductDetailsClient({ id }: Props) {
     {
       id: "reviews",
       label: "Customer Reviews",
+      href: "https://g.page/r/CRWyZ_fw3SfSEBM/review",
       content: (
         <p>
-          Customer ratings and reviews will appear here.
+          Kindly share your valuable feedback on Google. Thanks
         </p>
       ),
     },

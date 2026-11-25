@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import feather from "feather-icons";
+import { withBasePath } from "@/app/utils/basePath";
 
 import "./action-icons-list.css";
 import Button from "../button/button";
@@ -39,7 +40,8 @@ export default function ActionListIcons({
     instagram,
     title,
 }: Props) {
-    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [audioPlayer, setAudioPlayer] =
+        useState<HTMLAudioElement | null>(null);
     const [playing, setPlaying] = useState(false);
 
     const hasValue = (value?: string | null) =>
@@ -48,12 +50,12 @@ export default function ActionListIcons({
     const toggleAudio = async () => {
         if (!hasValue(audio)) return;
 
-        if (!audioRef.current) {
-            audioRef.current = new Audio(audio!);
-            audioRef.current.onended = () => setPlaying(false);
+        let player = audioPlayer;
+        if (!player) {
+            player = new Audio(audio!);
+            player.onended = () => setPlaying(false);
+            setAudioPlayer(player);
         }
-
-        const player = audioRef.current;
 
         if (playing) {
             player.pause();
@@ -148,7 +150,7 @@ export default function ActionListIcons({
                     >
                         {item.name === "360-view" ? (
                             <Image
-                                src="/images/icons/svg/svg-icon-360.svg"
+                                src={withBasePath("/images/icons/svg/svg-icon-360.svg")}
                                 alt=""
                                 width={20}
                                 height={20}

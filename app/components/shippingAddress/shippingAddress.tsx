@@ -127,14 +127,16 @@ export default function ShippingAddress({
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const [dialogStatus, setDialogStatus] = useState<
-    "success" | "failed" | "inprogress"
+    "success" | "failed" | "inprogress" | "warning"
   >("inprogress");
 
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogDescription, setDialogDescription] = useState("");
+  const [addressToDelete, setAddressToDelete] =
+    useState<ShippingAddressData | null>(null);
 
   const showDialog = (
-    status: "success" | "failed" | "inprogress",
+    status: "success" | "failed" | "inprogress" | "warning",
     title: string,
     description: string,
   ) => {
@@ -147,6 +149,15 @@ export default function ShippingAddress({
   const handleCloseDialog = () => {
     if (dialogStatus === "inprogress") return;
     setDialogOpen(false);
+    setAddressToDelete(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!addressToDelete) return;
+
+    onDeleteAddress?.(addressToDelete);
+    setDialogOpen(false);
+    setAddressToDelete(null);
   };
 
   useEffect(() => {
@@ -367,7 +378,17 @@ export default function ShippingAddress({
                               type="button"
                               variant="iconOnly"
                               color="primary"
-                              onClick={() => onDeleteAddress?.(address)}
+                              disabled={!onDeleteAddress}
+                              onClick={() => {
+                                if (!onDeleteAddress) return;
+
+                                setAddressToDelete(address);
+                                showDialog(
+                                  "warning",
+                                  "Delete Shipping Address?",
+                                  `Are you sure you want to delete the address for ${address.fullName}?`,
+                                );
+                              }}
                               aria-label={`Delete ${address.fullName}`}
                             >
                               <Trash2 className="shipping-icon" />
@@ -524,9 +545,19 @@ export default function ShippingAddress({
         status={dialogStatus}
         title={dialogTitle}
         description={dialogDescription}
+        primaryActionLabel={
+          dialogStatus === "warning" ? "Delete Address" : undefined
+        }
+        secondaryActionLabel={
+          dialogStatus === "warning" ? "Cancel" : undefined
+        }
+        onPrimaryAction={
+          dialogStatus === "warning"
+            ? handleConfirmDelete
+            : handleCloseDialog
+        }
         autoCloseDuration={5000}
         autoClose={dialogStatus === "success"}
-        onPrimaryAction={handleCloseDialog}
         onSecondaryAction={handleCloseDialog}
         onClose={handleCloseDialog}
         showCloseButton={dialogStatus !== "inprogress"}

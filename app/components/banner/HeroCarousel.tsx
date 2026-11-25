@@ -13,6 +13,7 @@ import Typography from "../typegrophy/typography";
 import Button from "../button/button";
 import useMediaQuery from "@/app/utils/useMediaQuery";
 import { breakpoints } from "@/app/utils/breakpoints";
+import { withBasePath } from "@/app/utils/basePath";
 
 const slides = [
   {
@@ -105,7 +106,7 @@ const isMobile = useMediaQuery(breakpoints.mobile);
             <div
               className="hero-slide"
               style={{
-                backgroundImage: `url("${slide.image}")`,
+                backgroundImage: `url("${withBasePath(slide.image)}")`,
               }}
             >
              

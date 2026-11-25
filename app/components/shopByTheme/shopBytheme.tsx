@@ -6,13 +6,14 @@ import Typography from "../typegrophy/typography";
 import type { Category } from "../../service/dataService";
 import Button from "../button/button";
 import { getProductImageUrl } from "@/app/service/imageSerive";
+import { withBasePath } from "@/app/utils/basePath";
 
 type ShopByThemeProps = {
   data: Category[];
   initialLimit?: number;
 };
 
-const PLACEHOLDER = "/images/products/product-placeholder.svg";
+const PLACEHOLDER = withBasePath("/images/products/product-placeholder.svg");
 
 export default function ShopByTheme({
   data,

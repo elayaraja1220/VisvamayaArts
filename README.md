@@ -88,6 +88,8 @@ checkout on localhost places **real orders**).
 |---|---|
 | `npm run dev` | Dev server (webpack) |
 | `npm run build` | Static export to `out/` |
+| `npm run build:demo` | Standalone `/demo/` static export to `out/` |
+| `npm run build:both` | Build root and `/demo/` static exports into `out/` |
 | `npm run lint` | ESLint |
 
 > **Next.js 16 note:** APIs and conventions differ from older versions. Read
@@ -118,7 +120,7 @@ app/
 ├── service/
 │   ├── dataService.ts         All API calls (GET + form-encoded POST)
 │   ├── productLinks.ts        Product list cache + slug/URL helpers
-│   ├── checkoutService.ts     submitOrder used by checkout
+│   ├── checkoutService.ts     Zoho payment session started by checkout
 │   ├── imageSerive.ts         Product image URL helper
 │   └── recentlyViewedService.ts
 ├── utils/                     slugify, GST calculation, breakpoints, …
@@ -129,25 +131,39 @@ public/
 scripts/deploy-ftp.py          Optional backup + deploy helper
 ```
 
-### API endpoints used (`dataService.ts`)
+### API endpoints used
 GET: `getAllProducts`, `getNewArrivals`, `getProductCategories`,
 `getAppreciations` · POST (form-encoded): `getProductById`,
-`getProductsByCategory`, `submitOrder` (fields `order`, `order_products` as
-JSON strings), `sendBulkOrderEnquiry` (`enquiry`). POST endpoints answer `1`
-(success) or `0` (failure).
+`getProductsByCategory`, `sendBulkOrderEnquiry` (`enquiry`) in
+`dataService.ts`.
+
+Checkout starts payment with `submitOrderDemo` in `checkoutService.ts`, sending
+`order` and `order_products` as JSON strings plus `success_url` and
+`failure_url`. The service must return an HTTPS Zoho payment URL; after payment,
+the backend should verify the gateway result and redirect to `/payment/success/`
+or `/payment/failed/`. Do not treat a client-side redirect alone as proof of
+payment.
 
 ---
 
 ## 5. Deployment (Hostinger)
 
-1. `npm run build` → creates `out/`.
-2. **Back up** `public_html` first (hPanel → File Manager, or
+Choose the build you need:
+
+- **Only `/demo/`:** run `npm run build:demo`, then upload the contents of
+  `out/` into `public_html/demo/`.
+- **Root and `/demo/`:** run `npm run build:both`, then upload the contents of
+  `out/` into `public_html/`.
+- **Only root:** run `npm run build`, then upload the contents of `out/` into
+  `public_html/`.
+
+Before uploading, **back up** `public_html` (hPanel → File Manager, or
    `python scripts/deploy-ftp.py backup`).
-3. Upload the **contents** of `out/` into `public_html`, overwriting files —
-   **except** the items below.
-4. hPanel → **Performance → CDN → Purge all** (the site is behind Hostinger's CDN).
-5. Test: home, `/products/collections/`, any product, `/products/x-not-real/`
-   (should show "Product Not Found", not Hostinger's 404), checkout.
+When uploading to `public_html/`, overwrite files **except** the items below.
+Then hPanel → **Performance → CDN → Purge all** (the site is behind Hostinger's
+CDN). Test the deployed path: home, `/products/collections/`, a product,
+`/products/x-not-real/` (should show "Product Not Found", not Hostinger's 404),
+checkout, and the payment success/failure return pages.
 
 ### Never overwrite or delete on the server
 

@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import CustomerCare from "../customercare/customerCare";
 import SocialNetwork from "../socialNetwork/socialNetwork";
 import socialNetworkData from "@/app/data/socialNetwork.json";
+import { withBasePath } from "@/app/utils/basePath";
 export default function Footer() {
     const [year, setYear] = useState<number>(2026);
 
@@ -46,7 +47,7 @@ export default function Footer() {
                 <Container>
                     <div className="footer-bottom-row">
                         <div className="footer-bottom-col-left">
-                            <div><Image src={"/images/footer/vimaya-logo.svg"} alt="" width={100} height={100} /></div><Typography>We bring authentic sculptures into your home.
+                            <div><Image src={withBasePath("/images/footer/vimaya-logo.svg")} alt="" width={100} height={100} /></div><Typography>We bring authentic sculptures into your home.
                                 Our mission is to celebrate and illuminate India's heritage, offering you a tangible piece
                                 of this legacy.</Typography>
                             <div></div>

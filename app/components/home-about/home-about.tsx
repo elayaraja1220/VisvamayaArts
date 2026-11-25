@@ -9,6 +9,7 @@ import Button from "../button/button";
 import { ArrowRight } from "react-feather";
 import { Container } from "../container/Container";
 import PageSection from "../page-section/page-section";
+import { withBasePath } from "@/app/utils/basePath";
 
 type AboutUsProps = {
   variant?: "home" | "page";
@@ -44,10 +45,10 @@ export default function AboutUs({
           
           <div className="about-us-image">
              {
-              !isHome && <div className="img-Scupture-text-poster"><img src={"/images/about/Scupture-text-poster.png"} alt="Scupture-text-poster" className="img-Scupture" /></div>
+              !isHome && <div className="img-Scupture-text-poster"><img src={withBasePath("/images/about/Scupture-text-poster.png")} alt="Scupture-text-poster" className="img-Scupture" /></div>
             }
             <Image
-              src={aboutData.heroImage}
+              src={withBasePath(aboutData.heroImage)}
               alt="Traditional Indian temple-inspired sculptures"
               width={600}
               height={600}
@@ -91,7 +92,7 @@ export default function AboutUs({
 
         <div className="about-legacy-col Scupture-image-div">
           <Image
-            src="/images/about/Scupture-text-poster.png"
+            src={withBasePath("/images/about/Scupture-text-poster.png")}
             alt={founder.name}
             width={300}
             height={300}
@@ -106,7 +107,7 @@ export default function AboutUs({
             ) : (
               <div>
                 
-               <img src={"/images/about/Vismayam-brand-icon.svg"} alt="" className="float-left"/>
+               <img src={withBasePath("/images/about/Vismayam-brand-icon.svg")} alt="" className="float-left"/>
                 {aboutData.intro.map((paragraph, index) => (
                   <Typography key={index}>
                     {paragraph}
@@ -146,7 +147,7 @@ export default function AboutUs({
               >
                 <div className="about-founder-header">
                   <Image
-                    src={founder.image}
+                    src={withBasePath(founder.image)}
                     alt={founder.name}
                     width={180}
                     height={180}
@@ -171,7 +172,7 @@ export default function AboutUs({
                         rel="noopener noreferrer"
                         aria-label={`${founder.name} on LinkedIn`}
                       >
-                        <img src={"/images/social-icons/icon-Linkedin.png"} />
+                        <img src={withBasePath("/images/social-icons/icon-Linkedin.png")} />
                       </Link>
 
                       }
@@ -181,7 +182,7 @@ export default function AboutUs({
                         href={founder.socialLinks.instagram}
                         target="_blank"
                       >
-                        <img src={"/images/social-icons/icon-Instagram.png"} />
+                        <img src={withBasePath("/images/social-icons/icon-Instagram.png")} />
                       </Link>
                       }
 
@@ -191,7 +192,7 @@ export default function AboutUs({
                         href={founder.socialLinks.facebook}
                         target="_blank"
                       >
-                        <img src={"/images/social-icons/icon-Facebook.png"} />
+                        <img src={withBasePath("/images/social-icons/icon-Facebook.png")} />
                       </Link>
                       }
 
@@ -201,7 +202,7 @@ export default function AboutUs({
                         href={founder.socialLinks.youtube}
                         target="_blank"
                       >
-                        <img src={"/images/social-icons/icon-Youtube.png"} />
+                        <img src={withBasePath("/images/social-icons/icon-Youtube.png")} />
                       </Link>
                       }
 
@@ -211,7 +212,7 @@ export default function AboutUs({
                         href={founder.socialLinks.x}
                         target="_blank"
                       >
-                        <img src={"/images/social-icons/icon-X.png"} />
+                        <img src={withBasePath("/images/social-icons/icon-X.png")} />
                       </Link>
                       }
 

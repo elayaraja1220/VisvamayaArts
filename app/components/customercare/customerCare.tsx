@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { withBasePath } from "@/app/utils/basePath";
 import "./customerCare.css";
 
 type CustomerCareProps = {
@@ -46,7 +47,7 @@ export default function CustomerCare({
                         <Image
                             alt=""
                             className="customer-care-icon-image"
-                            src="/images/icons/svg/svg-phone.svg"
+                            src={withBasePath("/images/icons/svg/svg-phone.svg")}
                             width={20}
                             height={20}
                         />
@@ -60,7 +61,7 @@ export default function CustomerCare({
                         <Image
                             alt=""
                             className="customer-care-icon-image"
-                            src="/images/icons/svg/svg-whatsapp.svg"
+                            src={withBasePath("/images/icons/svg/svg-whatsapp.svg")}
                             width={26}
                             height={26}
                         />
@@ -86,7 +87,7 @@ export default function CustomerCare({
                             <Image
                                 alt=""
                                 className="customer-care-icon-image"
-                                src="/images/icons/svg/svg-whatsapp.svg"
+                                src={withBasePath("/images/icons/svg/svg-whatsapp.svg")}
                                 width={26}
                                 height={26}
                             />
@@ -112,7 +113,7 @@ export default function CustomerCare({
                             <Image
                                 alt=""
                                 className="customer-care-icon-image"
-                                src="/images/icons/svg/svg-envelope.svg"
+                                src={withBasePath("/images/icons/svg/svg-envelope.svg")}
                                 width={25}
                                 height={25}
                             />

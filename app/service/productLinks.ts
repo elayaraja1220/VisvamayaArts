@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { getProductCollections, type Product } from "./dataService";
 import { buildSlugMap, slugify } from "@/app/utils/slugify";
+import { withBasePath } from "@/app/utils/basePath";
 
 type SlugMaps = ReturnType<typeof buildSlugMap<Product>>;
 
@@ -61,5 +62,5 @@ export function productHref(
     slugs[String(product.product_id)] ??
     (slugify(product.product_name ?? "") || String(product.product_id));
 
-  return `/products/${slug}/`;
+  return withBasePath(`/products/${slug}/`);
 }

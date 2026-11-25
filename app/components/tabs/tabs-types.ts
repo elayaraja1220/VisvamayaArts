@@ -19,6 +19,8 @@ export type TabItem = {
   label: string;
   content: ReactNode;
   disabled?: boolean;
+  /** When set, clicking the tab opens this URL in a new browser tab instead of switching panels. */
+  href?: string;
 };
 
 export type TabSize =

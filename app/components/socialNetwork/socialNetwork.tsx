@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { withBasePath } from "@/app/utils/basePath";
 import "./socialNetwork.css";
 
 export type SocialNetworkItem = {
@@ -41,7 +42,7 @@ export default function SocialNetwork({
                     <Image
                         alt={item.name}
                         className="social-network-image"
-                        src={item.icon}
+                        src={withBasePath(item.icon)}
                         width={item.width ?? 25}
                         height={item.height ?? 25}
                     />

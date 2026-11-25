@@ -12,6 +12,7 @@ import ViewCart from "../viewCart/viewCart";
 import { useCart } from "@/app/context/cartContext";
 import useMediaQuery from "@/app/utils/useMediaQuery";
 import { breakpoints } from "@/app/utils/breakpoints";
+import { withBasePath } from "@/app/utils/basePath";
 
 import { usePathname } from "next/navigation";
 
@@ -101,7 +102,11 @@ export function Header() {
               className={`${!showHamburger ? "logo-bg " :"mobile-logo"}`}
             >
               <Image
-                src={`${!showHamburger ?"/images/brands/Vismayam-Brand.svg" : "/images/brands/logo-mobile.svg"}`}
+                src={withBasePath(
+                  !showHamburger
+                    ? "/images/brands/Vismayam-Brand.svg"
+                    : "/images/brands/logo-mobile.svg",
+                )}
                 alt="Vismayam Arts"
                 width={145}
                 height={73}

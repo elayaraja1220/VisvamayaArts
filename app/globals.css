@@ -236,6 +236,11 @@ body.appreciation-page {
   background-size: cover;
 }
 
+html[data-base-path="/demo"] .product-details-body,
+html[data-base-path="/demo"] body.appreciation-page {
+  background-image: url("/demo/images/banner/products-details/slide-1.png");
+}
+
 .product-details-body .main-page-conatiner {
   padding-top: 120px;
 }

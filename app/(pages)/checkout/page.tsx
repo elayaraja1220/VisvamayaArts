@@ -13,7 +13,7 @@ import { Container } from "@/app/components/container/Container";
 import { useCart } from "@/app/context/cartContext";
 
 import {
-  submitOrder,
+  redirectToPaymentGateway,
   type SubmitOrderPayload,
   type SubmitOrderProduct,
 } from "@/app/service/checkoutService";
@@ -30,8 +30,6 @@ const ADDRESS_STORAGE_KEY = "vismayam-shipping-addresses";
 const SELECTED_ADDRESS_STORAGE_KEY =
   "vismayam-selected-shipping-address";
 
-const ORDER_EMAIL = "no-reply@vismayamarts.in";
-
 const parsePrice = (
   price: string | number | undefined,
 ): number => {
@@ -43,7 +41,7 @@ const parsePrice = (
 };
 
 export default function Checkout() {
-  const { items, hydrated, removeFromCart } = useCart();
+  const { items, hydrated } = useCart();
 
   const [addresses, setAddresses] =
     useState<ShippingAddressData[]>([]);
@@ -55,8 +53,6 @@ export default function Checkout() {
 
   const [isSubmittingOrder, setIsSubmittingOrder] =
     useState(false);
-
-  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const [orderMessage, setOrderMessage] = useState("");
 
@@ -74,52 +70,54 @@ export default function Checkout() {
     useState("");
 
   useEffect(() => {
-    try {
-      const savedAddresses =
-        localStorage.getItem(ADDRESS_STORAGE_KEY);
+    queueMicrotask(() => {
+      try {
+        const savedAddresses =
+          localStorage.getItem(ADDRESS_STORAGE_KEY);
 
-      const savedSelectedAddressId =
-        localStorage.getItem(SELECTED_ADDRESS_STORAGE_KEY);
+        const savedSelectedAddressId =
+          localStorage.getItem(SELECTED_ADDRESS_STORAGE_KEY);
 
-      if (savedAddresses) {
-        const parsed: unknown = JSON.parse(savedAddresses);
+        if (savedAddresses) {
+          const parsed: unknown = JSON.parse(savedAddresses);
 
-        if (Array.isArray(parsed)) {
-          const validAddresses = parsed.filter(
-            (item): item is ShippingAddressData =>
-              item !== null &&
-              typeof item === "object" &&
-              typeof item.id === "string" &&
-              typeof item.fullName === "string",
-          );
+          if (Array.isArray(parsed)) {
+            const validAddresses = parsed.filter(
+              (item): item is ShippingAddressData =>
+                item !== null &&
+                typeof item === "object" &&
+                typeof item.id === "string" &&
+                typeof item.fullName === "string",
+            );
 
-          setAddresses(validAddresses);
+            setAddresses(validAddresses);
 
-          const selectedAddressExists = validAddresses.some(
-            (address) =>
-              address.id === savedSelectedAddressId,
-          );
+            const selectedAddressExists = validAddresses.some(
+              (address) =>
+                address.id === savedSelectedAddressId,
+            );
 
-          setSelectedAddressId(
-            selectedAddressExists
-              ? savedSelectedAddressId ?? ""
-              : validAddresses[0]?.id ?? "",
-          );
+            setSelectedAddressId(
+              selectedAddressExists
+                ? savedSelectedAddressId ?? ""
+                : validAddresses[0]?.id ?? "",
+            );
+          }
+        } else {
+          setSelectedAddressId("");
         }
-      } else {
-        setSelectedAddressId("");
-      }
-    } catch (error) {
-      console.error(
-        "Unable to load shipping addresses:",
-        error,
-      );
+      } catch (error) {
+        console.error(
+          "Unable to load shipping addresses:",
+          error,
+        );
 
-      setAddresses([]);
-      setSelectedAddressId("");
-    } finally {
-      setAddressLoaded(true);
-    }
+        setAddresses([]);
+        setSelectedAddressId("");
+      } finally {
+        setAddressLoaded(true);
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -197,12 +195,6 @@ export default function Checkout() {
   const handleDeleteAddress = (
     address: ShippingAddressData,
   ) => {
-    const confirmed = window.confirm(
-      `Delete the address for ${address.fullName}?`,
-    );
-
-    if (!confirmed) return;
-
     const remainingAddresses = addresses.filter(
       (item) => item.id !== address.id,
     );
@@ -255,8 +247,8 @@ export default function Checkout() {
 
       showDialog(
         "inprogress",
-        "Processing Your Order",
-        "Please wait while we submit your order. Do not close this page.",
+        "Connecting to Secure Payment",
+        "Please wait while we connect you to Zoho Payments.",
       );
 
       try {
@@ -322,38 +314,9 @@ export default function Checkout() {
           totalItems,
         });
 
-        const success = await submitOrder(payload);
-
-        if (success) {
-
-          setOrderPlaced(true);
-
-          showDialog(
-            "success",
-            "Order Confirmed!",
-            `Thank you for shopping with Vismayam Arts. Your order has been successfully placed. A confirmation email will be sent to ${address.email} from ${ORDER_EMAIL}.`,
-          );
-
-          const productIds = items.map(
-            (item) => item.product.product_id,
-          );
-
-          productIds.forEach((id) => {
-            removeFromCart(id);
-          });
-        } else {
-          setOrderMessage(
-            "Unable to place the order. Please try again.",
-          );
-
-          showDialog(
-            "failed",
-            "Order Failed",
-            "We couldn't place your order. Please try again.",
-          );
-        }
+        redirectToPaymentGateway(payload);
       } catch (error) {
-        console.error("Order submission failed:", error);
+        console.error("Unable to start payment:", error);
 
         const message =
           error instanceof Error
@@ -364,7 +327,7 @@ export default function Checkout() {
 
         showDialog(
           "failed",
-          "Something Went Wrong",
+          "Unable to Start Payment",
           message,
         );
       } finally {
@@ -382,7 +345,6 @@ export default function Checkout() {
       gstPercentage,
       totalGST,
       totalItems,
-      removeFromCart,
     ],
   );
 
@@ -421,127 +383,56 @@ export default function Checkout() {
 
       {items.length === 0 ? (
 
-        <section
-          className={`checkout-result ${orderPlaced
-              ? "checkout-result--success"
-              : "checkout-result--empty"
-            }`}
-          aria-live="polite"
-        >
+        <section className="checkout-result checkout-result--empty" aria-live="polite">
           <Container>
             <div className="checkout-result__content">
-              {orderPlaced ? (
-                <>
-                  <div
-                    className="checkout-result__icon checkout-result__icon--success"
-                    aria-hidden="true"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M5 12.5L9.5 17L19 7.5"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
+              <div
+                className="checkout-result__icon checkout-result__icon--empty"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 3H5L7.2 14.2C7.4 15.2 8.2 16 9.3 16H18"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M7 7H21L19 13H8"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="10" cy="20" r="1.3" fill="currentColor" />
+                  <circle cx="18" cy="20" r="1.3" fill="currentColor" />
+                </svg>
+              </div>
 
-                  <span className="checkout-result__eyebrow">
-                    Order confirmation
-                  </span>
+              <span className="checkout-result__eyebrow">
+                Your shopping journey
+              </span>
 
-                  <h1 className="checkout-result__title">
-                    Thank you for your order!
-                  </h1>
+              <h1 className="checkout-result__title">
+                Your cart is empty
+              </h1>
 
-                  <p className="checkout-result__description">
-                    Your order has been successfully placed. <br /> we will call you back shortly!.
-                  </p>
+              <p className="checkout-result__description">
+                Discover handcrafted sculptures and bring a
+                piece of India’s artistic heritage into your
+                home.
+              </p>
 
-                  <div
-                    className="checkout-result__ornament"
-                    aria-hidden="true"
-                  >
-                    <span />
-                    <span className="checkout-result__ornament-icon">
-                      ✿
-                    </span>
-                    <span />
-                  </div>
-
-                  <div className="checkout-result__actions">
-                    <Link
-                      href="/products/collections"
-                      className="checkout-result__button checkout-result__button--primary"
-                    >
-                      Continue Shopping
-                      <span aria-hidden="true">→</span>
-                    </Link>
-
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div
-                    className="checkout-result__icon checkout-result__icon--empty"
-                    aria-hidden="true"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M3 3H5L7.2 14.2C7.4 15.2 8.2 16 9.3 16H18"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M7 7H21L19 13H8"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <circle
-                        cx="10"
-                        cy="20"
-                        r="1.3"
-                        fill="currentColor"
-                      />
-                      <circle
-                        cx="18"
-                        cy="20"
-                        r="1.3"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-
-                  <span className="checkout-result__eyebrow">
-                    Your shopping journey
-                  </span>
-
-                  <h1 className="checkout-result__title">
-                    Your cart is empty
-                  </h1>
-
-                  <p className="checkout-result__description">
-                    Discover handcrafted sculptures and bring a
-                    piece of India’s artistic heritage into your
-                    home.
-                  </p>
-
-                  <div className="checkout-result__actions">
-                    <Link
-                      href="/products/collections"
-                      className="checkout-result__button checkout-result__button--primary"
-                    >
-                      Explore Collections
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
-                </>
-              )}
+              <div className="checkout-result__actions">
+                <Link
+                  href="/products/collections"
+                  className="checkout-result__button checkout-result__button--primary"
+                >
+                  Explore Collections
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </div>
           </Container>
         </section>
@@ -584,6 +475,12 @@ export default function Checkout() {
         status={dialogStatus}
         title={dialogTitle}
         description={dialogDescription}
+        primaryActionLabel={
+          dialogStatus === "failed" ? "Try Again" : undefined
+        }
+        secondaryActionLabel={
+          dialogStatus === "failed" ? "Close" : undefined
+        }
         autoCloseDuration={5000}
         autoClose={true}
 

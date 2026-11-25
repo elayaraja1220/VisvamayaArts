@@ -42,6 +42,11 @@ export default function Tabs({
 
     if (!tab || tab.disabled) return;
 
+    if (tab.href) {
+      window.open(tab.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
     if (activeTab === undefined) {
       setInternalActiveTab(tabId);
     }

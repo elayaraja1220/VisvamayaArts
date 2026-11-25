@@ -22,6 +22,104 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Vismayam Arts",
   description: "Shop collections from Vismayam Arts.",
+  keywords: [
+    "VismayaTrail",
+    "விஸ்மயஉலா",
+    "Aralaguppe",
+    "KalleswaraTemple",
+    "WesternGanga",
+    "TempleArchitecture",
+    "IndianSculpture",
+    "KarnatakaHeritage",
+    "Vismayam",
+    "VismayamArts",
+    "VismayamSculptures",
+    "IndianHeritage",
+    "SouthIndianHeritage",
+    "TempleArt",
+    "IndianTempleSculpture",
+    "SacredArt",
+    "IndianCulture",
+    "HeritageKeepsakes",
+    "Gangaikondacholapuram",
+    "CholaLegacy",
+    "CholaBronze",
+    "CholaArt",
+    "PallavaArt",
+    "PandyaArt",
+    "HoysalaSculpture",
+    "Swamimalai",
+    "SwamimalaiBronze",
+    "TraditionalSculpture",
+    "IndianIconography",
+    "Nataraja",
+    "Dakshinamurthi",
+    "Ardhanareeshwara",
+    "Gajasamharamurti",
+    "NrityaGanapathi",
+    "Sapthamatrika",
+    "Somaskandha",
+    "Veenadharar",
+    "MuthuswamiDikshitar",
+    "HinduIdols",
+    "HeritageHomeDecor",
+    "SpiritualDecor",
+    "PoojaRoomDecor",
+    "IndianArtCollectors",
+    "LuxuryIndianGifts",
+    "TraditionalGiftsIndia",
+    "HandcraftedIdols",
+    "DivineSculptures",
+    "TempleReplicas",
+    "MadeInTamilNadu",
+    "Tanjore",
+    "Thanjavur",
+    "GangaikondaCholapuram",
+    "Dharasuram",
+    "Mamallapuram",
+    "Madurai",
+    "Meenakshi",
+    "MaduraiMeenakshi",
+    "Saraswati",
+    "Rishabakunjaram",
+    "Brahmi",
+    "Maheswari",
+    "Vaishnavi",
+    "Varahi",
+    "Kaumari",
+    "Indrani",
+    "Chamundi",
+    "AshtaMangalam",
+    "Veenadarar",
+    "SimhaDurga",
+    "KunchitaKaranar",
+    "Harihara",
+    "RamaSet",
+    "Murugan",
+    "AnanthaShayanaVishnu",
+    "Resin",
+    "StonePowder",
+    "PremiumPlastic",
+    "Thirunedun",
+    "Thirunedungalam",
+    "Rajarieeswaram",
+    "CholaArtistry",
+    "NageswaranTemple",
+    "Kumbakonam",
+    "Pullamangai",
+    "KailasanathaTemple",
+    "Kanchipuram",
+    "AdambarBronzeSet",
+    "PanchaRamaKshetram",
+    "GangaArt",
+    "VettuvanKoil",
+    "HoysalaArt",
+    "UNESCOTreasures",
+    "UNESCO",
+    "Lalitharam",
+    "SwamimalaiSaravanan",
+    "Saravanan",
+  ],
 };
 
 export default function RootLayout({
@@ -31,7 +129,21 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-base-path={process.env.NEXT_PUBLIC_BASE_PATH ?? ""}
     >
+      <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-MD2FVSLJ"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <ToastProvider
           position="top-right"

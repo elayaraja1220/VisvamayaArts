@@ -46,7 +46,7 @@
     .modal-body.shipping-adress-modal-body {
         padding: 0px !important;
     }
-    .form-user-details-fieldset,.address-form__grid {
+    .form-user-details-fieldset,.address-form__grid, .address-form-3__grid {
 
     grid-template-columns: repeat(1, 1fr);
 

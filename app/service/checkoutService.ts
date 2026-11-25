@@ -1,6 +1,11 @@
-const API_URL =
+import { withBasePath } from "@/app/utils/basePath";
+
+const API_URL = (
   process.env.NEXT_PUBLIC_API_URL ??
-  "https://vismayamarts.in/admin/vismayam_service";
+  "https://vismayamarts.in/admin/vismayam_service"
+).replace(/\/+$/, "");
+
+export const PAYMENT_ATTEMPT_STORAGE_KEY = "vismayam-payment-attempt";
 
 export type CheckoutAddress = {
   receiverFirstName: string;
@@ -51,50 +56,48 @@ export type SubmitOrderPayload = {
   order_products: SubmitOrderProduct[];
 };
 
-export async function submitOrder(
+export function redirectToPaymentGateway(
   payload: SubmitOrderPayload,
-): Promise<boolean> {
-  const formData = new URLSearchParams();
+): void {
+  if (typeof window === "undefined") {
+    throw new Error("Payment checkout can only be started in a browser.");
+  }
 
-  formData.append(
-    "order",
-    JSON.stringify({
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = `${API_URL}/submitOrderPayment`;
+  form.hidden = true;
+
+  const fields: Record<string, string> = {
+    order: JSON.stringify({
       sub_total: payload.sub_total,
       cgst_amount: payload.cgst_amount,
       sgst_amount: payload.sgst_amount,
       order_amount: payload.order_amount,
     }),
+    order_products: JSON.stringify(payload.order_products),
+    success_url: new URL(
+      withBasePath("/payment/success/"),
+      window.location.origin,
+    ).toString(),
+    failure_url: new URL(
+      withBasePath("/payment/failed/"),
+      window.location.origin,
+    ).toString(),
+  };
+
+  for (const [name, value] of Object.entries(fields)) {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+  }
+
+  document.body.appendChild(form);
+  sessionStorage.setItem(
+    PAYMENT_ATTEMPT_STORAGE_KEY,
+    String(Date.now()),
   );
-
-  formData.append(
-    "order_products",
-    JSON.stringify(payload.order_products),
-  );
-
-  const response = await fetch(`${API_URL}/submitOrder`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: formData.toString(),
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Order API failed: ${response.status}`);
-  }
-
-  const result = (await response.text()).trim();
-
-  console.log("submitOrder API response:", result);
-
-  if (result === "1") {
-    return true;
-  }
-
-  if (result === "0") {
-    return false;
-  }
-
-  throw new Error(`Unexpected submitOrder response: ${result}`);
+  form.submit();
 }

@@ -7,6 +7,7 @@ import { useCart } from "@/app/context/cartContext";
 import { getProductImageUrl } from "@/app/service/imageSerive";
 
 import "./viewCart.css";
+import { withBasePath } from "@/app/utils/basePath";
 
 import Button from "@/app/components/button/button";
 import Typography from "../typegrophy/typography";
@@ -79,7 +80,7 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
 
         <div className="cart-empty-icon">
           <img
-            src="/images/cart/empty-cart.png"
+            src={withBasePath("/images/cart/empty-cart.png")}
             alt="Lord Ganesha"
           />
         </div>
@@ -200,7 +201,7 @@ export default function ViewCart({ onCheckout, onClose }: ViewCartProps) {
                           }
                         >
                           <img
-                            src="/images/icons/svg/svg-remove.svg"
+                            src={withBasePath("/images/icons/svg/svg-remove.svg")}
                             alt="remove-icon"
                           />
                         </Button>
